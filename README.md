@@ -71,25 +71,25 @@ This install assumes the Kubernetes cluster has network access to pull images fr
   ```
 - Edit the following values:
 
-  - [`size`](docs/configuration_parameters.md#size): Specifies the size of the cluster. Size
+  - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
     defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
     large.
-  - [`quaypullsecret`](docs/configuration_parameters.md#quaypullsecret): quay.io provided with
+  - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
     your Sysdig purchase confirmation mail.
-  - [`storageClassProvisioner`](docs/configuration_parameters.md#storageClassProvisioner):
+  - [`storageClassProvisioner`](configuration_parameters.md#storageClassProvisioner):
     The name of the storage class provisioner to use when creating the
     configured storageClassName parameter. If you do not use one of those two
     dynamic storage provisioners, then enter: hostPath and refer to the Advanced
     examples for how to configure static storage provisioning with this option.
     Valid options: aws, gke, hostPath
-  - [`sysdig.license`](docs/configuration_parameters.md#sysdiglicense): Sysdig license key
+  - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
     provided with your Sysdig purchase confirmation mail
-  - [`sysdig.dnsName`](docs/configuration_parameters.md#sysdigdnsName): The domain name
+  - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name
     the Sysdig APIs will be served on.
-  - [`sysdig.collector.dnsName`](docs/configuration_parameters.md#sysdigcollectordnsName):
+  - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
     (OpenShift installs only) Domain name the Sysdig collector will be served on.
     When not configured it defaults to whatever is configured for sysdig.dnsName.
-  - [`sysdig.ingressNetworking`](docs/configuration_parameters.md#sysdigingressnetworking):
+  - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
     The networking construct used to expose the Sysdig API and collector. Options
     are:
 
@@ -109,17 +109,17 @@ This install assumes the Kubernetes cluster has network access to pull images fr
   **NOTE**: If doing an airgapped install (see Airgapped Installation Options), you
   would also edit the following values:
 
-  - [`airgapped_registry_name`](docs/configuration_parameters.md#airgapped_registry_name):
+  - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
     The URL of the airgapped (internal) docker registry. This URL is used for
     installations where the Kubernetes cluster can not pull images directly from
     Quay.
-  - [`airgapped_repository_prefix`](docs/configuration_parameters.md#airgapped_repository_prefix):
+  - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
     This defines custom repository prefix for airgapped_registry.
     Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
-  - [`airgapped_registry_password`](docs/configuration_parameters.md#airgapped_registry_password):
+  - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
     The password for the configured airgapped_registry_username. Ignore this
     parameter if the registry does not require authentication.
-  - [`airgapped_registry_username`](docs/configuration_parameters.md#airgapped_registry_username):
+  - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
     The username for the configured airgapped_registry_name. Ignore this
     parameter if the registry does not require authentication.
 
@@ -166,12 +166,12 @@ In case, you are setting up both Monitor and Agent together, you can provide a b
 
 - The following values are necessary for setting up Sysdig Agent. Edit the values.yaml to contain the following values:
 
-  - [`apps`](docs/configuration_parameters.md#apps): Specifies the Sysdig Platform components to be installed. Make sure `agent` is one of the values here.
-  - [`size`](docs/configuration_parameters.md#size): Specifies the size of the cluster. Size
+  - [`apps`](configuration_parameters.md#apps): Specifies the Sysdig Platform components to be installed. Make sure `agent` is one of the values here.
+  - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
     defines CPU and Memory limits for the Agent Pods. Valid options are: small, medium and
     large.
-  - [`agent.apiKey`](docs/configuration_parameters.md#agentapikey): Sysdig Agent api key for running agents.
-  - [`agent.collectorEndpoint`](docs/configuration_parameters.md#agentcollectorendpoint): Sysdig Collector Address
+  - [`agent.apiKey`](configuration_parameters.md#agentapikey): Sysdig Agent api key for running agents.
+  - [`agent.collectorEndpoint`](configuration_parameters.md#agentcollectorendpoint): Sysdig Collector Address
 
 # Airgapped Installation Options
 
@@ -247,25 +247,25 @@ the installation machine.
   ```
 - Edit the following values:
 
-  - [`size`](docs/configuration_parameters.md#size): Specifies the size of the cluster. Size
+  - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
     defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
     large
-  - [`quaypullsecret`](docs/configuration_parameters.md#quaypullsecret): quay.io provided with
+  - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
     your Sysdig purchase confirmation mail
-  - [`storageClassProvider`](docs/configuration_parameters.md#storageClassProvider): The
+  - [`storageClassProvider`](configuration_parameters.md#storageClassProvider): The
     name of the storage class provisioner to use when creating the configured
     storageClassName parameter. Use hostPath or local in clusters that do not have
     a provisioner. For setups where Persistent Volumes and Persistent Volume Claims
     are created manually this should be configured as none. Valid options are:
     aws,gke,hostPath,local,none
-  - [`sysdig.license`](docs/configuration_parameters.md#sysdiglicense): Sysdig license key
+  - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
     provided with your Sysdig purchase confirmation mail
-  - [`sysdig.dnsName`](docs/configuration_parameters.md#sysdigdnsName): The domain name
+  - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name
     the Sysdig APIs will be served on.
-  - [`sysdig.collector.dnsName`](docs/configuration_parameters.md#sysdigcollectordnsName):
+  - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
     (OpenShift installs only) Domain name the Sysdig collector will be served on.
     When not configured it defaults to whatever is configured for sysdig.dnsName.
-  - [`sysdig.ingressNetworking`](docs/configuration_parameters.md#sysdigingressnetworking):
+  - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
     The networking construct used to expose the Sysdig API and collector. Options
     are:
     - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
@@ -277,17 +277,17 @@ the installation machine.
       - sysdig.ingressNetworkingInsecureApiNodePort
       - sysdig.ingressNetworkingApiNodePort
       - sysdig.ingressNetworkingCollectorNodePort
-  - [`airgapped_registry_name`](docs/configuration_parameters.md#airgapped_registry_name):
+  - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
     The URL of the airgapped (internal) docker registry. This URL is used for
     installations where the Kubernetes cluster can not pull images directly from
     Quay.
-  - [`airgapped_repository_prefix`](docs/configuration_parameters.md#airgapped_repository_prefix):
+  - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
       This defines custom repository prefix for airgapped_registry.
       Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
-  - [`airgapped_registry_password`](docs/configuration_parameters.md#airgapped_registry_password):
+  - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
     The password for the configured airgapped_registry_username. Ignore this
     parameter if the registry does not require authentication.
-  - [`airgapped_registry_username`](docs/configuration_parameters.md#airgapped_registry_username):
+  - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
     The username for the configured airgapped_registry_name. Ignore this
     parameter if the registry does not require authentication.
 
@@ -323,12 +323,12 @@ Installer can regenerate is consistently with the same values.yaml file.
 
 # Upgrades
 
-See [upgrade.md](docs/upgrade.md) for upgrades documentation.
+See [upgrade.md](upgrade.md) for upgrades documentation.
 
 # Configuration Parameters and Examples
 
 For the full dictionary of configuration parameters, see:
-[configuration_parameters.md](docs/configuration_parameters.md)
+[configuration_parameters.md](configuration_parameters.md)
 
 # Permissions
 
@@ -357,7 +357,7 @@ For the full dictionary of configuration parameters, see:
 
 # Advanced Configuration
 
-For advanced configuration option see [advanced.md](docs/advanced.md)
+For advanced configuration option see [advanced.md](advanced.md)
 
 # Example values.yaml
 
