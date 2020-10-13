@@ -1,3 +1,6 @@
+# Advanced Configuration
+
+## Table of Contents  
    * [Advanced configuration](#advanced-configuration)
       * [SMTP Configs for Email Notifications](#smtp-configs-for-email-notifications)
       * [Configure AWS Credentials Using the Installer](#configure-aws-credentials-using-the-installer)
@@ -6,8 +9,6 @@
          * [Example](#example)
       * [Run Only Sysdig Pods on a Node Using Taints and Tolerations](#run-only-sysdig-pods-on-a-node-using-taints-and-tolerations)
    * [Patching Process](#patching-process)
-
-# Advanced configuration
 
 ## SMTP Configs for Email Notifications
 
