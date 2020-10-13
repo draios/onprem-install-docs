@@ -363,4 +363,4 @@ For advanced configuration option see [advanced.md](advanced.md)
 
 - [single-node values.yaml](examples/single-node/values.yaml)
 - [openshift-with-hostpath values.yaml](examples/openshift-with-hostpath/values.yaml)
-
+- [node-labels-and-taints values.yaml](examples/node-labels-and-taints/values.yaml)
