@@ -31,7 +31,7 @@ In general, Sysdig tests and supports direct upgrade from [**five** releases](ht
 
 |Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
 |---|---|---|---|---|
-| 3.5.1 (by request)| | 3.0, 3.2.x, (3.5.0 if it was installed) | New/changed modules in both Sysdig Secure and Sysdig Monitor, including: New Getting Started and Overview, new Dashboards, overhauled Secure Events Feed, new navigation bar icons and layout, changed Image scanning navigation and usage, new Secure vulnerability feed and benchmark test. | Installer Upgrade (3.5.0-3.5.1) with oversite assistance from Sysdig Support 
+|[3.5.1 (by request)](https://github.com/draios/onprem-install-docs/tree/main/3.5.1)| | 3.0, 3.2.x, (3.5.0 if it was installed) | New/changed modules in both Sysdig Secure and Sysdig Monitor, including: New Getting Started and Overview, new Dashboards, overhauled Secure Events Feed, new navigation bar icons and layout, changed Image scanning navigation and usage, new Secure vulnerability feed and benchmark test. | [3.5.1](https://github.com/draios/onprem-install-docs/tree/main/3.5.1)
 | 3.2.2 | | 2.5.0, 3.2.0 | Hot fix | 	Installer Upgrade (2.5.0+) |
 | 3.2.0 | 3.2.1, 3.2.2 | 2.5.0, 3.0.0 | In Sysdig Secure: Data retention limits for scan results, vulnerabiity comparison in scan results, redesigned Captures page, RBAC capability, activity audit improvement. In Sysdig Monitor and Secure: S3-compatible storage for Capture files. | |
 | 3.0.0 | | 2.4.1, 2.5.0 | Beta Activity Audit feature, Beta Policy Advisor feature. | |
