@@ -7,10 +7,11 @@
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
    * [Upgrades](upgrade.md)
-   * [Configuration Parameters and Examples](#configuration-parameters-and-examples)
    * [Permissions](#permissions)
-   * [Advanced Configuration](advanced.md)
-   * [Example values.yaml](#example-valuesyaml)
+   * [Additional Installer Resources](#Additional-Installer-Resources)
+      * [Configuration Parameters and Examples](configuration_parameters.md)
+      * [Advanced Configuration](advanced.md)
+      * [Example values.yaml](examples/README.md)
 
 # Installer
 
@@ -408,9 +409,3 @@ A successful installation should display output in the terminal such as:
 
 There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
-
-# Example values.yaml
-
-- [single-node values.yaml](examples/single-node/values.yaml)
-- [openshift-with-hostpath values.yaml](examples/openshift-with-hostpath/values.yaml)
-- [node-labels-and-taints values.yaml](examples/node-labels-and-taints/values.yaml)
