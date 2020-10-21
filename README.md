@@ -1,10 +1,9 @@
 # Sysdig Onprem Install Documentation
 
 ## Table of Contents
-  * [Sysdig Onprem Install Documentation](#sysdig-onprem-install-documentation)
-      * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
-      * [Supported Migration Paths](#supported-migration-paths)
-         * [For Kubernetes Environments](#for-kubernetes-environments)
+  * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
+  * [Supported Migration Paths](#supported-migration-paths)
+     * [For Kubernetes Environments](#for-kubernetes-environments)
 
 ## Oversight Services Now Offered for All Installs and Upgrades
 
