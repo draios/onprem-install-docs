@@ -1,5 +1,11 @@
 # Sysdig Onprem Install Documentation
 
+## Table of Contents
+  * [Sysdig Onprem Install Documentation](#sysdig-onprem-install-documentation)
+      * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
+      * [Supported Migration Paths](#supported-migration-paths)
+         * [For Kubernetes Environments](#for-kubernetes-environments)
+
 ## Oversight Services Now Offered for All Installs and Upgrades
 
 > **Note**
@@ -48,5 +54,3 @@ In general, Sysdig tests and supports direct upgrade from [**five** releases](ht
 | 1091 | | | | legacy |
    
 
-## Releases
-* [3.6.0](https://github.com/draios/onprem-install-docs/blob/release/3.6.0/README.md)
