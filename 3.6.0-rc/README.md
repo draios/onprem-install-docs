@@ -130,9 +130,9 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     <!-- -->
 
-        > **Note**
-        >
-        > If doing an airgapped install , you would also edit the following values:
+    > **Note**
+    >
+    > If doing an airgapped install , you would also edit the following values:
 
     <!-- -->
 
