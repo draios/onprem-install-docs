@@ -43,14 +43,14 @@ In general, Sysdig tests and supports direct upgrade from [**five** releases](ht
 | [3.0.0](3.0.0/README.md) | | 2.4.1, 2.5.0 | Beta Activity Audit feature, Beta Policy Advisor feature. | |
 | [2.5.0](2.5.0/README.md) | | 2.3.0, 2.4.1 | New Installer tool for upgrading; new documentation site; inline scanning for Secure, other enhancements | |
 | [2.4.1](2.4.1/installer-beta/README.md) | | 2.3.0 | Report service added; upgrade to Anchore license required | |
-| 2.3.0 | | 1929, 2435 | Ability to secure Elasticsearch and the Cassandra DB with password authentication or SSL/TLS protection. | |
-| 2435 | 2304, 2266, 2172 | Architecture changes to Dashboards(2304) & API pods (2172) | |
-| 1929 | | | | legacy |
-| 1765 | | |Migration Tool (MySQL Connector) & Architecture & Port 443 change | legacy |
-| 1630 | 1586 | | | legacy |
-| 1511 | 1472, 1402 | | | legacy |
-| 1245 | | | | legacy |
-| 1149 | | | Migration Tool (Unified Events) | legacy |
-| 1091 | | | | legacy |
+| [2.3.0](2.3.0/sysdigcloud-kubernetes-2.3.0/README.md) | | 1929, 2435 | Ability to secure Elasticsearch and the Cassandra DB with password authentication or SSL/TLS protection. | |
+| [2435](2435/README.md) | 2304, 2266, 2172 | Architecture changes to Dashboards(2304) & API pods (2172) | |
+| [1929](legacy/1929/README.md) | | | | legacy |
+| [1765](legacy/1765/README.md) | | |Migration Tool (MySQL Connector) & Architecture & Port 443 change | legacy |
+| [1630](legacy/1630/README.md) | 1586 | | | legacy |
+| [1511](legacy/1511/README.md) | 1472, 1402 | | | legacy |
+| [1245](legacy/1245/README.md) | | | | legacy |
+| [1149](legacy/1149/README.md) | | | Migration Tool (Unified Events) | legacy |
+| [1091](legacy/1091/README.md)| | | | legacy |
    
 
