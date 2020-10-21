@@ -1,0 +1,86 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sysdigcloud-cassandra
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        instance: "1" # Cassandra node number
+        app: sysdigcloud
+        role: cassandra
+    spec:
+      containers:
+        - image: quay.io/sysdig/cassandra:2.1.21.6
+          name: cassandra
+          imagePullPolicy: Always
+          ## Recommended resource limits for Cassandra pods.
+          ## Make sure to set values for these limits that are appropriate for your environment.
+          #resources:
+          #  requests:
+          #    cpu: 2
+          #    memory: 8Gi
+          #  limits:
+          #    cpu: 12
+          #    memory: 12Gi
+          env:
+            - name: CASSANDRA_SERVICE
+              value: sysdigcloud-cassandra
+            - name: CASSANDRA_CLUSTER_NAME
+              value: sysdigcloud
+            - name: CASSANDRA_CLUSTER_TIME_LIMIT
+              value: "5"
+            # If not using CASSANDRA_SERVICE discovery, manually configure the seeds
+            # - name: CASSANDRA_SEEDS
+            #   value: ""
+            # If using multiple directories for data, set the path list
+            # - name: CASSANDRA_DATA_DIRS
+            #   value: "/var/lib/cassandra/data /var/lib/cassandra/data2"
+            - name: JVM_EXTRA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.jvm.options
+            - name: CASSANDRA_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.secure
+            - name: CASSANDRA_SSL
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.ssl.enabled
+          volumeMounts:
+            - mountPath: /var/lib/cassandra
+              name: data
+            # Uncomment this when using multiple mount points for data
+            # - mountPath: /var/lib/cassandra/data2
+            #   name: data2
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        # Uncomment this for emptyDir volumes
+        - name: data
+          emptyDir: {}
+        # - name: data2
+        #   emptyDir: {}
+        # Uncomment this for hostPath volumes
+        # - name: data
+        #   hostPath:
+        #     path: /mnt/data
+        # - name: data2
+        #   hostPath:
+        #     path: /mnt/data2
+        # Uncomment this for GCE Disk
+        # - name: data
+        #   gcePersistentDisk:
+        #     pdName: <volume-name>
+        #     fsType: ext4
+        # Uncomment this for AWS EBS
+        # - name: data
+        #   awsElasticBlockStore:
+        #     volumeID: <volume-id>
+        #     fsType: ext4

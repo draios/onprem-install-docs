@@ -1,0 +1,63 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql-upgrade-pv-claim
+spec:
+  storageClassName: <INSERT_YOUR_STORAGE_CLASS_NAME>
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-upgrade-pod
+spec:
+  template:
+    spec:
+      volumes:
+        - name: mysql-upgrade-pv-storage
+          persistentVolumeClaim:
+            claimName: mysql-upgrade-pv-claim
+        - name: mysql-config
+          configMap:
+            name: sysdigcloud-mysql-config
+      containers:
+        - name: mysql-upgrade
+          image: quay.io/sysdig/onprem_migration:0.1.2-mysql_5.6_8.0
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: mysql.endpoint
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: mysql.password
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: mysql.user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: mysql.password
+            - name: MYSQL_DATABASE
+              value: draios
+          volumeMounts:
+            - name: mysql-config
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
+            - name: mysql-upgrade-pv-storage
+              mountPath: /data
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+  backoffLimit: 1

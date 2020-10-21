@@ -1,0 +1,107 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sysdigcloud-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: worker
+    spec:
+      containers:
+        - name: worker
+          image: quay.io/sysdig/sysdigcloud-backend:1929
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/sysdigcloud
+            - name: config
+              mountPath: /opt/kubernets_config
+            - name: ssl
+              mountPath: /opt/certs/
+            # Uncomment this if you need to import self-signed SSL certs
+            #- name: java-certs
+            #  mountPath: /opt/java-certs/
+            # Uncomment this if you want to split sysdgicloud configurations into configs and secrets.
+            #- name: secrets
+            #  mountPath: /opt/kubernets_secrets
+          env:
+            - name: ROLES
+              value: worker
+            - name: LOG_ROLE
+              value: worker
+            - name: LOG_TO_STDOUT
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: sysdigcloud.logging.stdout
+            - name: API_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: api.url
+            - name: JVM_EXTRA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: sysdigcloud.jvm.worker.options
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.endpoint.snitch
+            - name: CASSANDRA_DC
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.datacenter.name
+          # If you're running multiple replicas, it is advisable to configure the limits below. Limiting resources
+          # can help stabilize rolling updates later down the road.
+          # resources:
+          #   # minimum resources for container
+          #   requests:
+          #     memory: "13G"
+          #     cpu: "4"
+          #   # maximum resources for container
+          #   limits:
+          #     memory: "64G"
+          #     cpu: "32"
+          readinessProbe:
+            httpGet:
+              path: /api/ping
+              port: 9000
+            initialDelaySeconds: 30
+            timeoutSeconds: 2
+          lifecycle:
+            preStop:
+              exec:
+                command: ["curl","-v","http://127.0.0.1:9000/api/admin/drain"]
+          #resources:
+          #  limits:
+          #    cpu: 8
+          #    memory: 8Gi
+          #  requests:
+          #    cpu: 4
+          #    memory: 4Gi
+      terminationGracePeriodSeconds: 60
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: logs
+        - name: config
+          configMap:
+            name: sysdigcloud-config
+        - name: ssl
+          secret:
+            secretName: sysdigcloud-ssl-secret
+        # Uncomment this if you need to import self-signed SSL certs, wich can be created with
+        # kubectl create secret generic example-cert --from-file=${HOME}/cert.pem
+        #- name: java-certs
+        #  secret:
+        #    secretName: sysdigcloud-java-certs
+        # Uncomment this if you want to split sysdgicloud configurations into configs and secrets.
+        #- name: secrets
+        #  secret:
+        #    secretName: <secret_name>

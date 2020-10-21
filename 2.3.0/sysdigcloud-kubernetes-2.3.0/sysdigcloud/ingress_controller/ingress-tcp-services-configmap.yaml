@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: haproxy-tcp-services
+data:
+  "6443": sysdigcloud/sysdigcloud-collector:6000:::sysdigcloud/sysdigcloud-ssl-secret

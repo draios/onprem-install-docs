@@ -1,0 +1,243 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdigcloud-config
+data:
+  ####################################
+  ######### MYSQL #########
+  ####################################
+  # Required: MySQL endpoint DNS/IP. If MySQL is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  mysql.endpoint: sysdigcloud-mysql
+  # Required: MySQL user
+  mysql.user: admin
+  # Required: MySQL password
+  mysql.password: change_me
+  # Required: Cassandra endpoint DNS/IP. If Cassandra is deployed as a Kubernetes service, this will be the service name.
+  # If using an external database, put the proper address (the address of a single node will be sufficient)
+  ####################################
+  ######### CASSANDRA #########
+  ####################################
+  cassandra.endpoint: sysdigcloud-cassandra
+  # Optional: enable or disable cassandra authentication and authorization in sysdigcloud cassandra image,
+  # if you want to enable it, make sure to follow the support guide in the official sysdigcloud documentation (needs link)
+  cassandra.secure: "false"
+  # Optional: Enable cassandra internodes and client encryption
+  cassandra.ssl.enabled: "false"
+  # Optional: Specify Cassandra cipher suites to use. This option is available only when using external cassandra clusters.
+  # Comma separated value. Example: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+  cassandra.ssl.ciphers: ""
+  # Optional: Cassandra user
+  cassandra.user: ""
+  # Optional: Cassandra password
+  cassandra.password: ""
+  # Required: CQL native clients port
+  cassandra.port: "9042"
+  # Optional: Cassandra replication factor to use. This parameter will be applied during the
+  # initial keyspace creation. This will not change an already running install.
+  # Change to 1 only for POC or if running a single node deployment
+  cassandra.replication.factor: "3"
+  # Optional: Cassandra JVM JVM options. For heavy load environments this will override the defaults (e.g. -Xms5G -Xmx10G)
+  cassandra.jvm.options: ""
+  # Optional: Store Sysdig captures using Cassandra instead of S3. This increases cassandra storage if set to true
+  sysdigcloud.captures.cassandra.storage: "true"
+  # Optional: Increase cassandra compaction throughput to 350 MB/s
+  # if not specified, cassandra compaction throughput is set to 100 MB/s
+  cassandra.compaction.throughput: ""
+  # Start Custom Snitch Group ########################################
+  # Optional but if used, all values are required
+  # If "cassandra.endpoint.snitch" contains "customHostBasedGossipingPropertyFileSnitch", then
+  # the 3 following entries:
+  # - cassandra.endpoint.snitch
+  # - cassandra.snitch.hostname.file
+  # - cassandra.snitch.extract_cmd
+  # - cassandra.datacenter.name
+  # form a group.
+  # A value of "customHostBasedGossipingPropertyFileSnitch" in "cassandra.endpoint.snitch"
+  # translates to the GossipingPropertyFileSnitch, with the rack value being extracted from
+  # the host name.
+  # The hostname is found in the file whose name is contained in
+  # cassandra.snitch.hostname.file - the content of the file is piped through the command contained
+  # in cassandra.snitch.extract_cmd to extract the zone.
+  # The file could be the host /etc/hostname mounted in the container under /host/etc/hostname
+  # "cassandra.datacenter.name" is required to setup the network topology - on the assumption of a single DC
+  # This configuration was devised for IBM IKS to get the real hostname of the worker node
+  # Example:
+  # cassandra.endpoint.snitch: "customHostBasedGossipingPropertyFileSnitch"
+  # (the entrypoint script of Sysdig Cassandra image will translate this to "GossipingPropertyFileSnitch")
+  # cassandra.snitch.hostname.file: "/host/etc/hostname"
+  # (the host /etc/hostname should be mounted under /host/etc/hostname inside the container)
+  # cassandra.snitch.extract_cmd: "cut -d- -f2"
+  # (assuming that hostname is: "hostname-zone01-kubernetes-w1.domain.com", rack will contain: "zone01")
+  # ATTENTION: these new values should be used in conjuction with extra entries in the Cassandra statefulset
+  # and with a specific version of Sysdig Cassandra image (TBD)
+  cassandra.endpoint.snitch: ""
+  # Optional but required as a group: file containing the worker node name
+  cassandra.snitch.hostname.file: ""
+  # Optional but required as a group: command to extract the zone from the hostname
+  cassandra.snitch.extract_cmd: ""
+  # Optional but required as a group: datacenter name used for snitch and network topology
+  cassandra.datacenter.name: ""
+  # End Snitch Group ###########################################
+  ####################################
+  ######### REDIS #########
+  ####################################
+  # Required: Redis endpoint DNS/IP. If Redis is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  # The assumption is that the redis port will always be 6339
+  # This is the value for HA Redis and non-HA Redis
+  redis.endpoint: redis-primary
+  # Optional: Redis password
+  redis.password: ""
+  # If using Redis HA/Statefulsets, see the SYSDIG ONPREM section below about adding jvm options to
+  # sysdigcloud.jvm.api.options, sysdigcloud.jvm.worker.options, sysdigcloud.jvm.collector.options
+  ####################################
+  ######### ELASTICSEARCH #########
+  ####################################
+  # Required: Elasticsearch URL. If Elasticsearch is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  elasticsearch.url: http://sysdigcloud-elasticsearch
+  # Optional: Elasticsearch JVM options. For heavy load environments this will override the defaults (e.g. -Xms6G -Xmx6G)
+  elasticsearch.jvm.options: ""
+  ####################################
+  ######### SMTP #########
+  ####################################
+  # Optional: SMTP server address, needed for Sysdig Cloud to send email notifications
+  smtp.server: ""
+  # Optional: SMTP server port
+  smtp.server.port: "25"
+  # Optional: SMTP user (leave empty if your server doesn't require authentication)
+  smtp.user: ""
+  # Optional: SMTP password (leave empty if your server doesn't require authentication)
+  smtp.password: ""
+  # Optional: SMTP Secure Connection options
+  smtp.tls: "false"
+  smtp.ssl: "false"
+  # Optional: From Header used for email notifications
+  smtp.from.address: ""
+  ####################################
+  ######### SYSDIG ONPREM #########
+  ####################################
+  # Required: Collector service endpoint is the FQDN which should match the <EXTERNAL-DNS-NAME>
+  # found in the file api-ingress.yaml
+  collector.endpoint: <EXTERNAL-DNS-NAME>
+  # Required: Collector port. If using a LoadBalancer service for the collector, the port can be left as the default.
+  collector.port: "6443"
+  # Required: Api service https URL is the URL using the FQDN which should match the <EXTERNAL-DNS-NAME>
+  # found in the file api-ingress.yaml
+  api.url: https://<EXTERNAL-DNS-NAME>:443
+  # Required: Sysdig Cloud super admin user. This will be used for the initial login in the web interface
+  sysdigcloud.default.user: test@sysdig.com
+  # Required: Sysdig Cloud super admin user password
+  # NOTE: Change upon first login
+  sysdigcloud.default.user.password: test
+  # Required: Restrict password login to super admin user
+  # Force all non-default users to login using the configured IdP
+  sysdigcloud.restrict.password.login: "false"
+  # Optional: forward application logs to stdout
+  sysdigcloud.logging.stdout: "false"
+  # Optional: Sysdig Cloud application JVM options. For heavy load environments this will override the defaults
+  # If using Redis statefulsets (HA) the following needs to be added to the api, worker, and collector jvm options
+  # "-Ddraios.redis.useSentinel=true -Ddraios.redis.master=primary -Ddraios.redis.sentinels.0=redis-sentinel:26379"
+  # e.g. (-Xms4G -Xmx8G)
+  sysdigcloud.jvm.api.options: ""
+  sysdigcloud.jvm.worker.options: ""
+  sysdigcloud.jvm.collector.options: ""
+  # Required: Sysdig Cloud license
+  sysdigcloud.license: ""
+  # Optional: OAuth allowed domains (comma separated list of domains)
+  sysdigcloud.oauth.allowed.domains.list: ""
+  # Optional: Sysdig Cloud Google OAuth Client ID
+  sysdigcloud.google.oauth.client.id: ""
+  # Optional: Sysdig Cloud Google OAuth Client Secret
+  sysdigcloud.google.oauth.client.secret: ""
+  ####################################
+  # SCANNING and ANCHORE #
+  ####################################
+  # This token is used to authenticate service-to-service calls from the scanning service
+  # to the backend-api service. It should be changed to a small unique string, like a UUID.
+  scanning.service.token: change_me
+  # Scanning uses a different database than the other backend components, but
+  # can use the same mysql RDBMS endpoint.
+  scanning.mysql.endpoint: sysdigcloud-mysql
+  scanning.mysql.user: scanninguser
+  scanning.mysql.dbname: sysdig_scanning
+  # password in sysdigcloud-scanning secret
+  scanning.backend.url: "http://sysdigcloud-api:8080"
+  scanning.backend.tlsCheck: "false"
+  scanning.redis.enabled: "true"
+  anchore.url: "http://sysdigcloud-anchore-core:8228"
+  anchore.admin.user: admin
+  anchore.db.endpoint: sysdigcloud-postgresql
+  anchore.db.dbname: anchore
+  anchore.db.user: postgres
+  # db password in anchore-secrets
+
+  # Anchore proxy support
+  # Proxy support in the Anchore core/worker components may be needed for reaching
+  # the vulnerability feed or registries.
+  # The worker will contact registries but will never try to reach vulnerability feeds,
+  # while the core deployment will do both.
+  #
+  # If a proxy is required, uncomment & specify the proxy URL here, and uncomment
+  # the environment setting in the related deployment file.
+  # You also need to use anchore.no.proxy to ensure that internal communications
+  # between the Anchore services will not go through the proxy.
+  #
+  # NOTE: if the password contains non-url safe characters, it should
+  # be urlencoded in the value below. For example: F@oBar! would be F%40oBar%21
+  #
+  # anchore.core.https.proxy: https://user:password@proxy.corp.example.com:8128
+  # anchore.worker.https.proxy: https://user:password@proxy.corp.example2.com:8128
+  #
+  # anchore.no.proxy: 127.0.0.1, localhost, sysdigcloud-anchore-core
+
+  ####################################
+  # ======= BEGIN DEPRECATED LDAP OPTIONS =======
+  ####################################
+  # NOTE: The following series of LDAP settings are deprecated starting
+  # with version 963. If you have been using LDAP in a version older than 963,
+  # you should keep your settings intact until you successfully upgrade to 963
+  # or newer, at which time your settings from this ConfigMap will be migrated
+  # to a new API-based LDAP configuration. Once running version 963 or newer,
+  # you can remove these LDAP settings from this ConfigMap and configure
+  # LDAP via the API as described in the following Support article:
+  #
+  #   https://sysdigdocs.atlassian.net/wiki/spaces/LDAP/pages/203620377/LDAP+Authentication+Configuration
+  #
+  # (Deprecated - formerly Required): enable or disable Sysdig Cloud LDAP integration
+  sysdigcloud.ldap.enabled: "false"
+  # (Deprecated - formerly Optional): LDAP server endpoint (eg: ldaps://1.2.3.4:636)
+  sysdigcloud.ldap.endpoint: ""
+  # (Deprecated - formerly Optional): LDAP DN manager (eg: cn=servicer_acccount,ou=Service accounts,dc=demo,dc=com)
+  sysdigcloud.ldap.manager.dn: ""
+  # (Deprecated - formerly Optional): LDAP Manager password
+  sysdigcloud.ldap.manager.password: ""
+  # (Deprecated - formerly Optional): LDAP root DN
+  sysdigcloud.ldap.root.dn: ""
+  # (Deprecated - formerly Optional): LDAP user search base
+  # If you specify a relative DN (from the root DN), Sysdig Cloud will further narrow down searches to the sub-tree.
+  sysdigcloud.ldap.user.search.base: ""
+  # (Deprecated - formerly Optional): LDAP user search filter
+  # (eg: (\&(objectClass=organizationalPerson)(sAMAccountName={0})).
+  # This field determines the query to be run to identify the user record.
+  # The query is almost always uid={0} as per defined in RFC 2798.
+  # NB. Escape special characters like &
+  sysdigcloud.ldap.user.search.filter: ""
+  # (Deprecated - formerly Optional): Group search base (eg: ou=Organization,ou=Users)
+  # This field determines the query to be run to identify the organizational unit that contains groups.
+  sysdigcloud.ldap.group.search.base: ""
+  # (Deprecated - formerly Optional): Group search filter (eg: cn=sysdigcloud)
+  # This field is used to determine if a named group exists. If you know your LDAP server only stores group information
+  # in one specific object class, then you can improve group search performance by restricting the filter to just the
+  # required object class.
+  sysdigcloud.ldap.group.search.filter: ""
+  # (Deprecated - formerly Optional): Group membership filter (eg: member={0})
+  # The group membership filter field controls the search filter that is used to determine group membership.
+  # You are normally safe leaving this field unchanged, the default value ( | (member={0}) (uniqueMember={0})
+  # (memberUid={1})) will be used.
+  sysdigcloud.ldap.group.membership.filter: ""
+  ####################################
+  # ======= END DEPRECATED LDAP OPTIONS =======
+  ####################################

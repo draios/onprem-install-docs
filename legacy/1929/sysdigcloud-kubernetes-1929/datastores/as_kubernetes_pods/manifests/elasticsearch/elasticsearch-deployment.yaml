@@ -1,0 +1,67 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sysdigcloud-elasticsearch
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        instance: "1" # Elasticsearch node number
+        app: sysdigcloud
+        role: elasticsearch
+    spec:
+      containers:
+        - image: quay.io/sysdig/elasticsearch:5.6.15.6-alpine
+          name: elasticsearch
+          # https://www.elastic.co/blog/bootstrap_checks_annoying_instead_of_devastating
+          # Elasticsearch team decided to force everybody to run ES5 with the following sysctl option:
+          # sysctl -w vm.max_map_count=262144
+          # If you choose to run the container in privileged mode the container will automatically configured the system
+          # parameter and start elasticsearch as elasticsearch user.
+          # if you choose to run the container not in privileged mode make sure to configure the vm.max_map_count
+          # on all the servers of your cluster
+          securityContext:
+            privileged: true
+          ## Recommended resource limits for Elasticsearch pods.
+          ## Make sure to set values for these limits that are appropriate for your environment.
+          #resources:
+          #  requests:
+          #    cpu: 2
+          #    memory: 6Gi
+          #  limits:
+          #    cpu: 4
+          #    memory: 10Gi
+          env:
+            - name: ELASTICSEARCH_SERVICE
+              value: sysdigcloud-elasticsearch
+            # ELASTICSEARCH_GOSSIP_NODES_NUM needs to match the number of replicas specified for the deployment.
+            - name: ELASTICSEARCH_GOSSIP_NODES_NUM
+              value: "1"
+            - name: ELASTICSEARCH_CLUSTER_NAME
+              value: sysdigcloud
+            - name: ES_JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: elasticsearch.jvm.options
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: data
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        # Uncomment this for emptyDir volumes
+        - name: data
+          emptyDir: {}
+        # Uncomment this for GCE Disk
+        # - name: data
+        #   gcePersistentDisk:
+        #     pdName: <volume-name>
+        #     fsType: ext4
+        # Uncomment this for AWS EBS
+        # - name: data
+        #   awsElasticBlockStore:
+        #     volumeID: <volume-id>
+        #     fsType: ext4

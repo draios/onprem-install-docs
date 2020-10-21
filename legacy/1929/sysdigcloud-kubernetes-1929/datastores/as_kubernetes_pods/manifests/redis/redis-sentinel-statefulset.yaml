@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: redis-sentinel
+spec:
+  serviceName: redis-sentinel
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: redis-sentinel
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - redis-sentinel
+            topologyKey: "kubernetes.io/hostname"
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: redis-sentinel
+        image: quay.io/sysdig/redis:4.0.12.1-alpine-ha
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        env:
+        - name: SENTINEL
+          value: redis-primary
+        - name: REDIS_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: redis.password
+        resources:
+          limits:
+            cpu: 500m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        ports:
+        - containerPort: 26379
+          name: redis-sentinel
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret

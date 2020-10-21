@@ -1,0 +1,78 @@
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    run: haproxy-ingress
+  name: haproxy-ingress
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      run: haproxy-ingress
+  template:
+    metadata:
+      labels:
+        run: haproxy-ingress
+    spec:
+      hostNetwork: true
+      serviceAccountName: ingress-controller
+      containers:
+        - name: haproxy-ingress
+          image: quay.io/sysdig/haproxy-ingress:v0.7-beta.7
+          args:
+              - --reload-strategy=multibinder
+              - --default-backend-service=$(POD_NAMESPACE)/ingress-default-backend
+              - --allow-cross-namespace
+              - --configmap=$(POD_NAMESPACE)/haproxy-ingress
+              - --tcp-services-configmap=$(POD_NAMESPACE)/haproxy-tcp-services
+              - --default-ssl-certificate=$(POD_NAMESPACE)/sysdigcloud-ssl-secret
+          ports:
+            - containerPort: 10253
+              hostPort: 10253
+              name: healthcheck
+              protocol: TCP
+            - containerPort: 80
+              hostPort: 80
+              name: http
+              protocol: TCP
+            - containerPort: 443
+              hostPort: 443
+              name: https
+              protocol: TCP
+          readinessProbe:
+              failureThreshold: 3
+              httpGet:
+                path: /healthz
+                port: 10253
+                scheme: HTTP
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 1
+          resources:
+              limits:
+                cpu: 2
+                memory: 2Gi
+              requests:
+                cpu: 100m
+                memory: 100Mi
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10253
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret

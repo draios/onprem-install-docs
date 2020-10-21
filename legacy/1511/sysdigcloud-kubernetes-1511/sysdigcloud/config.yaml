@@ -1,0 +1,167 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdigcloud-config
+data:
+  ####################################
+  ######### MYSQL #########
+  ####################################
+  # Required: MySQL endpoint DNS/IP. If MySQL is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  mysql.endpoint: sysdigcloud-mysql
+  # Required: MySQL user
+  mysql.user: admin
+  # Required: MySQL password
+  mysql.password: change_me
+  # Required: Cassandra endpoint DNS/IP. If Cassandra is deployed as a Kubernetes service, this will be the service name.
+  # If using an external database, put the proper address (the address of a single node will be sufficient)
+  ####################################
+  ######### CASSANDRA #########
+  ####################################
+  cassandra.endpoint: sysdigcloud-cassandra
+  # Optional: enable or disable cassandra authentication and authorization in sysdigcloud cassandra image,
+  # if you want to enable it, make sure to follow the support guide in the official sysdigcloud documentation (needs link)
+  cassandra.secure: "false"
+  # Optional: Enable cassandra internodes and client encryption
+  cassandra.ssl.enabled: "false"
+  # Optional: Specify Cassandra cipher suites to use. This option is available only when using external cassandra clusters.
+  # Comma separated value. Example: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+  cassandra.ssl.ciphers: ""
+  # Optional: Cassandra user
+  cassandra.user: ""
+  # Optional: Cassandra password
+  cassandra.password: ""
+  # Required: CQL native clients port
+  cassandra.port: "9042"
+  # Optional: Cassandra replication factor to use. This parameter will be applied during the
+  # initial keyspace creation. This will not change an already running install.
+  # Change to 1 only for POC or if running a single node deployment
+  cassandra.replication.factor: "3"
+  # Optional: Cassandra JVM JVM options. For heavy load environments this will override the defaults
+  cassandra.jvm.options: ""
+  # Optional: Store Sysdig captures using Cassandra instead of S3. This increases cassandra storage if set to true
+  sysdigcloud.captures.cassandra.storage: "true"
+  ####################################
+  ######### REDIS #########
+  ####################################
+  # Required: Redis endpoint DNS/IP. If Redis is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  # The assumption is that the redis port will always be 6339
+  # This is the value for HA Redis and non-HA Redis
+  redis.endpoint: redis-primary
+  # Optional: Redis password
+  redis.password: ""
+  # If using Redis HA/Statefulsets, see the SYSDIG ONPREM section below about adding jvm options to
+  # sysdigcloud.jvm.api.options, sysdigcloud.jvm.worker.options, sysdigcloud.jvm.collector.options
+  ####################################
+  ######### ELASTICSEARCH #########
+  ####################################
+  # Required: Elasticsearch URL. If Elasticsearch is deployed as a Kubernetes service,
+  # this will be the service name. If using an external database, put the proper address
+  elasticsearch.url: http://sysdigcloud-elasticsearch
+  # Optional: Elasticsearch JVM options. For heavy load environments this will override the defaults
+  elasticsearch.jvm.options: ""
+  ####################################
+  ######### SMTP #########
+  ####################################
+  # Optional: SMTP server address, needed for Sysdig Cloud to send email notifications
+  smtp.server: ""
+  # Optional: SMTP server port
+  smtp.server.port: "25"
+  # Optional: SMTP user (leave empty if your server doesn't require authentication)
+  smtp.user: ""
+  # Optional: SMTP password (leave empty if your server doesn't require authentication)
+  smtp.password: ""
+  # Optional: SMTP Secure Connection options
+  smtp.tls: "false"
+  smtp.ssl: "false"
+  # Optional: From Header used for email notifications
+  smtp.from.address: ""
+  ####################################
+  ######### SYSDIG ONPREM #########
+  ####################################
+  # Required: Collector service endpoint DNS/IP. If the collector needs to be reachable outside the Kubernetes
+  # cluster, this will likely need to be set to the address of the Kubernetes nodes (if using a NodePort service) or the
+  # cloud loadbalancer created by the service (if using a LoadBalancer service). Otherwise, it can be left
+  # to the default value and the collector will just be routable within the Kubernetes cluster.
+  collector.endpoint: sysdigcloud-collector
+  # Required: Collector port. If using a LoadBalancer service for the collector, the port can be left as the default.
+  # If using a NodePort service, this will need to be set to the dynamic port allocated by Kubernetes on the nodes
+  # (obtained via kubectl describe service sysdigcloud-collector)
+  collector.port: "6443"
+  # Required: Api service https URL. If the api needs to be reachable outside the Kubernetes cluster,
+  # this will likely need to be set to the address of the Kubernetes nodes and the dynamic port allocated by Kubernetes
+  # (if using a NodePort service) or the cloud loadbalancer created by the service (if using a LoadBalancer service).
+  # Otherwise, it can be left to the default value and the api will just be routable within the Kubernetes cluster.
+  api.url: https://sysdigcloud-api:443
+  # Required: Sysdig Cloud super admin user. This will be used for the initial login in the web interface
+  sysdigcloud.default.user: test@sysdig.com
+  # Required: Sysdig Cloud super admin user password
+  # NOTE: Change upon first login
+  sysdigcloud.default.user.password: test
+  # Required: Restrict password login to super admin user
+  # Force all non-default users to login using the configured IdP
+  sysdigcloud.restrict.password.login: "false"
+  # Optional: forward application logs to stdout
+  sysdigcloud.logging.stdout: "false"
+  # Optional: Sysdig Cloud application JVM options. For heavy load environments this will override the defaults
+  # If using Redis statefulsets (HA) the following needs to be added to the api, worker, and collector jvm options
+  # "-Ddraios.redis.useSentinel=true -Ddraios.redis.master=primary -Ddraios.redis.sentinels.0=redis-sentinel:26379"
+  sysdigcloud.jvm.api.options: ""
+  sysdigcloud.jvm.worker.options: ""
+  sysdigcloud.jvm.collector.options: ""
+  # JVM GC options for the collectors
+  sysdigcloud.jvmgc.collector.options: "-XX:+PrintFlagsFinal -Xverify:none -XX:+UseG1GC -XX:MaxGCPauseMillis=300 -XX:+UseTLAB -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
+  # Required: Sysdig Cloud license
+  sysdigcloud.license: ""
+  # Optional: OAuth allowed domains (comma separated list of domains)
+  sysdigcloud.oauth.allowed.domains.list: ""
+  # Optional: Sysdig Cloud Google OAuth Client ID
+  sysdigcloud.google.oauth.client.id: ""
+  # Optional: Sysdig Cloud Google OAuth Client Secret
+  sysdigcloud.google.oauth.client.secret: ""
+  ####################################
+  # ======= BEGIN DEPRECATED LDAP OPTIONS =======
+  ####################################
+  # NOTE: The following series of LDAP settings are deprecated starting
+  # with version 963. If you have been using LDAP in a version older than 963,
+  # you should keep your settings intact until you successfully upgrade to 963
+  # or newer, at which time your settings from this ConfigMap will be migrated
+  # to a new API-based LDAP configuration. Once running version 963 or newer,
+  # you can remove these LDAP settings from this ConfigMap and configure
+  # LDAP via the API as described in the following Support article:
+  #
+  #   https://sysdigdocs.atlassian.net/wiki/spaces/LDAP/pages/203620377/LDAP+Authentication+Configuration
+  #
+  # (Deprecated - formerly Required): enable or disable Sysdig Cloud LDAP integration
+  sysdigcloud.ldap.enabled: "false"
+  # (Deprecated - formerly Optional): LDAP server endpoint (eg: ldaps://1.2.3.4:636)
+  sysdigcloud.ldap.endpoint: ""
+  # (Deprecated - formerly Optional): LDAP DN manager (eg: cn=servicer_acccount,ou=Service accounts,dc=demo,dc=com)
+  sysdigcloud.ldap.manager.dn: ""
+  # (Deprecated - formerly Optional): LDAP Manager password
+  sysdigcloud.ldap.manager.password: ""
+  # (Deprecated - formerly Optional): LDAP root DN
+  sysdigcloud.ldap.root.dn: ""
+  # (Deprecated - formerly Optional): LDAP user search base
+  # If you specify a relative DN (from the root DN), Sysdig Cloud will further narrow down searches to the sub-tree.
+  sysdigcloud.ldap.user.search.base: ""
+  # (Deprecated - formerly Optional): LDAP user search filter (eg: (\&(objectClass=organizationalPerson)(sAMAccountName={0})).
+  # This field determines the query to be run to identify the user record. The query is almost always uid={0} as per defined in RFC 2798.
+  # NB. Escape special characters like &
+  sysdigcloud.ldap.user.search.filter: ""
+  # (Deprecated - formerly Optional): Group search base (eg: ou=Organization,ou=Users)
+  # This field determines the query to be run to identify the organizational unit that contains groups.
+  sysdigcloud.ldap.group.search.base: ""
+  # (Deprecated - formerly Optional): Group search filter (eg: cn=sysdigcloud)
+  # This field is used to determine if a named group exists. If you know your LDAP server only stores group information
+  # in one specific object class, then you can improve group search performance by restricting the filter to just the required object class.
+  sysdigcloud.ldap.group.search.filter: ""
+  # (Deprecated - formerly Optional): Group membership filter (eg: member={0})
+  # The group membership filter field controls the search filter that is used to determine group membership.
+  # You are normally safe leaving this field unchanged, the default value ( | (member={0}) (uniqueMember={0}) (memberUid={1})) will be used.
+  sysdigcloud.ldap.group.membership.filter: ""
+  ####################################
+  # ======= END DEPRECATED LDAP OPTIONS =======
+  ####################################

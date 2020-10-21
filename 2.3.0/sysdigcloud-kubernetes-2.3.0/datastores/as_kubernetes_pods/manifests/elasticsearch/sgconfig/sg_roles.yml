@@ -1,0 +1,66 @@
+#<sg_role_name>:
+#  cluster:
+#    - '<permission>'
+#  indices:
+#    '<indexname or alias>':
+#      '<type>':  
+#        - '<permission>'
+#      _dls_: '<querydsl query>'
+#      _fls_:
+#        - '<field>'
+#        - '<field>'
+
+# When a user make a request to elasticsearch then the following roles will be evaluated to see if the user has
+# permissions for the request. A request is always associated with an action and is executed against and index (or alias)
+# and a type. If a request is executed against all indices (or all types) then the asterix ('*') is needed.
+# Every role a user has will be examined if it allows the action against an index (or type). At least one role must match
+# for the request to be successful. If no role match then the request will be denied. Currently a match must happen within
+# one single role - that means that permissions can not span multiple roles. 
+
+# For <permission>, <indexname or alias> and <type> simple wildcards and regular expressions are possible. 
+# A asterix (*) will match any character sequence (or an empty sequence)
+# A question mark (?) will match any single character (but NOT empty character)
+# Example: '*my*index' will match 'my_first_index' as well as 'myindex' but not 'myindex1'
+# Example: '?kibana' will match '.kibana' but not 'kibana'
+
+# To use a full blown regex you have to pre- and apend a '/' to use regex instead of simple wildcards
+# '/<java regex>/'
+# Example: '/\S*/' will match any non whitespace characters
+
+# Important: 
+# Index, alias or type names can not contain dots (.) in the <indexname or alias> or <type> expression.
+# Reason is that we currently parse the config file into a elasticsearch settings object which cannot cope with dots in keys.
+# Workaround: Just configure something like '?kibana' instead of '.kibana' or 'my?index' instead of 'my.index'
+# This limitation will likely removed with Search Guard 6
+
+# Default role for all users (including anonymous)
+sg_public:
+  cluster:
+    - cluster:monitor/main
+    - CLUSTER_COMPOSITE_OPS_RO
+
+sg_admin:
+  cluster:
+    - UNLIMITED
+  indices:
+    '*':
+      '*':
+        - ALL
+
+sg_readonly:
+  cluster:
+    - CLUSTER_MONITOR
+    - CLUSTER_COMPOSITE_OPS_RO
+  indices:
+    '*':
+      '*':
+        - INDICES_ALL
+
+# Allows each user to access own named index
+sg_own_index:
+  cluster:
+    - CLUSTER_COMPOSITE_OPS
+  indices:
+    '${user_name}':
+      '*':
+        - INDICES_ALL

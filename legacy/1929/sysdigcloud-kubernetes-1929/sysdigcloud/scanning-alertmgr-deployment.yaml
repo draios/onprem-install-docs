@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sysdigcloud-scanning-alertmgr
+  labels:
+    app: sysdigcloud
+    role: scanning-alertmgr
+spec:
+  # There must only be one alertmgr replica running.
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: scanning-alertmgr
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: scanning-alertmgr
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/metrics'
+        prometheus.io/port: '80'
+    spec:
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      containers:
+        - name: scanning-alertmgr
+          image: quay.io/sysdig/scanning:1929
+          imagePullPolicy: IfNotPresent
+          resources:
+            {}
+          env:
+          - name: ALERT_MANAGER
+            value: "1"
+          - name: ANCHORE_ADMIN_USER
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: anchore.admin.user
+          - name: ANCHORE_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sysdigcloud-anchore
+                key: anchore.admin.password
+          - name: ANCHORE_DB_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: anchore.db.endpoint
+          - name: ANCHORE_DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: anchore.db.dbname
+          - name: ANCHORE_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sysdigcloud-anchore
+                key: anchore.db.password
+          - name: ANCHORE_DB_USER
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: anchore.db.user
+          - name: ANCHORE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: anchore.url
+          - name: BACKEND_SERVICE_TOKEN
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.service.token
+          - name: BACKEND_TLS_CHECK_CERTIFICATE
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.backend.tlsCheck
+          - name: BACKEND_URL
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.backend.url
+          - name: DB_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.mysql.endpoint
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.mysql.dbname
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sysdigcloud-scanning
+                key: scanning.mysql.password
+          - name: DB_USER
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.mysql.user
+          - name: REDIS_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: scanning.redis.enabled
+          - name: REDIS_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: redis.endpoint
+          - name: REDIS_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: redis.password
+          - name: BASE_API_URL
+            valueFrom:
+              configMapKeyRef:
+                name: sysdigcloud-config
+                key: api.url
+          - name: UI_SECURE_URL
+            value: "$(BASE_API_URL)/secure"

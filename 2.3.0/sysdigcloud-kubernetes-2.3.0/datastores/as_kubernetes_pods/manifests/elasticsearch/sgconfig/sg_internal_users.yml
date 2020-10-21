@@ -1,0 +1,11 @@
+# This is the internal user database
+# The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+admin:
+  hash: ${ADMIN_PWD_HASH} #password is: ${ADMIN_PASSWORD}
+  roles:
+  - sg_admin
+
+readonly:
+  hash: ${READONLY_PWD_HASH} #password is: ${READONLY_PASSWORD}
+  roles:
+  - sg_readonly

@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: redis-secondary
+spec:
+  serviceName: redis-secondary
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: redis-secondary
+    spec:
+      affinity:
+       podAntiAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+         - labelSelector:
+             matchExpressions:
+             - key: app
+               operator: In
+               values:
+               - redis-secondary
+               - redis-primary
+           topologyKey: "kubernetes.io/hostname"
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: redis-secondary
+          image: quay.io/sysdig/redis:4.0.12.5-ha
+          imagePullPolicy: Always
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: redis.password
+            - name: REPLICA
+              value: "true"
+          resources:
+            limits:
+              cpu: 2
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 6379
+              name: redis-secondary
+          volumeMounts:
+            - name: redis-secondary-volume
+              mountPath: /data
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: redis-secondary-volume
+          emptyDir: {}

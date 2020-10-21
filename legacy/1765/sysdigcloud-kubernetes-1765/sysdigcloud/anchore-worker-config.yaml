@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdigcloud-anchore-worker
+  labels:
+    app: sysdigcloud
+    role: anchore-worker
+data:
+  config.yaml: |
+    service_dir: /anchore_service_config
+    tmp_dir: /analysis_scratch
+    allow_awsecr_iam_auto: false
+    cleanup_images: true
+    log_level: INFO
+    host_id: ${ANCHORE_POD_NAME}
+    internal_ssl_verify: false
+    metrics:
+      enabled: false
+    default_admin_password: ${ANCHORE_ADMIN_PASSWORD}
+    default_admin_email: 'admin@myemail.com'
+    credentials:
+      database:
+        db_connect: "postgresql+pg8000://${ANCHORE_DB_USER}:${ANCHORE_DB_PASSWORD}@${ANCHORE_DB_ENDPOINT}/${ANCHORE_DB}"
+        db_connect_args:
+          timeout: 120
+          ssl: false
+        db_pool_size: 30
+        db_pool_max_overflow: 30
+    services:
+      analyzer:
+        enabled: true
+        endpoint_hostname: ${ANCHORE_POD_IP}
+        listen: '0.0.0.0'
+        port: 8084
+        cycle_timer_seconds: 1
+        max_threads: 1
+        analyzer_driver: nodocker

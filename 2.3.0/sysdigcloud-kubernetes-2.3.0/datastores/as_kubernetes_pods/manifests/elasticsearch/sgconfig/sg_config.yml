@@ -1,0 +1,19 @@
+searchguard:
+  dynamic:
+    http:
+      anonymous_auth_enabled: false
+      xff:
+        enabled: false
+        internalProxies: '.*' 
+        remoteIpHeader:  'x-forwarded-for'
+        proxiesHeader:   'x-forwarded-by'
+        trustedProxies: '.*' 
+    authc:
+      basic_internal_auth_domain: 
+        enabled: true
+        order: 1
+        http_authenticator:
+          type: basic
+          challenge: true
+        authentication_backend:
+          type: intern

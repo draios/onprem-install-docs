@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sysdigcloud-anchore-worker
+  labels:
+    app: sysdigcloud
+    role: anchore-worker
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: anchore-worker
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: anchore-worker
+    spec:
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sysdigcloud-anchore-worker
+        - name: analysis-scratch
+          emptyDir: {}
+        # If you need to import self-signed SSL certs (e.g. because there's a proxy
+        # to the standard vulnerabilities feed service, or images are hosted on
+        # internal registries), create a secret named 'sysdigcloud-anchore-custom-certs'
+        # as in
+        #    kubectl ... create secret generic sysdigcloud-anchore-custom-certs
+        #    --from-file=/path/to/custom-cert1 --from_file=/path/to/custom-cert2 ...
+        # then uncomment this:
+        # - name: custom-certs-volume
+        #   secret:
+        #     secretName: sysdigcloud-anchore-custom-certs
+      containers:
+      - name: anchore-worker
+        image: quay.io/sysdig/anchore:v0.3.3.1
+        imagePullPolicy:
+        resources:
+          {}
+        env:
+        - name: ANCHORE_ENGINE_SERVICES
+          value: anchore-worker
+        - name: ANCHORE_DB
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: anchore.db.dbname
+        - name: ANCHORE_DB_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: anchore.db.endpoint
+        - name: ANCHORE_DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: anchore.db.user
+        - name: ANCHORE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sysdigcloud-anchore
+              key: anchore.db.password
+        - name: ANCHORE_IO_USER
+          value: ""
+        - name: ANCHORE_IO_PASSWORD
+          value: ""
+        - name: ANCHORE_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sysdigcloud-anchore
+              key: anchore.admin.password
+        - name: ANCHORE_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: ANCHORE_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: ANCHORE_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        # See comments in sysdigcloud/config.yaml on how to specify https_proxy and no_proxy:
+        # https://github.com/draios/sysdigcloud-kubernetes/blob/master/sysdigcloud/config.yaml
+        # - name: https_proxy
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: sysdigcloud-config
+        #       key: anchore.worker.https.proxy
+        # - name: no_proxy
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: sysdigcloud-config
+        #       key: anchore.no_proxy
+        ports:
+        - name: analyzer-api
+          containerPort: 8084
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+        - name: analysis-scratch
+          mountPath: /analysis_scratch
+        # Only needed if the engine needs import self-signed SSL certs
+        # (see comment above)
+        # - name: custom-certs-volume
+        #   mountPath: /custom-certs
+        livenessProbe:
+          exec:
+            command:
+            - pgrep
+            - twistd
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: analyzer-api
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 10
+          failureThreshold: 10

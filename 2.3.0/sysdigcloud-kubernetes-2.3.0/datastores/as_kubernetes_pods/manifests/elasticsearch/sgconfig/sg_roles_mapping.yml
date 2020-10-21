@@ -1,0 +1,15 @@
+sg_admin:
+  users:
+    - admin
+
+sg_public:
+  users:
+    - '*'
+
+sg_readonly:
+  users:
+    - readonly
+
+sg_own_index:
+  users:
+    - '*'

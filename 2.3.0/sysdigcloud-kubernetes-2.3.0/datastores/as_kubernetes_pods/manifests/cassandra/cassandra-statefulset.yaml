@@ -1,0 +1,164 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: sysdigcloud-cassandra
+  labels:
+    affinity: cassandra
+    app: sysdigcloud
+    role: cassandra
+spec:
+  updateStrategy:
+    type: OnDelete
+  serviceName: sysdigcloud-cassandra
+  podManagementPolicy: Parallel
+  replicas: 3
+  selector:
+    matchLabels:
+      affinity: cassandra
+      app: sysdigcloud
+      role: cassandra
+  template:
+    metadata:
+      labels:
+        affinity: cassandra
+        app: sysdigcloud
+        role: cassandra
+    spec:
+      ## Pod anti-affinity rules ensure that cassandra pods run on separate hosts.
+      ## You may need to disable these if your number of available kubernetes hosts is less than
+      ## the replication factor for your statefulset.
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: affinity
+                operator: In
+                values:
+                - cassandra
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - image: quay.io/sysdig/cassandra:2.1.21.13
+          name: cassandra
+          env:
+            - name: CASSANDRA_SERVICE
+              value: sysdigcloud-cassandra
+            - name: CASSANDRA_CLUSTER_NAME
+              value: sysdigcloud
+            - name: CASSANDRA_CLUSTER_TIME_LIMIT
+              value: "5"
+            # If not using CASSANDRA_SERVICE discovery, manually configure the seeds
+            # - name: CASSANDRA_SEEDS
+            #   value: ""
+            # If using multiple directories for data, set the path list
+            # - name: CASSANDRA_DATA_DIRS
+            #   value: "/var/lib/cassandra/data /var/lib/cassandra/data2"
+            - name: CASSANDRA_COMPACTION_THROUGHPUT
+              valueFrom:
+                configMapKeyRef:
+                  key: cassandra.compaction.throughput
+                  name: sysdigcloud-config
+            - name: JVM_EXTRA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.jvm.options
+            - name: CASSANDRA_SECURE
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.secure
+            - name: CASSANDRA_SSL
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.ssl.enabled
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            ### Start of the custom Cassandra snitch group
+            # The following entries are required for the custom Cassandra snitch (see configMap)
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.endpoint.snitch
+            # - name: CASSANDRA_SNITCH_EXTRACT_CMD
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: cassandra.snitch.extract_cmd
+            # - name: CASSANDRA_SNITCH_HOSTNAME_FILE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: cassandra.snitch.hostname.file
+            - name: CASSANDRA_DC
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.datacenter.name
+            ##########################################
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "nodetool drain"]
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - /ready.sh
+            initialDelaySeconds: 15
+            failureThreshold: 10
+            timeoutSeconds: 5
+          #resources:
+          #  limits:
+          #    cpu: 12
+          #    memory: 16Gi
+          #  requests:
+          #    cpu: 4
+          #    memory: 8Gi
+          volumeMounts:
+            - mountPath: /var/lib/cassandra
+              name: data
+            # Uncomment this when using multiple mount points for data
+            # - mountPath: /var/lib/cassandra/data2
+            #   name: data2
+            ### Start of the custom Cassandra snitch group
+            # The following entries are required for the custom Cassandra snitch (see configMap)
+            # - mountPath: /host/etc/hostname
+            #   readOnly: true
+            #   name: host-etc-hostname
+            ############################################
+            # Uncomment to specify per-pod jvm options
+            # using the cassandra-jvm-opts configmap.
+            # - name: cassandra-jvm-opts
+            #   mountPath: /opt/cassandra/cassandra-jvm-opts.json
+            #   subPath: cassandra-jvm-opts.json
+            #############################################
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      ### Start of the custom Cassandra snitch group
+      # The following entries are required for the custom Cassandra snitch (see configMap)
+      # volumes:
+      # - name: host-etc-hostname
+      #   hostPath:
+      #     path: /etc/hostname
+      ############################################
+      # Uncomment to specify per-pod jvm options
+      # using the cassandra-jvm-opts configmap.
+      # - name: cassandra-jvm-opts
+      #   configMap:
+      #     name: cassandra-jvm-opts
+      #############################################
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: <INSERT_YOUR_STORAGE_CLASS_NAME>

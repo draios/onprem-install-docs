@@ -1,0 +1,124 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sysdigcloud-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: worker
+    spec:
+      containers:
+        - name: email-renderer
+          image: quay.io/sysdig/sysdigcloud-backend:2.3.0.2461-email-renderer
+        - name: worker
+          image: quay.io/sysdig/sysdigcloud-backend:2.3.0.2461-allinone-java
+          volumeMounts:
+            - name: config
+              mountPath: /opt/kubernets_config
+            ## Uncomment this if you need to import self-signed SSL certs
+            #- name: java-certs
+            #  mountPath: /opt/java-certs/
+            ## Uncomment this if you want to split sysdgicloud configurations into configs and secrets.
+            #- name: secrets
+            #  mountPath: /opt/kubernets_secrets
+            ## If enabling elasticsearch auth, uncomment elasticsearch-certs volume mount
+            # - name: elasticsearch-certs
+            #   mountPath: /opt/kubernets_secrets/elasticsearch_certs
+          env:
+            - name: ROLES
+              value: worker
+            - name: LOG_ROLE
+              value: worker
+            - name: LOG_TO_STDOUT
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: sysdigcloud.logging.stdout
+            - name: JVM_EXTRA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: sysdigcloud.jvm.worker.options
+            - name: CASSANDRA_ENDPOINT_SNITCH
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.endpoint.snitch
+            - name: CASSANDRA_DC
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: cassandra.datacenter.name
+            - name: ES_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: sysdigcloud-config
+                  key: elasticsearch.hostname
+            ## If enabling elasticsearch auth, uncomment ES_SEARCHGUARD_USER, ES_SEARCHGUARD_ENABLED, and ES_SEARCHGUARD_PASSWORD env vars
+            # - name: ES_SEARCHGUARD_USER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: elasticsearch.user
+            # - name: ES_SEARCHGUARD_ENABLED
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: elasticsearch.searchguard.enabled
+            # - name: ES_SEARCHGUARD_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: sg-admin-secret
+            #       key: password
+          ## If you're running multiple replicas, it is advisable to configure the limits below. Limiting resources
+          ## can help stabilize rolling updates later down the road.
+          # resources:
+          #   # minimum resources for container
+          #   requests:
+          #     memory: "13G"
+          #     cpu: "4"
+          #   # maximum resources for container
+          #   limits:
+          #     memory: "64G"
+          #     cpu: "32"
+          readinessProbe:
+            httpGet:
+              path: /api/ping
+              port: 9000
+            initialDelaySeconds: 30
+            timeoutSeconds: 2
+          lifecycle:
+            preStop:
+              exec:
+                command: ["curl","-v","http://127.0.0.1:9000/api/admin/drain"]
+          #resources:
+          #  limits:
+          #    cpu: 8
+          #    memory: 8Gi
+          #  requests:
+          #    cpu: 4
+          #    memory: 4Gi
+      terminationGracePeriodSeconds: 60
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: config
+          configMap:
+            name: sysdigcloud-config
+        ## Uncomment this if you need to import self-signed SSL certs, wich can be created with
+        # kubectl create secret generic example-cert --from-file=${HOME}/cert.pem
+        #- name: java-certs
+        #  secret:
+        #    secretName: sysdigcloud-java-certs
+        ## Uncomment this if you want to split sysdgicloud configurations into configs and secrets.
+        #- name: secrets
+        #  secret:
+        #    secretName: <secret_name>
+        ## If enabling elasticsearch auth, uncomment elasticsearch-certs volume
+        # - name: elasticsearch-certs
+        #   secret:
+        #     secretName: ca-certs

@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: sysdigcloud-elasticsearch
+  labels:
+    app: sysdigcloud
+    component: elasticsearch
+    role: elasticsearch
+spec:
+  serviceName: elasticsearch-data
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        component: elasticsearch
+        role: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: quay.io/sysdig/elasticsearch:5.6.4.1
+        securityContext:
+          privileged: true
+        env:
+        - name: ELASTICSEARCH_SERVICE
+          value: sysdigcloud-elasticsearch
+        - name: ELASTICSEARCH_GOSSIP_NODES_NUM
+          value: "2"
+        - name: ELASTICSEARCH_CLUSTER_NAME
+          value: sysdigcloud
+        - name: ES_JAVA_OPTS
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: elasticsearch.jvm.options
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: data
+      imagePullSecrets:
+      - name: sysdigcloud-pull-secret
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 50Gi
+      storageClassName: <INSERT_YOUR_STORAGE_CLASS_NAME>

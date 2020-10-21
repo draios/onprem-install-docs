@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sysdigcloud-haproxy
+  labels:
+    app: sysdigcloud
+    role: haproxy
+spec:
+  # Replicas can be scaled up as needed.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: haproxy
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: haproxy
+    spec:
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: config
+          configMap:
+            name: sysdigcloud-haproxy
+            defaultMode: 0777
+        - name: cert
+          secret:
+            secretName: sysdigcloud-ssl-secret
+      containers:
+      - image: quay.io/sysdig/rsyslog:8.34.0.1
+        name: rsyslog
+        resources:
+          limits:
+            cpu: 150m
+            memory: 30Mi
+          requests:
+            cpu: 50m
+            memory: 10Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - name: haproxy
+        image: quay.io/sysdig/haproxy:1.6.14.3-alpine
+        command: ["/config/haproxy.sh"]
+        args: []
+        ports:
+          - containerPort: 443
+            name: https
+          - containerPort: 1936
+            name: stats
+          - containerPort: 10253
+            name: healthz
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: cert
+          mountPath: /cert
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: healthz
+          initialDelaySeconds: 2

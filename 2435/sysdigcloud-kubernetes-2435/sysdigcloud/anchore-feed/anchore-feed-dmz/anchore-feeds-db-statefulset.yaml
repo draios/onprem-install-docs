@@ -1,0 +1,106 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sysdigcloud-anchore-feeds-db-ext
+  labels:
+    app: sysdigcloud
+    role: anchore-feeds-db
+spec:
+  # Stateful service, replica should never be greater than 1
+  replicas: 1
+  serviceName: "sysdigcloud-anchore-feeds-db-ext"
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: anchore-feeds-db
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+       - ReadWriteOnce
+      storageClassName: <INSERT_YOUR_STORAGE_CLASS_NAME>
+      resources:
+        requests:
+          storage: 8Gi
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: anchore-feeds-db
+    spec:
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sysdigcloud-anchore-feeds
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                  - anchore-feeds
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: postgresql
+        image: quay.io/sysdig/postgres:10.6
+        resources: {}
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data/pgdata
+          subPath: "postgresql-db"
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.user
+          # Required for pg_isready in the health probes.
+        - name: PGUSER
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.user
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.dbname
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.password
+        - name: POD_IP
+          valueFrom: { fieldRef: { fieldPath: status.podIP } }
+        ports:
+        - name: feeds-db
+          containerPort: 5432
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - exec pg_isready --host $POD_IP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - exec pg_isready --host $POD_IP
+          initialDelaySeconds: 5
+          timeoutSeconds: 3
+          periodSeconds: 5

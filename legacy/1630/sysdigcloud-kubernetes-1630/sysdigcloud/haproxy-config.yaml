@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sysdigcloud-haproxy
+  labels:
+    app: sysdigcloud
+    role: haproxy
+data:
+  haproxy.sh: |
+    #!/bin/sh
+    set -e
+    cat /cert/tls.crt /cert/tls.key > /etc/combined-cert.pem
+    exec haproxy -db -f /config/haproxy.cfg
+
+  haproxy.cfg: |
+    global
+      daemon
+      maxconn 8192
+      log 127.0.0.1:514 format rfc5424 local0
+      log-tag haproxy
+      tune.ssl.default-dh-param 2048
+      ssl-default-bind-options force-tlsv12
+      ssl-default-bind-ciphers ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES256:ECDH+AES128:!aNULL:!SHA1
+      ssl-default-server-options force-tlsv12
+      ssl-default-server-ciphers ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES256:ECDH+AES128:!aNULL:!SHA1
+
+    defaults
+      log global
+      maxconn 8192
+      option redispatch
+      option dontlognull
+      option http-server-close
+      option http-keep-alive
+      timeout http-request    30s
+      timeout connect         5s
+      timeout client          50s
+      timeout client-fin      50s
+      timeout queue           5s
+      timeout server          50s
+      timeout server-fin      50s
+      timeout tunnel          1h
+      timeout http-keep-alive 1m
+
+    frontend common
+      mode http
+      log-format {\"type\":\"haproxy\",\"protocol\":\"http\",\"timestamp\":\"%t\",\"client_ip\":%{+Q}ci,\"client_port\":%{+Q}cp,\"frontend_name\":%{+Q}ft,\"backend_name\":%{+Q}b,\"backend_ip\":%{+Q}s,\"time_handshake\":%{+Q}Th,\"time_idle_before_request\":%{+Q}Ti,\"time_receive_full_request\":%{+Q}TR,\"time_wait_send_backend\":%{+Q}Tw,\"time_backend_ack\":%{+Q}Tc,\"time_backend_processing\":%{+Q}Tr,\"time_delay_send_to_client\":%{+Q}Td,\"waittime_on_client\":%{+Q}Tq,\"active_request_time\":%{+Q}Ta,\"total_request_time\":%{+Q}Tt,\"http_status_code\":%{+Q}ST,\"client_bytes_uploaded\":%{+Q}U,\"bytes_sent\":%{+Q}B,\"termination_status\":\"%tsc\",\"active_conns\":%{+Q}ac,\"frontend_conns\":%{+Q}fc,\"backend_conns\":%{+Q}bc,\"server_conns\":%{+Q}sc,\"retry_conns\":%{+Q}rc,\"server_queue\":%{+Q}sq,\"backend_queue\":%{+Q}bq,\"request\":%{+Q,+E}r}
+
+      bind *:443 ssl crt /etc/combined-cert.pem
+
+      use_backend scanning-api if { path -m beg /api/scanning }
+      default_backend backend-api
+
+    backend scanning-api
+      mode http
+      cookie SERVERID insert indirect nocache
+      server scanning-api sysdigcloud-scanning-api:80 check
+
+    backend backend-api
+      mode http
+      cookie SERVERID insert indirect nocache
+      server backend-api sysdigcloud-api:8080 check
+
+    listen stats
+      bind *:1936
+      mode http
+      stats enable
+      stats realm HAProxy\ Statistics
+      stats uri /
+      no log
+
+    frontend healthz
+      bind *:10253
+      mode http
+      monitor-uri /healthz
+      no log

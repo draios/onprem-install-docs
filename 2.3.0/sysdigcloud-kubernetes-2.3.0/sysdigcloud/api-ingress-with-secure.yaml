@@ -1,0 +1,32 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "haproxy"
+    ingress.kubernetes.io/affinity: cookie
+    ingress.kubernetes.io/session-cookie-name: INGRESSCOOKIEAPI
+  labels:
+    app.kubernetes.io/managed-by: ingress-config
+    app.kubernetes.io/name: ingress-config
+    app.kubernetes.io/part-of: sysdigcloud
+    role: ingress-config
+    tier: infra
+  name: sysdigcloud-api-ingress
+spec:
+  rules:
+    - host: <EXTERNAL-DNS-NAME>
+      http:
+        paths:
+          - backend:
+              serviceName: sysdigcloud-api
+              servicePort: 8080 
+            path: /
+          - backend:
+              serviceName: sysdigcloud-scanning-api
+              servicePort: 80 
+            path: /api/scanning
+  tls:
+    - hosts:
+        - <EXTERNAL-DNS-NAME>
+      secretName: sysdigcloud-ssl-secret

@@ -1,0 +1,126 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sysdigcloud-anchore-feeds
+  labels:
+    app: sysdigcloud
+    role: anchore-feeds
+spec:
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: anchore-feeds
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: anchore-feeds
+    spec:
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sysdigcloud-anchore-feeds
+        - name: anchore-license
+          secret:
+            secretName: anchore-enterprise-license
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                  - anchore-feeds-db
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: anchore-feeds
+        image: quay.io/sysdig/anchore-feed:v0.3.2
+        imagePullPolicy: Always
+        command: ["/usr/local/bin/anchore-enterprise-manager"]
+        args: ["service", "start", "feeds"]
+        ports:
+        - containerPort: 8448
+          name: feeds-api
+        env:
+        - name: ANCHORE_DB
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.dbname
+        - name: ANCHORE_DB_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.endpoint
+        - name: ANCHORE_DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.user
+        - name: ANCHORE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.db.password
+        - name: ANCHORE_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sysdigcloud-anchore-feeds
+              key: anchore.admin.password
+        - name: ANCHORE_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: ANCHORE_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: ANCHORE_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        # See comments in sysdigcloud/config.yaml on how to specify anchore.https.proxy:
+        # https://github.com/draios/sysdigcloud-kubernetes/blob/master/sysdigcloud/config.yaml
+        # - name: https_proxy
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: sysdigcloud-config
+        #       key: anchore.https.proxy
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config/config.yaml
+          subPath: config.yaml
+        - name: anchore-license
+          mountPath: /license/
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: feeds-api
+          initialDelaySeconds: 120
+          timeoutSeconds: 10
+          periodSeconds: 10
+          failureThreshold: 6
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: feeds-api
+          timeoutSeconds: 10
+          periodSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        resources:
+          limits:
+            cpu: 300m
+            memory: 8Gi
+          requests:
+            cpu: 100m
+            memory: 3Gi

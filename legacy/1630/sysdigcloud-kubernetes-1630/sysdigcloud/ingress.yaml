@@ -1,0 +1,26 @@
+# This ingress object can be used instead of the haproxy deployment & service,
+# in environments that have a running ingress controller.
+# You will need specify the external dns entry in both the rules and tls
+# section.
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sysdigcloud-ingress
+  annotations:
+    ingress.kubernetes.io/affinity: 'cookie'
+spec:
+  rules:
+  - host: <EXTERNAL-DNS-NAME>
+    http:
+      paths:
+      - path: /api/scanning
+        backend:
+          serviceName: sysdigcloud-scanning-api
+          servicePort: 80
+      - backend:
+          serviceName: sysdigcloud-api
+          servicePort: 8080
+  tls:
+  - hosts:
+    - <EXTERNAL-DNS-NAME>
+    secretName: sysdigcloud-ssl-secret
