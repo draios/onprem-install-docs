@@ -85,7 +85,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 -   ./installer-image import -n sysdig --certs-directory certs -o values.yaml
 
     > **Note**
-
+    >
     > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath values.yaml. .
 
 3.  Edit the following values:
@@ -130,8 +130,8 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     <!-- -->
 
-    -   **Note**
-
+        > **Note**
+        >
         > If doing an airgapped install , you would also edit the following values:
 
     <!-- -->
