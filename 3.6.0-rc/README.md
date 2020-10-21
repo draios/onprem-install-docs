@@ -5,7 +5,7 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
-   * [Upgrades](upgrades.md)
+   * [Upgrades](upgrade.md)
    * [Configuration Parameters and Examples](#configuration-parameters-and-examples)
    * [Permissions](#permissions)
    * [Advanced Configuration](advanced.md)
