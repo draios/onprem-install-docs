@@ -1,5 +1,6 @@
    * [Installer](#installer)
    * [Installation Overview](#installation-overview)
+      * [Install vs Upgrade](#Install-vs-Upgrade)  TODO fix path here
       * [Prerequisites](#prerequisites)
    * [Quickstart Install](#quickstart-install)
    * [Airgapped Installation Options](#airgapped-installation-options)
@@ -13,128 +14,159 @@
 
 # Installer
 
-The Sysdig Installer tool is a collection of scripts that help automate the
-on-premises deployment of the Sysdig platform (Sysdig Monitor, Secure and
-Agent), for environments using Kubernetes or OpenShift. Use the Installer to
-install or upgrade your Sysdig platform. It is recommended as a replacement
-for the earlier manual install/upgrade procedures.
+The Sysdig Installer tool is a binary containing a collection of scripts that help automate the on-premises deployment of the Sysdig platform (Sysdig Monitor and/or Sysdig Secure), for environments using Kubernetes or OpenShift. Use the Installer to install or upgrade your Sysdig platform. It is recommended as a replacement for the earlier Kubernetes manual installation and upgrade procedures.
 
 # Installation Overview
 
-To install, you will log in to quay.io, download a sysdig-chart/values.yaml
-file, provide a few basic parameters in it, and launch the Installer. In a
-normal installation, the rest is automatically configured and deployed.
+To install, you will download the installer binary and a values.yaml file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
 
-Note that you can perform a quick install if your environment has access to the
-internet, or a partial or full airgapped installation, as needed. Each is
-described below.
+You can perform a quick install if your environment has access to the internet, or a partial or full airgapped installation, as needed. Each is described below.
+
+## Install vs Upgrade
+
+With Sysdig Platform 3.5.0, the installer has been simplified from previous versions. Upgrade differs from Install in that you run an `installer diff` to discover the differences between the old and new versions and then `installer deploy` for the new version.
+
+If you are installing the Sysdig Platform for the first time, ignore the *ForUpgradeOnly* step in the process. If you are upgrading, check the [Upgrade notes](upgrade.md) before you begin.
 
 ## Prerequisites
 
 ### Requirements for Installation Machine with Internet Access
 
 - kubectl or oc binary
-- Network access to quay.io
 - A domain name you are in control of.
 
 ### Additional Requirements for Airgapped Environments
 
 - Edited sysdig-chart/values.yaml, with airgap registry details updated
 - Network and authenticated access to the private registry
+- Network access to quay.io
 
 ### Access Requirements
 
 - Sysdig license key (Monitor and/or Secure)
 - Quay pull secret
 
+### Storage Requirements
+
+You may use dynamic or static storage on a variety of platforms to store the Sysdig platform components (stateful sets). Different configuration parameters and values are used during the install, depending on which scenario you have.
+
+**Use Case 1: Default, undefined (AWS/GKE)**
+
+If you will use dynamic storage on AWS or GKE and haven't configured any storage class there yet, then the Quick Install streamlines the process for you.
+
+-   `storageclassProvision``er:` Enter `aws` or `gke`. The installer will create the appropriate storage class and then use it for all the Sysdig platform stateful sets.
+
+-   `storageclassName`: Leave empty.
+
+**Use Case 2: Dynamic, predefined**
+
+It is also possible that you are using dynamic storage but have already created storage classes there. This dynamic storage could be AWS, GKE, or any other functioning dynamic storage you use.  In this case, you would enter: 
+
+-   `storageclassProvisioner`: Leave empty; anything put here would be ignored.
+
+-   `storageclass``Name`: Provide the name of the pre-configured storage class you want to use. The installer will use this storage class for all the Sysdig platform stateful sets.
+
+**Use Case 3: Static Storage **
+
+In cases where dynamic storage is not available, you can use static storage for the Sysdig stateful sets. In this case, you would use:
+
+-   `storageclassProvisioner`: Enter `hostpath`, then define the nodes for the four main Sysdig components: ElasticSearch, Cassandra, MySQL, and Postgres.storageclassProvisioner
+
+-   See [Advanced Configurations](advanced.md) for details. [TODO fix path to static storage]
+
 # Quickstart Install
 
 This install assumes the Kubernetes cluster has network access to pull images from quay.io.
 
-- Copy the current version sysdig-chart/values.yaml to your working directory.
-  ```bash
-  wget https://raw.githubusercontent.com/draios/sysdigcloud-kubernetes/installer/installer/values.yaml
-  ```
-- Edit the following values:
+1.  Have your Sysdig Technical Account Manager download the installer binary that matches your OS from the the  page [TODO: Donald].
 
-  - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
-    defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
-    large.
-  - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
-    your Sysdig purchase confirmation mail.
-  - [`storageClassProvisioner`](configuration_parameters.md#storageClassProvisioner):
-    The name of the storage class provisioner to use when creating the
-    configured storageClassName parameter. If you do not use one of those two
-    dynamic storage provisioners, then enter: hostPath and refer to the Advanced
-    examples for how to configure static storage provisioning with this option.
-    Valid options: aws, gke, hostPath
-  - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
-    provided with your Sysdig purchase confirmation mail
-  - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name
-    the Sysdig APIs will be served on.
-  - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
-    (OpenShift installs only) Domain name the Sysdig collector will be served on.
-    When not configured it defaults to whatever is configured for sysdig.dnsName.
-  - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
-    The networking construct used to expose the Sysdig API and collector. Options
-    are:
+2.  **For Upgrades Only:** Copy the current version of [values.yaml](values.yaml) to your working directory.\]
 
-    - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
-      host ports for api and collector. This does not create a Kubernetes service.
-    - loadbalancer: creates a service of type loadbalancer and expects that
-      your Kubernetes cluster can provision a load balancer with your cloud provider.
-    - nodeport: creates a service of type nodeport. The node ports can be
-      customized with:
+-   ./installer-image import -n sysdig --certs-directory certs -o values.yaml
 
-          - sysdig.ingressNetworkingInsecureApiNodePort
-          - sysdig.ingressNetworkingApiNodePort
-          - sysdig.ingressNetworkingCollectorNodePort
+    > **Note**
 
-      When not configured `sysdig.ingressNetworking` defaults to `hostnetwork`.
+    > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath values.yaml. .
 
-  **NOTE**: If doing an airgapped install (see Airgapped Installation Options), you
-  would also edit the following values:
+3.  Edit the following values:
 
-  - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
-    The URL of the airgapped (internal) docker registry. This URL is used for
-    installations where the Kubernetes cluster can not pull images directly from
-    Quay.
-  - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
-    This defines custom repository prefix for airgapped_registry.
-    Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
-  - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
-    The password for the configured airgapped_registry_username. Ignore this
-    parameter if the registry does not require authentication.
-  - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
-    The username for the configured airgapped_registry_name. Ignore this
-    parameter if the registry does not require authentication.
+    -   **size:** Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
 
-- Download the installer binary that matches your OS from the
-  [sysdigcloud-kubernetes releases
-  page](https://github.com/draios/sysdigcloud-kubernetes/releases).
-- Run the Installer.
-  ```bash
-  ./installer deploy
-  ```
-- On successful run of Installer towards the end of your terminal you should
-  see the below:
+    -   **quaypullsecret:** quay.io provided with your Sysdig purchase confirmation mail
 
-  ```
-  Congratulations, your Sysdig installation was successful!
-  You can now login to the UI at "https://awesome-domain.com:443" with:
+    -   **storageClassProvisioner:** Review Storage Requirements, above.
 
-  username: "configured-username@awesome-domain.com"
-  password: "awesome-password"
+    <!-- -->
 
-  Collector endpoint for connecting agents is: awesome-domain.com
-  Collector port is: 6443
-  ```
+    -   If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
 
-**NOTE**: Save the values.yaml file in a secure location; it will be used for
-future upgrades. There will also be a generated directory containing various
-Kubernetes configuration yaml files which were applied by Installer against
-your cluster. It is not necessary to keep the generated directory, as the
-Installer can regenerate is consistently with the same values.yaml file.
+    <!-- -->
+
+    -   **sysdig.license:** Sysdig license key provided with your Sysdig purchase confirmation mail
+
+    -   **sysdig.dnsname:** The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+
+    -   **sysdig.collector.dnsName: (OpenShift installs only) **Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+
+    -   **deployment**: **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
+
+    -   **sysdig.ingressNetworking:** The networking construct used to expose the Sysdig API and collector.Options are:
+
+        -   **hostnetwork:** sets the hostnetworking in the ingress daemonset and opens host ports for api and collector. This does not create a Kubernetes service.
+
+        -   **loadbalancer:** creates a service of type loadbalancer and expects that your Kubernetes cluster can provision a load balancer with your cloud provider.
+
+        -   **nodeport:** creates a service of type nodeport.The node ports can be customized with:
+
+        <!-- -->
+
+        -   `sysdig.ingressNetworkingInsecureApiNodePort`
+
+            `sysdig.ingressNetworkingApiNodePort`
+
+            `sysdig.ingressNetworkingColle``ctorNodePort`
+
+            When not configured, `sysdig.ingressNetworking` defaults to `hostnetwork`.
+
+    <!-- -->
+
+    -   **Note**
+
+        > If doing an airgapped install , you would also edit the following values:
+
+    <!-- -->
+
+    -   **airgapped\_registry\_name:** The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
+
+    -   **airgapped\_repository\_prefix:** This defines custom repository prefix for airgapped\_registry. Tags and pushes images as `airgapped_registry_name/airgapped_repository_prefix``/image_name:tag`
+
+    -   **airgapped\_registry\_password:** The password for the configured airgapped\_registry\_username. Ignore this parameter if the registry does not require authentication.
+
+    -   **airgapped\_registry\_username:** The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
+
+4.  \[**For Upgrades Only:**\]
+
+-   \[Generate and review the diff of changes the installer is about to introduce:
+
+        ./installer diff
+
+    This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
+
+    If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.\]
+
+5.  Run the installer:
+
+    ```bash
+    ./installer deploy
+    ``` 
+
+6.  See [*Output*](#output) (below) to finish.
+
+> **Note**
+>
+> Save the `values.yaml `file in a secure location; it will be used for future upgrades.
+>
+> There will also be a generated directory containing various Kubernetes configuration `yaml` files that were applied by the Installer against your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate it consistently with the same `values.yaml `file.
 
 # Airgapped Installation Options
 
