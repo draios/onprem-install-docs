@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: collector-passthrough-ssl
+spec:
+  # Note: this dns name MUST be different from the Api dns name
+  host: <COLLECTOR_DNS_NAME>
+  to:
+    kind: Service
+    name: sysdigcloud-collector
+  tls:
+    termination: passthrough
+  port:
+    targetPort: 6443

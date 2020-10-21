@@ -1,0 +1,32 @@
+###################################################################################
+# Use this optional configmap to specify pod-specific JVM options in a statefulset.
+# Only specify one option at a time (either additional or override, not both).
+#
+# Make sure to add the appropriate volume configuration to the statefulset if you
+# intend to use this configurations.
+####################################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cassandra-jvm-opts
+data:
+  cassandra-jvm-opts.json: |-
+    {
+        "cassandra_hosts": [
+            {
+                "podname": "sysdigcloud-cassandra-0",
+                "additional_jvm_options": "",
+                "override_jvm_options": ""
+            },
+            {
+                "podname": "sysdigcloud-cassandra-1",
+                "additional_jvm_options": ""
+                "override_jvm_options": ""
+            },
+            {
+                "podname": "sysdigcloud-cassandra-2",
+                "additional_jvm_options": "",
+                "override_jvm_options": ""
+            }
+        ]
+    }

@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: sysdigcloud
+    role: event-migration
+  name: sysdig-event-migration
+spec:
+  containers:
+    - name: event-migration
+      image: quay.io/sysdig/onprem_migration:combined-events_0.1.0_1091-1149
+      env:
+        - name: DB_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: mysql.endpoint
+        - name: DB_CONNECTION_TIMEOUT
+          value: "4000" # Tweak parameter if necessary
+        - name: DB_SOCKET_TIMEOUT
+          value: "14000" # Tweak parameter if necessary
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: mysql.user
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: mysql.password
+        - name: ES_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: sysdigcloud-config
+              key: elasticsearch.url
+        - name: ES_PORT
+          value: "9200" # Change the param if different
+        - name: BATCH_SIZE
+          value: "500"
+        - name: ALERT_EVENTS
+          value: "true"
+        - name: CUSTOM_EVENTS
+          value: "true"
+        - name: POLICY_EVENTS
+          value: "true"
+        - name: ONPREM
+          value: "true"
+        - name: REPAIR_MODE
+          value: "false"

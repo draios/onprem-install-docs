@@ -1,0 +1,186 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sysdigcloud-mysql-cluster
+  labels:
+    app: sysdigcloud
+    role: mysql-cluster
+  annotations:
+    # needed so every node can query itself using its fqdn even before
+    # the live/ready probe succeed
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  clusterIP: None
+  ports:
+    - port: 3306
+  selector:
+    app: sysdigcloud
+    role: mysql-cluster
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sysdigcloud-mysql-cluster
+  labels:
+    app: sysdigcloud
+    role: mysql-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sysdigcloud
+      role: mysql-cluster
+  serviceName: sysdigcloud-mysql-cluster
+  template:
+    metadata:
+      labels:
+        app: sysdigcloud
+        role: mysql-cluster
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - sysdigcloud
+              - key: role
+                operator: In
+                values:
+                - mysql-cluster
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: mysql
+          image: quay.io/sysdig/mysql-server:8.0.16.2
+          command:
+            - /bin/bash
+            - -ecx
+            - |
+              # Use native auth plugin for compatibility with MariaDB driver
+              sed -i -e '/^\s*default-authentication-plugin=/d;$a\\n# Use native auth plugin for compatibility with MariaDB driver\ndefault-authentication-plugin=mysql_native_password'  /etc/my.cnf
+
+              base=1000
+              index=$(echo $HOSTNAME | grep -o '[^-]*$')
+
+              /entrypoint.sh --server_id=$(expr $base + $index) \
+              --datadir=/var/lib/mysql \
+              --user=mysql \
+              --gtid_mode=ON \
+              --log-bin=sysdigcloud-mysql-cluster-${index}-bin \
+              --binlog_checksum=NONE \
+              --enforce_gtid_consistency=ON \
+              --log-slave-updates=ON \
+              --binlog-format=ROW \
+              --master-info-repository=TABLE \
+              --relay-log-info-repository=TABLE \
+              --transaction-write-set-extraction=XXHASH64 \
+              --relay-log=sysdigcloud-mysql-cluster-${index}-relay-bin \
+              --report-host="sysdigcloud-mysql-cluster-${index}.sysdigcloud-mysql-cluster" \
+              --log-error-verbosity=3 \
+              --max_connections=1024 \
+              --explicit_defaults_for_timestamp=ON
+          env:
+            - name: MYSQL_DATABASE
+              value: draios
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.user
+                  name: sysdigcloud-config
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.password
+                  name: sysdigcloud-config
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.password
+                  name: sysdigcloud-config
+            # These MYSQL_EXTRADB_* enviroment variables will trigger the
+            # creation of the scanning database when mysql starts.
+            # - name: MYSQL_EXTRADB_SCANNING_DBNAME
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: scanning.mysql.dbname
+            # - name: MYSQL_EXTRADB_SCANNING_USER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: sysdigcloud-config
+            #       key: scanning.mysql.user
+            # - name: MYSQL_EXTRADB_SCANNING_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: sysdigcloud-scanning
+            #       key: scanning.mysql.password
+            - name: MYSQL_ROOT_HOST
+              value: '%'
+            - name: MYSQL_LOG_CONSOLE
+              value: "true"
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 1
+              memory: 2Gi
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: data
+              subPath: "mysql"
+        - name: mysql-agent
+          image: quay.io/sysdig/mysql-agent:0.1.1.5
+          args:
+            - --v=4
+            - --no-kube-client
+          env:
+            - name: MYSQL_CLUSTER_NAME
+              value: Cluster
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: MYSQL_CLUSTER_SERVICE_NAME
+              value: sysdigcloud-mysql
+            - name: REPLICATION_GROUP_SEEDS
+              value: sysdigcloud-mysql-cluster-0.sysdigcloud-mysql-cluster:13306,sysdigcloud-mysql-cluster-1.sysdigcloud-mysql-cluster:13306,sysdigcloud-mysql-cluster-2.sysdigcloud-mysql-cluster:13306
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: mysql.password
+                  name: sysdigcloud-config
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 10512
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 10512
+      imagePullSecrets:
+        - name: sysdigcloud-pull-secret
+      # Uncomment this in case it's preferred to use non persistent volumes
+      # instead of the volume claim templates. Can be used for quick testing,
+      # but not recommended for production workloads
+      # volumes:
+      #   - emptyDir: {}
+      #     name: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 60Gi
+        storageClassName: <INSERT_YOUR_STORAGE_CLASS_NAME>
