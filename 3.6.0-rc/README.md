@@ -160,7 +160,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
     ./installer deploy
     ``` 
 
-6.  See [*Output*](#output) (below) to finish. TODO pj link check
+6.  See [*Output*](#output) (below) to finish.
 
 > **Note**
 >
@@ -395,7 +395,7 @@ For the full dictionary of configuration parameters, see:
 ## Network policies enabled
 * CRUD on networkpolicies in sysdig namespace (if networkpolicies are enabled, this is an alpha feature customers should not enable it)
 
-#Output
+# Output
 
 A successful installation should display output in the terminal such as:
 
