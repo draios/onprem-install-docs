@@ -5,10 +5,10 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
-   * [Upgrades](#upgrades)
+   * [Upgrades](upgrades.md)
    * [Configuration Parameters and Examples](#configuration-parameters-and-examples)
    * [Permissions](#permissions)
-   * [Advanced Configuration](#advanced-configuration)
+   * [Advanced Configuration](advanced.md)
    * [Example values.yaml](#example-valuesyaml)
 
 # Installer
@@ -284,10 +284,6 @@ Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the
 Installer can regenerate is consistently with the same values.yaml file.
 
-# Upgrades
-
-See [upgrade.md](upgrade.md) for upgrades documentation.
-
 # Configuration Parameters and Examples
 
 For the full dictionary of configuration parameters, see:
@@ -316,11 +312,6 @@ For the full dictionary of configuration parameters, see:
 
 ## Network policies enabled
 * CRUD on networkpolicies in sysdig namespace (if networkpolicies are enabled, this is an alpha feature customers should not enable it)
-
-
-# Advanced Configuration
-
-For advanced configuration option see [advanced.md](advanced.md)
 
 # Example values.yaml
 
