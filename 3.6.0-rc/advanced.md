@@ -11,7 +11,22 @@
 
 ## SMTP Configs for Email Notifications
 
-https://docs.sysdig.com/en/frequently-used-installer-configurations.html#UUID-32b26a75-cf1c-494b-bb3e-cf9f3607da11_UUID-98c88350-ca7a-685c-1d89-45b3e43d0839
+The available fields for SMTP configuration are documented in the [configuration_parameters.md](configuration_parameters.md). Each includes `SMTP` in its name. 
+For example:    
+
+```yaml
+sysdig:
+  smtpServer: smtp.sendgrid.net
+  smtpServerPort: 587
+  #User,Password can be empty if the server does not require authentication
+  smtpUser: apikey
+  smtpPassword: XY.abcdefghijk
+  smtpProtocolTLS: true
+  smtpProtocolSSL: false
+  #Optional Email Header
+  smtpFromAddress: sysdig@mycompany.com
+```
+To configure email settings to be used for a notification channel, copy the parameters and appropriate values into your `values.yaml`               
 
 ## Configure AWS Credentials Using the Installer
 
