@@ -3,7 +3,6 @@
 ## Table of Contents
   * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
   * [Supported Migration Paths](#supported-migration-paths)
-     * [For Kubernetes Environments](#for-kubernetes-environments)
 
 ## Oversight Services Now Offered for All Installs and Upgrades
 
@@ -30,9 +29,6 @@
 ## Supported Migration Paths
 
 In general, Sysdig tests and supports direct upgrade from [**five** releases](https://github.com/draios/sysdigcloudkubernetes/releases) back to the current version. Release-specific requirements are listed in the table below.
-
-### For Kubernetes Environments
-
 
 |Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
 |---|---|---|---|---|
