@@ -160,7 +160,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
     ./installer deploy
     ``` 
 
-6.  See [*Output*](#output) (below) to finish.
+6.  See [*Output*](#output) (below) to finish. TODO pj link check
 
 > **Note**
 >
