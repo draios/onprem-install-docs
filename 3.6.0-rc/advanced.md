@@ -127,4 +127,140 @@ Example from the sample file:
 
 # Patching Process
 
-https://docs.sysdig.com/en/frequently-used-installer-configurations.html#UUID-32b26a75-cf1c-494b-bb3e-cf9f3607da11_section-5db0e898dc647-idm45530487323952
+Patching can be used to customize or "tweak" the default behavior of the Installer to accommodate the unique requirements of a specific environment. Use patching to modify the parameters that are not exposed by the`values.yaml`. Refer to the `configuration_parameters.md` for more detail about various parameters.  
+
+The most common use case for patching is during updates. When generating the differences between an existing installation and the upgrade, you may see previously customized configurations that the upgrade would overwrite, but that you want to preserve.Installer Upgrade (2.5.0+)
+
+### Patching Process
+
+If you have run ` generate diff ` and found a configuration that you need to tweak (e.g. the installer will delete something you want to keep, or you need to add something that isn\'t there), then follow these general steps:
+
+-   Create an `overlays `directory in the same location as the `values.yaml`.
+
+> **Note**
+> This directory, and the patch.yaml you create for it, must be kept. The installer will use it during future upgrades of Sysdig.
+
+-   Create a `.yaml` file to be used for patching. You can name it whatever you want; we will call it patch.yaml for this example.
+
+-   Patch files must include, at a minimum:
+
+```text
+    -   `apiVersion`
+
+    -   `kind`
+
+    -   `metadata.name`
+```
+
+Then you add the specific configuration required for your needs. See one example below.
+
+You will need this patch definition for every Kubernetes object you want to patch.
+
+-   Run `generate diff `again and check that the outcome will be what you want.
+
+-   When satisfied, complete the update by changing the scripts value to deploy and running the installer. If you want to add another patch, you can either add a separate `.yaml `file or a new YAML document separated by `---`. 
+
+The recommended practice is to use a single patch per Kubernetes object.
+
+### Example
+
+Presume you have the following generated configuration:
+
+```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      annotations: {}
+      labels:
+        app: sysdigcloud
+        role: api
+      name: sysdigcloud-api
+      namespace: sysdigcloud
+    spec:
+      clusterIP: None
+      ports:
+      - name: api
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: sysdigcloud
+        role: api
+      sessionAffinity: None
+      type: ClusterIP
+```
+
+#### To Add to the Generated Configuration
+
+Suppose you want to add an extra label `my-awesome-label: my-awesome-value` to the Service object. Then in the PATCH.yaml, you would put the following:
+
+```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: sysdigcloud-api
+      labels:
+        my-awesome-label: my-awesome-value
+```
+
+Run the installer again, and the configuration would be as follows:
+
+```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      annotations: {}
+      labels:
+        app: sysdigcloud
+        role: api
+        my-awesome-label: my-awesome-value
+      name: sysdigcloud-api
+      namespace: sysdigcloud
+    spec:
+      clusterIP: None
+      ports:
+      - name: api
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: sysdigcloud
+        role: api
+      sessionAffinity: None
+      type: ClusterIP
+```
+
+#### To Remove from the Generated Configuration
+
+Supposed you wanted to remove all the labels. Then in the PATCH.yaml, you would put the following:
+
+```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: sysdigcloud-api
+      labels:
+```
+
+Run the installer again, and the configuration would be as follows:
+
+```yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      annotations: {}
+      name: sysdigcloud-api
+      namespace: sysdigcloud
+    spec:
+      clusterIP: None
+      ports:
+      - name: api
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: sysdigcloud
+        role: api
+      sessionAffinity: None
+      type: ClusterIP
+```
