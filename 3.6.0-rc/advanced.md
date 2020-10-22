@@ -30,7 +30,13 @@ To configure email settings to be used for a notification channel, copy the para
 
 ## Configure AWS Credentials Using the Installer
 
-https://docs.sysdig.com/en/frequently-used-installer-configurations.html#UUID-32b26a75-cf1c-494b-bb3e-cf9f3607da11_section-idm23195535090299
+The available fields for AWS credentials are documented in the [configuration_parameters.md.](configuration_parameters.md#sysdigaccesskey) 
+
+```yaml
+sysdig:      
+  accessKey: my_awesome_aws_access_key
+  secretKey: my_super_secret_secret_key
+```
 
 ## Use hostPath for Static Storage of Sysdig Components
 
