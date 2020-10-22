@@ -1,6 +1,6 @@
    * [Installer](#installer)
    * [Installation Overview](#installation-overview)
-      * [Install vs Upgrade](#Install-vs-Upgrade)  TODO fix path here
+      * [Install vs Upgrade](#Install-vs-Upgrade)
       * [Prerequisites](#prerequisites)
    * [Quickstart Install](#quickstart-install)
    * [Airgapped Installation Options](#airgapped-installation-options)
@@ -73,7 +73,7 @@ In cases where dynamic storage is not available, you can use static storage for 
 
 -   `storageclassProvisioner`: Enter `hostpath`, then define the nodes for the four main Sysdig components: ElasticSearch, Cassandra, MySQL, and Postgres.storageclassProvisioner
 
--   See [Advanced Configurations](advanced.md) for details. [TODO fix path to static storage]
+-   See [Advanced Configurations](advanced.md#use-hostpath-for-static-storage-of-sysdig-components) for details.
 
 # Quickstart Install
 
