@@ -98,7 +98,7 @@ sysdig:
 
 ## Run Only Sysdig Pods on a Node Using Taints and Tolerations
 
-If you have a large shared Kubernetes cluster and want to dedicate a few nodes for just the Sysdig backend component installation, you can use the Kubernetes concept of [taints and tolerations](https://kubernetes.io/docs/concepts/configuration/taintandtoleration/).
+If you have a large shared Kubernetes cluster and want to dedicate a few nodes for just the Sysdig backend component installation, you can use the Kubernetes concept of [taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
 The basic process is:
 
