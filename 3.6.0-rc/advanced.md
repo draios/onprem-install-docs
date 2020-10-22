@@ -98,7 +98,32 @@ sysdig:
 
 ## Run Only Sysdig Pods on a Node Using Taints and Tolerations
 
-https://docs.sysdig.com/en/frequently-used-installer-configurations.html#UUID-32b26a75-cf1c-494b-bb3e-cf9f3607da11_section-idm4574289599260831641288416009
+If you have a large shared Kubernetes cluster and want to dedicate a few nodes for just the Sysdig backend component installation, you can use the Kubernetes concept of [taints and tolerations](https://kubernetes.io/docs/concepts/configuration/taintandtoleration/).
+
+The basic process is:
+
+1. Assign labels and taints to the relevant nodes.
+2. Review the sample [node-labels-and-taints values.yaml](examples/node-labels-and-taints/values.yaml) in the Sysdig github repo.
+3. Copy that section to your own `values.yaml` file and edit with labels and taints you assigned.
+    
+Example from the sample file:
+
+```yaml
+# To make the ‘tolerations’ code sample below functional, assign nodes the taint 
+# dedicated=sysdig:NoSchedule. E.g:
+# kubectl taint my-awesome-node01 dedicated=sysdig:NoSchedule
+  tolerations:
+    - key: "dedicated"
+      operator: "Equal"
+      value: sysdig
+      effect: "NoSchedule"
+# To make the Label code sample below functional, assign nodes the label 
+# role=sysdig. 
+# e.g: kubectl label nodes my-awesome-node01 role=sysdig
+  nodeaffinityLabel:
+    key: role
+    value: sysdig
+```
 
 # Patching Process
 
