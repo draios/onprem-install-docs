@@ -137,11 +137,7 @@ If you have run ` generate diff ` and found a configuration that you need to t
 
 -   Create an `overlays `directory in the same location as the `values.yaml`.
 
-> **Note**    -   `apiVersion`
-          
-              -   `kind`
-          
-              -   `metadata.name`
+> **Note**
 > This directory, and the patch.yaml you create for it, must be kept. The installer will use it during future upgrades of Sysdig.
 
 -   Create a `.yaml` file to be used for patching. You can name it whatever you want; we will call it patch.yaml for this example.
