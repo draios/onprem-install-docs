@@ -129,11 +129,11 @@ Example from the sample file:
 
 Patching can be used to customize or "tweak" the default behavior of the Installer to accommodate the unique requirements of a specific environment. Use patching to modify the parameters that are not exposed by the`values.yaml`. Refer to the `configuration_parameters.md` for more detail about various parameters.  
 
-The most common use case for patching is during updates. When generating the differences between an existing installation and the upgrade, you may see previously customized configurations that the upgrade would overwrite, but that you want to preserve.Installer Upgrade (2.5.0+)
+The most common use case for patching is during updates. When generating the differences between an existing installation and the upgrade, you may see previously customized configurations that the upgrade would overwrite, but that you want to preserve.
 
 ### Patching Process
 
-If you have run ` generate diff ` and found a configuration that you need to tweak (e.g. the installer will delete something you want to keep, or you need to add something that isn\'t there), then follow these general steps:
+If you have run ` generate diff ` and found a configuration that you need to tweak (e.g. the installer will delete something you want to keep, or you need to add something that isn't there), then follow these general steps:
 
 -   Create an `overlays `directory in the same location as the `values.yaml`.
 
