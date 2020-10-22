@@ -137,7 +137,11 @@ If you have run ` generate diff ` and found a configuration that you need to t
 
 -   Create an `overlays `directory in the same location as the `values.yaml`.
 
-> **Note**
+> **Note**    -   `apiVersion`
+          
+              -   `kind`
+          
+              -   `metadata.name`
 > This directory, and the patch.yaml you create for it, must be kept. The installer will use it during future upgrades of Sysdig.
 
 -   Create a `.yaml` file to be used for patching. You can name it whatever you want; we will call it patch.yaml for this example.
@@ -192,7 +196,7 @@ Presume you have the following generated configuration:
 
 #### To Add to the Generated Configuration
 
-Suppose you want to add an extra label `my-awesome-label: my-awesome-value` to the Service object. Then in the PATCH.yaml, you would put the following:
+Suppose you want to add an extra label `my-awesome-label: my-awesome-value` to the Service object. Then in the patch.yaml, you would put the following:
 
 ```yaml
     apiVersion: v1
@@ -232,7 +236,7 @@ Run the installer again, and the configuration would be as follows:
 
 #### To Remove from the Generated Configuration
 
-Supposed you wanted to remove all the labels. Then in the PATCH.yaml, you would put the following:
+Supposed you wanted to remove all the labels. Then in the patch.yaml, you would put the following:
 
 ```yaml
     apiVersion: v1
