@@ -7,6 +7,7 @@
      * [Parameters](#parameters)
      * [Example](#example)
    * [Run Only Sysdig Pods on a Node Using Taints and Tolerations](#run-only-sysdig-pods-on-a-node-using-taints-and-tolerations)
+   * [Replace a Self-Signed Cert with Custom Cert](#replace-a-self-signed-cert-with-custom-cert)
    * [Patching Process](#patching-process)
 
 ## SMTP Configs for Email Notifications
@@ -124,6 +125,25 @@ Example from the sample file:
     key: role
     value: sysdig
 ```
+
+## Replace a Self-Signed Cert with Custom Cert
+
+Installer automatically generates a self-signed cert on the fly. To use a different certificate you would
+
+- Add your cert and key to the /certs directory ex: (server.crt, server.key)
+​
+- Update values.yaml:
+
+    ```yaml
+    sysdig:  
+      certificate:    
+        crt: certs/server.crt    
+        key: certs/server.key
+    ```
+- Rerun the Installer.
+
+The [configuration\_parameter.md](configuration_parameters.md#sysdigcertificatecrt) gives full details on `sysdig.certificate.crt` and `sysdig.certificate.key`
+
 
 # Patching Process
 
