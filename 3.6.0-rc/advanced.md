@@ -1,6 +1,7 @@
 # Advanced Configuration
 
 ## Table of Contents  
+   * [Upgrade License](#upgrade-license)
    * [SMTP Configs for Email Notifications](#smtp-configs-for-email-notifications)
    * [Configure AWS Credentials Using the Installer](#configure-aws-credentials-using-the-installer)
    * [Use hostPath for Static Storage of Sysdig Components](#use-hostpath-for-static-storage-of-sysdig-components)
@@ -10,6 +11,17 @@
    * [Replace a Self-Signed Cert with Custom Cert](#replace-a-self-signed-cert-with-custom-cert)
    * [Optional: Custom Self-Signed Certificate](#optional-custom-self-signed-certificate)
    * [Patching Process](#patching-process)
+   
+## Upgrade License
+
+On-premises environments may require a license upgrade to renew, extend an expiration date, enable new features, add a service (Sysdig Secure), or change the number of licensed agents.
+
+- set [sysdig.license](configuration_parameters.md#sysdiglicense) in values.yaml
+```yaml
+sysdig:
+  license: XYZ
+```
+- Rerun Installer
 
 ## SMTP Configs for Email Notifications
 
@@ -141,7 +153,7 @@ Installer automatically generates a self-signed certificate during install. To u
         crt: certs/server.crt    
         key: certs/server.key
     ```
-- Rerun the Installer.
+- Rerun Installer
 
 The [configuration\_parameter.md](configuration_parameters.md#sysdigcertificatecrt) gives full details on `sysdig.certificate.crt` and `sysdig.certificate.key`
 
