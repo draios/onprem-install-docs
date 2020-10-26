@@ -8,6 +8,7 @@
      * [Example](#example)
    * [Run Only Sysdig Pods on a Node Using Taints and Tolerations](#run-only-sysdig-pods-on-a-node-using-taints-and-tolerations)
    * [Replace a Self-Signed Cert with Custom Cert](#replace-a-self-signed-cert-with-custom-cert)
+   * [Optional: Custom Self-Signed Certificate](#optional-custom-self-signed-certificate)
    * [Patching Process](#patching-process)
 
 ## SMTP Configs for Email Notifications
@@ -128,7 +129,7 @@ Example from the sample file:
 
 ## Replace a Self-Signed Cert with Custom Cert
 
-Installer automatically generates a self-signed cert on the fly. To use a different certificate you would
+Installer automatically generates a self-signed certificate during install. To use a custom certificate you would
 
 - Add your cert and key to the /certs directory ex: (server.crt, server.key)
 ​
@@ -144,6 +145,15 @@ Installer automatically generates a self-signed cert on the fly. To use a differ
 
 The [configuration\_parameter.md](configuration_parameters.md#sysdigcertificatecrt) gives full details on `sysdig.certificate.crt` and `sysdig.certificate.key`
 
+## Optional: Custom Self-Signed Certificate
+
+Sysdig Monitor/Cloud/etc uses a self-signed SSL/TLS security certificate, unless a custom certificate is provided.
+
+The example command below creates a custom, unsigned certificate called `MyCert.pem`; the certificate has a private key called `MyCert.key`, and is valid for five years
+​
+```bash
+sudo openssl req -new -x509 -sha256 -days 1825 -nodes -out ./MyCert.pem -keyout ./MyCert.key
+```
 
 # Patching Process
 
