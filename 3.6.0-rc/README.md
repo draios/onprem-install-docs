@@ -1,5 +1,5 @@
-   * [Installer](#installer)
    * [Installation Overview](#installation-overview)
+      * [About the Installer](#about-the-installer)
       * [Install vs Upgrade](#Install-vs-Upgrade)
       * [Prerequisites](#prerequisites)
    * [Quickstart Install](#quickstart-install)
@@ -7,21 +7,22 @@
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
    * [Upgrades](upgrade.md)
+   * [output](#output)
    * [Permissions](#permissions)
    * [Additional Installer Resources](#Additional-Installer-Resources)
-      * [Configuration Parameters and Examples](configuration_parameters.md)
-      * [Advanced Configuration](advanced.md)
+      * [Frequently Used Options](advanced.md)
+      * [Configuration Parameters](configuration_parameters.md)
       * [Example values.yaml](examples/README.md)
-
-# Installer
-
-The Sysdig Installer tool is a binary containing a collection of scripts that help automate the on-premises deployment of the Sysdig platform (Sysdig Monitor and/or Sysdig Secure), for environments using Kubernetes or OpenShift. Use the Installer to install or upgrade your Sysdig platform. It is recommended as a replacement for the earlier Kubernetes manual installation and upgrade procedures.
 
 # Installation Overview
 
 To install, you will download the installer binary and a values.yaml file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
 
 You can perform a quick install if your environment has access to the internet, or a partial or full airgapped installation, as needed. Each is described below.
+
+## About the Installer
+
+The Sysdig Installer tool is a binary containing a collection of scripts that help automate the on-premises deployment of the Sysdig platform (Sysdig Monitor and/or Sysdig Secure), for environments using Kubernetes or OpenShift. Use the Installer to install or upgrade your Sysdig platform. It is recommended as a replacement for the earlier Kubernetes manual installation and upgrade procedures.
 
 ## Install vs Upgrade
 
@@ -67,7 +68,7 @@ It is also possible that you are using dynamic storage but have already created 
 
 -   `storageclass``Name`: Provide the name of the pre-configured storage class you want to use. The installer will use this storage class for all the Sysdig platform stateful sets.
 
-**Use Case 3: Static Storage **
+**Use Case 3: Static Storage**
 
 In cases where dynamic storage is not available, you can use static storage for the Sysdig stateful sets. In this case, you would use:
 
@@ -81,15 +82,17 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
 1.  Have your Sysdig Technical Account Manager download the installer binary that matches your OS from the the  page [TODO: Donald].
 
-2.  **For Upgrades Only:** Copy the current version of [values.yaml](values.yaml) to your working directory.\]
+2.  **For Upgrades Only:** Preparing values.yaml
 
--   ./installer-image import -n sysdig --certs-directory certs -o values.yaml
-
-    > **Note**
-    >
-    > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath values.yaml. .
-
-3.  Edit the following values:
+    -  Option1: Use the previous values.yaml used to install your current version (recommended)
+    -  Option2: If you dont have a copy of previous values.yaml, use Installer's import function:
+          ```bash
+         ./installer-image import -n <namespace> --certs-directory certs -o values.yaml
+          ```
+          > **Note**
+          >
+          > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath [values.yaml](examples/openshift-with-hostpath/values.yaml). 
+3. Edit the following values:
 
     -   **size:** Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
 
@@ -97,17 +100,13 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     -   **storageClassProvisioner:** Review Storage Requirements, above.
 
-    <!-- -->
-
     -   If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
-
-    <!-- -->
 
     -   **sysdig.license:** Sysdig license key provided with your Sysdig purchase confirmation mail
 
     -   **sysdig.dnsname:** The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
-    -   **sysdig.collector.dnsName: (OpenShift installs only) **Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+    -   **sysdig.collector.dnsName: (OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
     -   **deployment**: **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
 
@@ -119,20 +118,17 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
         -   **nodeport:** creates a service of type nodeport.The node ports can be customized with:
 
-        <!-- -->
+            -   `sysdig.ingressNetworkingInsecureApiNodePort`
 
-        -   `sysdig.ingressNetworkingInsecureApiNodePort`
+            -   `sysdig.ingressNetworkingApiNodePort`
 
-            `sysdig.ingressNetworkingApiNodePort`
-
-            `sysdig.ingressNetworkingColle``ctorNodePort`
+            -    `sysdig.ingressNetworkingCollectorNodePort`
 
             When not configured, `sysdig.ingressNetworking` defaults to `hostnetwork`.
 
-    > **Note**
-    >
-    > If doing an airgapped install , you would also edit the following values:
-
+            > **Note**
+            >
+            > If doing an airgapped install, you would also edit the following values:
 
     -   **airgapped\_registry\_name:** The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
 
@@ -142,21 +138,17 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     -   **airgapped\_registry\_username:** The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
 
--   **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
-
+4.   **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
+        ```bash
         ./installer diff
-
-    This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
-
-    If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
-
-- Run the installer:
-
+        ```
+        This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
+        If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
+5. Run the installer:
     ```bash
     ./installer deploy
     ``` 
-
-- See [*Output*](#output) (below) to finish.
+6. See [*Output*](#output) (below) to finish.
 
     > **Note**
     >
@@ -180,16 +172,15 @@ the following exceptions:
 
 - In step 2, add the airgap registry information.
 - After step 3, make the installer push sysdig images to the airgapped registry by running:
-```bash
-./installer airgap
-```
-  That will pull all the images into `images_archive` directory as `tar` files
-  and push them to the airgapped registry
+    ```bash
+    ./installer airgap
+    ```
+    That will pull all the images into `images_archive` directory as `tar` files and push them to the airgapped registry
 - Run the Installer.
 -   If you are upgrading, run the diff as directed in Step 4.
-```bash
-./installer deploy
-```
+    ```bash
+    ./installer deploy
+    ```
 
 ## Full Airgap Install
 
@@ -210,7 +201,7 @@ the installation machine.
 
 - Network access to quay.io
 - Docker
-- jq
+- [jq](https://stedolan.github.io/jq/)
 
 ### Requirements for installation machine
 
@@ -220,7 +211,7 @@ the installation machine.
 - Edited sysdig-chart/values.yaml, with airgap registry details updated
 - **Host Disk Space Requirements:** `/tmp `\> 4 GB; directory from which the installer is run \>8GB; and `/var/lib/docker `\> 4GB.
 
-    > **NOTE:** 
+    > **NOTE:**
     >
     >The environment variable `TMPDIR` can be used to override the` /tmp` directory.
 
@@ -239,79 +230,75 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 
 #### On the Jump Machine
 
-- Follow the Docker Log In to quay.io steps, above.
-- Pull the image containing the self-extracting tar:
-  ```bash
-  docker pull quay.io/sysdig/installer:3.6.0-rc-uber
-  ```
-- Extract the tarball:
-  ```bash
-  docker create --name uber_image quay.io/sysdig/installer:3.6.0-rc-uber
-  docker cp uber_image:/sysdig_installer.tar.gz .
-  docker rm uber_image
-  ```
-- Copy the tarball to the installation machine.
+1. Follow the Docker Log In to quay.io steps, above.
+2. Pull the image containing the self-extracting tar:
+      ```bash
+      docker pull quay.io/sysdig/installer:3.6.0-rc-uber
+      ```
+3. Extract the tarball:
+      ```bash
+      docker create --name uber_image quay.io/sysdig/installer:3.6.0-rc-uber
+      docker cp uber_image:/sysdig_installer.tar.gz .
+      docker rm uber_image
+      ```
+4. Copy the tarball to the installation machine.
 
 #### On the Installation Machine:
-
-- Copy the current version sysdig-chart/values.yaml to your working directory.
-  ```bash
-  wget https://github.com/draios/onprem-install-docs/blob/main/3.6.0-rc/values.yaml
-  ```
-- Edit the following values:
-
-  - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
-    defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
-    large
-  - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
-    your Sysdig purchase confirmation mail
-  - [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
-  - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
-    provided with your Sysdig purchase confirmation mail
-  - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
-  - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
-    **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
-  - [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
-  - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
-    The networking construct used to expose the Sysdig API and collector. Options
-    are:
-    - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
-      host ports for api and collector. This does not create a Kubernetes service.
-    - loadbalancer: creates a service of type loadbalancer and expects that
-      your Kubernetes cluster can provision a load balancer with your cloud provider.
-    - nodeport: creates a service of type nodeport. The node ports can be
-      customized with:
-      ```yaml
-      sysdig:
-        ingressNetworkingInsecureApiNodePort: 30001
-        ingressNetworkingApiNodePort: 30002
-        ingressNetworkingCollectorNodePort: 30002
+1. Copy the current version sysdig-chart/values.yaml to your working directory.
+      ```bash
+      wget https://github.com/draios/onprem-install-docs/blob/main/3.6.0-rc/values.yaml
       ```
-  - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
-    The URL of the airgapped (internal) docker registry. This URL is used for
-    installations where the Kubernetes cluster can not pull images directly from
-    Quay.
-  - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
-      This defines custom repository prefix for airgapped_registry.
-      Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
-  - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
-    The password for the configured airgapped_registry_username. Ignore this
-    parameter if the registry does not require authentication.
-  - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
-    The username for the configured airgapped_registry_name. Ignore this
-    parameter if the registry does not require authentication.
+2. Edit the following values:
+      - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
+        defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
+        large
+      - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
+        your Sysdig purchase confirmation mail
+      - [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
+      - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
+        provided with your Sysdig purchase confirmation mail
+      - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+      - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
+        **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+      - [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
+      - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
+        The networking construct used to expose the Sysdig API and collector. Options
+        are:
+        - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
+          host ports for api and collector. This does not create a Kubernetes service.
+        - loadbalancer: creates a service of type loadbalancer and expects that
+          your Kubernetes cluster can provision a load balancer with your cloud provider.
+        - nodeport: creates a service of type nodeport. The node ports can be
+          customized with:
+          ```yaml
+          sysdig:
+            ingressNetworkingInsecureApiNodePort: 30001
+            ingressNetworkingApiNodePort: 30002
+            ingressNetworkingCollectorNodePort: 30002
+          ```
+      - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
+        The URL of the airgapped (internal) docker registry. This URL is used for
+        installations where the Kubernetes cluster can not pull images directly from
+        Quay.
+      - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
+          This defines custom repository prefix for airgapped_registry.
+          Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
+      - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
+        The password for the configured airgapped_registry_username. Ignore this
+        parameter if the registry does not require authentication.
+      - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
+        The username for the configured airgapped_registry_name. Ignore this
+        parameter if the registry does not require authentication.
+3. Copy the tarball file to the directory where you have your values.yaml file.
+4. Run:
+    ```bash
+    installer airgap --tar-file sysdig_installer.tar.gz
+    ```
+    > **Note:**
+    >
+    >The above step will extract the images into `images_archive` directory relative to where the installer was run and push the images to the airgapped_registry
 
-- Copy the tarball file to the directory where you have your values.yaml file.
-- Run:
-```bash
-installer airgap --tar-file sysdig_installer.tar.gz
-```
-
-> **Note:** 
->
->The above step will extract the images into `images_archive` directory relative to where the installer was run and push the images to the airgapped_registry
-
--  **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
+5.  **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
 
     ```bash
     ./installer diff
@@ -321,21 +308,21 @@ installer airgap --tar-file sysdig_installer.tar.gz
 
     If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
 
-- Run the Installer:
-  ```bash
-  ./installer deploy
-  ```
-- On successful run of Installer towards the end of your terminal you should
+6. Run the Installer:
+      ```bash
+      ./installer deploy
+      ```
+7. On successful run of Installer towards the end of your terminal you should
   see the below:
 
-  ```
-  All Pods Ready.....Continuing
-  Congratulations, your Sysdig installation was successful!
-  You can now login to the UI at "https://awesome-domain.com:443" with:
+      ```
+      All Pods Ready.....Continuing
+      Congratulations, your Sysdig installation was successful!
+      You can now login to the UI at "https://awesome-domain.com:443" with:
 
-  username: "configured-username@awesome-domain.com"
-  password: "awesome-password"
-  ```
+      username: "configured-username@awesome-domain.com"
+      password: "awesome-password"
+      ```
 
 > **NOTE**: 
 >
@@ -344,7 +331,7 @@ installer airgap --tar-file sysdig_installer.tar.gz
 > There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
 
-### Updating Vulnerability Feed in Airgapped Environments
+### Updating Vulnerability Feed in Airgapped Environments TODO PJ number this
 
 > **NOTE:** 
 >
@@ -356,11 +343,11 @@ When you install with the \"`airgapped_`\" parameters enabled (see [/document/pr
 
 To automatically update the vulnerability database, you can:
 
-- Download the image file [quay.io/sysdig/vuln-feed-database:latest](https://quay.io/sysdig/vulnfeeddatabase:latest) from the Sysdig registry to the jump box server and save it locally.
-- Move the file from the jump box server to the airgapped environment (if needed)
-- Load the image file and push it to the airgapped image registry.
-- Restart the pod `sysdigcloud-feeds-db`
-- Restart the pod `feeds-api`
+1. Download the image file [quay.io/sysdig/vuln-feed-database:latest](https://quay.io/sysdig/vulnfeeddatabase:latest) from the Sysdig registry to the jump box server and save it locally.
+2. Move the file from the jump box server to the airgapped environment (if needed)
+3. Load the image file and push it to the airgapped image registry.
+4. Restart the pod `sysdigcloud-feeds-db`
+5. Restart the pod `feeds-api`
 
 The following script (`feeds_database_update.sh`) performs the five steps:
 
@@ -392,10 +379,18 @@ Schedule a chron job to run the script on a chosen schedule (e.g. every day):
 
     0 8 * * * feeds-database-update.sh >/dev/null 2>&1
 
-# Configuration Parameters and Examples
+# Output
 
-For the full dictionary of configuration parameters, see:
-[configuration_parameters.md](configuration_parameters.md)
+A successful installation should display output in the terminal such as:
+
+    All Pods Ready.....Continuing
+    Congratulations, your Sysdig installation was successful!
+    You can now login to the UI at "https://awesome-domain.com:443" with:
+
+    username: "configured-username@awesome-domain.com"
+    password: "awesome-password"
+
+There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
 # Permissions
 
@@ -420,17 +415,3 @@ For the full dictionary of configuration parameters, see:
 
 ## Network policies enabled
 * CRUD on networkpolicies in sysdig namespace (if networkpolicies are enabled, this is an alpha feature customers should not enable it)
-
-# Output
-
-A successful installation should display output in the terminal such as:
-
-    All Pods Ready.....Continuing
-    Congratulations, your Sysdig installation was successful!
-    You can now login to the UI at "https://awesome-domain.com:443" with:
-
-    username: "configured-username@awesome-domain.com"
-    password: "awesome-password"
-
-There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
-
