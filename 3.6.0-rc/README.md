@@ -7,7 +7,6 @@
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
       * [Updating Vulnerability Feed](#updating-vulnerability-feed)
-   * [Upgrades](upgrade.md)
    * [Output](#output)
    * [Permissions](#permissions)
    * [Additional Installer Resources](#Additional-Installer-Resources)
@@ -30,7 +29,7 @@ The Sysdig Installer tool is a binary containing a collection of scripts that he
 
 With Sysdig Platform 3.5.0, the installer has been simplified from previous versions. Upgrade differs from Install in that you run an `installer diff` to discover the differences between the old and new versions and then `installer deploy` for the new version.
 
-If you are installing the Sysdig Platform for the first time, ignore the *ForUpgradeOnly* step in the process. If you are upgrading, check the [Upgrade notes](upgrade.md) before you begin.
+If you are installing the Sysdig Platform for the first time, ignore the *ForUpgradeOnly* step in the process. If you are upgrading, check the [Upgrade notes](upgrade_notes.md) before you begin.
 
 ## Prerequisites
 
