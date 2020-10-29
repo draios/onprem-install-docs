@@ -6,8 +6,9 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
+      * [Updating Vulnerability Feed](#updating-vulnerability-feed)
    * [Upgrades](upgrade.md)
-   * [output](#output)
+   * [Output](#output)
    * [Permissions](#permissions)
    * [Additional Installer Resources](#Additional-Installer-Resources)
       * [Frequently Used Options](advanced.md)
@@ -332,7 +333,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 > There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
 
-### Updating Vulnerability Feed in Airgapped Environments TODO PJ number this
+### Updating Vulnerability Feed
 
 > **NOTE:** 
 >
