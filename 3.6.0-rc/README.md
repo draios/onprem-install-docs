@@ -13,6 +13,7 @@
       * [Frequently Used Options](advanced.md)
       * [Configuration Parameters](configuration_parameters.md)
       * [Example values.yaml](examples/README.md)
+      * [Agent Install](agent_install.md)
 
 # Installation Overview
 
