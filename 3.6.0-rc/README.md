@@ -396,9 +396,9 @@ There will also be a generated directory containing various Kubernetes configura
 
 # Additional Installer Resources
 
-- see [Frequently Used Options](advanced.md) for additional configurations such as static storage and patching
+- See [Frequently Used Options](advanced.md) for additional configurations such as static storage and patching
 
-- see [configuration_parameters.md](configuration_parameters.md) for all the configuration parameters available, as well as their definitions, values, and examples
+- See [configuration_parameters.md](configuration_parameters.md) for all the configuration parameters available, as well as their definitions, values, and examples
 
 - See [Examples](examples/README.md) of single-node, openshift... values.yaml
 
