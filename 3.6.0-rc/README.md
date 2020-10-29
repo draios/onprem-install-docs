@@ -417,3 +417,13 @@ There will also be a generated directory containing various Kubernetes configura
 
 ## Network policies enabled
 * CRUD on networkpolicies in sysdig namespace (if networkpolicies are enabled, this is an alpha feature customers should not enable it)
+
+# Additional Installer Resources
+
+- For Frequently Used Options, including static storage and patching, see [Frequently Used Options](advanced.md).
+
+- To see all the configuration parameters available, as well as their definitions, values, and examples, see [configuration_parameters.md](configuration_parameters.md).
+
+- See [Examples](examples/README.md) of single-node, openshift... values.yaml
+
+- See [Agent Install](agent_install.md) for Installer agent install
