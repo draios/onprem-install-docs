@@ -1,10 +1,10 @@
-Release 3.6.0 November 5, 2020
-===========================
+Release 3.6.0 November 9, 2020
+===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
-Upgrade Process
----------------
+Upgrade Matrix
+---
 
 Sysdig Platform version 3.6.0 has been tested and qualified against the following:
 

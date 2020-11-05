@@ -400,6 +400,10 @@ There will also be a generated directory containing various Kubernetes configura
 
 # Additional Installer Resources
 
+- See [Release Notes](release_notes.md) for upgrade matrix, supported platforms & link to full feature notes
+
+- See [Upgrade notes](upgrade_notes.md) for release-specific upgrade information
+
 - See [Frequently Used Options](advanced.md) for additional configurations such as static storage and patching
 
 - See [configuration_parameters.md](configuration_parameters.md) for all the configuration parameters available, as well as their definitions, values, and examples
@@ -409,5 +413,4 @@ There will also be a generated directory containing various Kubernetes configura
 - See [Agent Install](agent_install.md) for Installer agent install
 
 - See [Permissions](permissions.md) for running the Installer
-
-- See [Upgrade notes](upgrade_notes.md) for release-specific upgrade information
+ 

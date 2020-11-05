@@ -14,3 +14,7 @@ Refer to the appropriate workflow, depending on your environment:
 ## Upgrade Notes
 
 No special notes for version 3.6.0.
+
+## Release Notes
+
+- See [Release Notes](release_notes.md) for upgrade matrix, supported platforms & link to full feature notes
