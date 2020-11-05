@@ -8,12 +8,13 @@
       * [Full Airgap Install](#full-airgap-install)
       * [Updating Vulnerability Feed](#updating-vulnerability-feed)
    * [Output](#output)
-   * [Permissions](#permissions)
    * [Additional Installer Resources](#Additional-Installer-Resources)
       * [Frequently Used Options](advanced.md)
       * [Configuration Parameters](configuration_parameters.md)
       * [Example values.yaml](examples/README.md)
       * [Agent Install](agent_install.md)
+      * [Permissions](permissions.md)
+      * [Upgrade notes](upgrade_notes.md)
 
 # Installation Overview
 
@@ -29,7 +30,11 @@ The Sysdig Installer tool is a binary containing a collection of scripts that he
 
 With Sysdig Platform 3.5.0, the installer has been simplified from previous versions. Upgrade differs from Install in that you run an `installer diff` to discover the differences between the old and new versions and then `installer deploy` for the new version.
 
-If you are installing the Sysdig Platform for the first time, ignore the *ForUpgradeOnly* step in the process. If you are upgrading, check the [Upgrade notes](upgrade_notes.md) before you begin.
+If you are installing the Sysdig Platform for the first time, ignore the *ForUpgradeOnly* step in the process. If you are upgrading, See [Upgrade notes](upgrade_notes.md) for release-specific upgrade information.
+
+> **Note**
+>
+> For Sysdig TAMs: If you are upgrading from much older versions and do not find that documentation in the GitHub folders yet, see our internal site <https://github-push-sysdigdocs.netlify.app/en/on-prem-deploy-nov_4_2020.html>.
 
 ## Prerequisites
 
@@ -404,3 +409,5 @@ There will also be a generated directory containing various Kubernetes configura
 - See [Agent Install](agent_install.md) for Installer agent install
 
 - See [Permissions](permissions.md) for running the Installer
+
+- See [Upgrade notes](upgrade_notes.md) for release-specific upgrade information

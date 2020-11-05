@@ -12,3 +12,5 @@ Refer to the appropriate workflow, depending on your environment:
   - [Airgapped Installation Options](README.md#airgapped-installation-options)
 
 ## Upgrade Notes
+
+No special notes for version 3.6.0.
