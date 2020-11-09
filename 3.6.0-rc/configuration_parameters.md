@@ -675,7 +675,7 @@ pvStorageSize:
 
 ```yaml
 sysdig:
-  activityAuditVersion: 3.5.1.7018
+  activityAuditVersion: 3.6.0.7691
 ```
 
 ## **sysdig.profilingVersion**
@@ -687,7 +687,7 @@ sysdig:
 
 ```yaml
 sysdig:
-  profilingVersion: 3.5.1.7018
+  profilingVersion: 3.6.0.7691
 ```
 
 ## **sysdig.anchoreVersion**
@@ -1129,12 +1129,12 @@ sysdig:
 this unless you know what you are doing as modifying it could have unintended
 consequences**<br>
 **Options**:<br>
-**Default**: 3.5.1.7018<br>
+**Default**: 3.6.0.7691<br>
 **Example**:
 
 ```yaml
 sysdig:
-  monitorVersion: 3.5.1.7018
+  monitorVersion: 3.6.0.7691
 ```
 
 ## **sysdig.scanningVersion**
@@ -1144,12 +1144,12 @@ this is not configured it defaults to `sysdig.monitorVersion` **Do not modify
 this unless you know what you are doing as modifying it could have unintended
 consequences**<br>
 **Options**:<br>
-**Default**: 3.5.1.7018<br>
+**Default**: 3.6.0.7691<br>
 **Example**:
 
 ```yaml
 sysdig:
-  scanningVersion: 3.5.1.7018
+  scanningVersion: 3.6.0.7691
 ```
 
 ## **sysdig.sysdigAPIVersion**
@@ -1159,12 +1159,12 @@ this is not configured it defaults to `sysdig.monitorVersion` **Do not modify
 this unless you know what you are doing as modifying it could have unintended
 consequences**<br>
 **Options**:<br>
-**Default**: 3.5.1.7018<br>
+**Default**: 3.6.0.7691<br>
 **Example**:
 
 ```yaml
 sysdig:
-  sysdigAPIVersion: 3.5.1.7018
+  sysdigAPIVersion: 3.6.0.7691
 ```
 
 ## **sysdig.sysdigCollectorVersion**
@@ -1174,12 +1174,12 @@ this is not configured it defaults to `sysdig.monitorVersion` **Do not modify
 this unless you know what you are doing as modifying it could have unintended
 consequences**<br>
 **Options**:<br>
-**Default**: 3.5.1.7018<br>
+**Default**: 3.6.0.7691<br>
 **Example**:
 
 ```yaml
 sysdig:
-  sysdigCollectorVersion: 3.5.1.7018
+  sysdigCollectorVersion: 3.6.0.7691
 ```
 
 ## **sysdig.sysdigWorkerVersion**
@@ -1189,12 +1189,12 @@ this is not configured it defaults to `sysdig.monitorVersion` **Do not modify
 this unless you know what you are doing as modifying it could have unintended
 consequences**<br>
 **Options**:<br>
-**Default**: 3.5.1.7018<br>
+**Default**: 3.6.0.7691<br>
 **Example**:
 
 ```yaml
 sysdig:
-  sysdigWorkerVersion: 3.5.1.7018
+  sysdigWorkerVersion: 3.6.0.7691
 ```
 
 ## **sysdig.enableAlerter**
@@ -1554,7 +1554,7 @@ sysdig:
 **Description**: Determines if a [web
 proxy](https://en.wikipedia.org/wiki/Proxy_server#Web_proxy_servers) should be
 used by Anchore for fetching CVE feed from
-[https://ancho.re](https://ancho.re.) and by the events forwarder to forward to HTTP based targets.<br>
+[https://api.sysdigcloud.com/api/scanning-feeds/v1/feeds](https://api.sysdigcloud.com/api/scanning-feeds/v1/feeds) and by the events forwarder to forward to HTTP based targets.<br>
 **Options**:<br>
 **Default**: `false`<br>
 
