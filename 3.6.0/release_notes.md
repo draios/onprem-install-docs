@@ -45,7 +45,7 @@ Qualified with agent release 10.6.0
 
 ### Installer binaries sha256sum
 
-| **Components** | **Kubernetes with Statefulsets** |
+| **sha256sum** | **Installer binary ** |
 |---|---|
 | 53c0abed589a2ac425cbf5468039705fd63cdb3cd631b1ed6b7c3d20ac84a217 | installer-darwin-amd64 |
 | 223d818dd43d5a3d6ef4b8f7152382a74984a4943d487913b013b60edb2a2706 | installer-linux-amd64 |
