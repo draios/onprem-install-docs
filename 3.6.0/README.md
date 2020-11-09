@@ -86,7 +86,7 @@ In cases where dynamic storage is not available, you can use static storage for 
 
 This install assumes the Kubernetes cluster has network access to pull images from quay.io.
 
-1.  Have your Sysdig Technical Account Manager download the installer binary that matches your OS from the the  page [TODO: Donald].
+1.  Have your Sysdig Technical Account Manager download the installer binary that matches your distribution.
 
 2.  **For Upgrades Only:** Preparing values.yaml
 
@@ -239,11 +239,11 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 1. Follow the Docker Log In to quay.io steps, above.
 2. Pull the image containing the self-extracting tar:
       ```bash
-      docker pull quay.io/sysdig/installer:3.6.0-rc-uber
+      docker pull quay.io/sysdig/installer:3.6.0-1-uber
       ```
 3. Extract the tarball:
       ```bash
-      docker create --name uber_image quay.io/sysdig/installer:3.6.0-rc-uber
+      docker create --name uber_image quay.io/sysdig/installer:3.6.0-1-uber
       docker cp uber_image:/sysdig_installer.tar.gz .
       docker rm uber_image
       ```
@@ -252,7 +252,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 #### On the Installation Machine:
 1. Copy the current version sysdig-chart/values.yaml to your working directory.
       ```bash
-      wget https://github.com/draios/onprem-install-docs/blob/main/3.6.0-rc/values.yaml
+      wget https://github.com/draios/onprem-install-docs/blob/main/3.6.0/values.yaml
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
