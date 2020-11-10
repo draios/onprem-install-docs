@@ -100,23 +100,21 @@ This install assumes the Kubernetes cluster has network access to pull images fr
           > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath [values.yaml](examples/openshift-with-hostpath/values.yaml). 
 3. Edit the following values:
 
-    -   **size:** Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
+    -   [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
 
-    -   **quaypullsecret:** quay.io provided with your Sysdig purchase confirmation mail
+    -   [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with your Sysdig purchase confirmation mail
 
-    -   **storageClassProvisioner:** Review Storage Requirements, above.
+    -   [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
 
-    -   If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
+    -   [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key provided with your Sysdig purchase confirmation mail
 
-    -   **sysdig.license:** Sysdig license key provided with your Sysdig purchase confirmation mail
+    -   [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
-    -   **sysdig.dnsname:** The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+    -   [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName): **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
-    -   **sysdig.collector.dnsName: (OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+    -   [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
 
-    -   **deployment**: **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
-
-    -   **sysdig.ingressNetworking:** The networking construct used to expose the Sysdig API and collector.Options are:
+    -   [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking): The networking construct used to expose the Sysdig API and collector.Options are:
 
         -   **hostnetwork:** sets the hostnetworking in the ingress daemonset and opens host ports for api and collector. This does not create a Kubernetes service.
 
@@ -136,13 +134,13 @@ This install assumes the Kubernetes cluster has network access to pull images fr
             >
             > If doing an airgapped install, you would also edit the following values:
 
-    -   **airgapped\_registry\_name:** The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
+    -   [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name): The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
 
-    -   **airgapped\_repository\_prefix:** This defines custom repository prefix for airgapped\_registry. Tags and pushes images as `airgapped_registry_name/airgapped_repository_prefix``/image_name:tag`
+    -   [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix): This defines custom repository prefix for airgapped\_registry. Tags and pushes images as `airgapped_registry_name/airgapped_repository_prefix``/image_name:tag`
 
-    -   **airgapped\_registry\_password:** The password for the configured airgapped\_registry\_username. Ignore this parameter if the registry does not require authentication.
+    -   [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password): The password for the configured airgapped\_registry\_username. Ignore this parameter if the registry does not require authentication.
 
-    -   **airgapped\_registry\_username:** The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
+    -   [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username): The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
 
 4.   **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
         ```bash
