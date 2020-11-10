@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: anchore-enterprise-license
-data:
-  # <LICENSE> is derived from `cat anchore-license.yaml | base64`
-  anchore-license.yaml: <LICENSE>
-type: Opaque
