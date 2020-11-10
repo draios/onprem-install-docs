@@ -33,5 +33,8 @@ In general, Sysdig tests and supports direct upgrade from **five releases** back
 |Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
 |---|---|---|---|---|
 | [3.6.0 (by request)](3.6.0)| | 3.2.x, 3.5.x | 3.6.0 | [3.6.0](3.6.0)
+
+
+See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
    
 
