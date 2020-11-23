@@ -32,8 +32,8 @@ In general, Sysdig tests and supports direct upgrade from **five releases** back
 
 |Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
 |---|---|---|---|---|
-| [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, (3.6.0 if it was installed) | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html#UUID-09ad904e-77dd-17bf-b7f7-15e0bb3f81be_UUID-610e4e72-7170-e8af-8ece-82686c0c9b52) | [3.6.1](3.6.1)
-| [3.6.0 (by request)](3.6.0)| | 3.2.x, 3.5.x | [3.6.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html#UUID-09ad904e-77dd-17bf-b7f7-15e0bb3f81be_UUID-610e4e72-7170-e8af-8ece-82686c0c9b52) | [3.6.0](3.6.0)
+| [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, (3.6.0 if it was installed) | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.1](3.6.1)
+| [3.6.0 (by request)](3.6.0)| | 3.2.x, 3.5.x | [3.6.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.0](3.6.0)
 
 
 See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
