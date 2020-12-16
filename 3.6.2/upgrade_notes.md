@@ -15,7 +15,7 @@ Refer to the appropriate workflow, depending on your environment:
 
 ### Elastic search 6.8.6 upgrade
 
-With Sysdig 3.6.0 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
+With Sysdig 3.6.2 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
 
 There are some cases where ElasticSearch will fail with an error like below
 
