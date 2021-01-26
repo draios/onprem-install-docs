@@ -41,6 +41,28 @@ There are 2 ways to fix this issue
 
 2. An initContainer which runs as `privileged: true` and `root` and set vm.max_map_count [example overlay](examples/elasticsearch-init-vmmaxmapcount)
 
+### ElasticSearch(ES) Certificate Expiration
+
+The default certificates used by ES version 6.8.6.5 has an expiry of 30 days.
+This causes ES cluster to fail after the expiry.
+The workaround is to restart ES pods to renew certs which will extend the validity.
+
+3.6.2-2 Installer patch version extends ES(6.8.6.7) certificate validity to 2 years.
+
+#### Full Upgrade using Installer
+
+`./installer deploy` will update ES to 6.8.6.7 by running a full upgrade.
+
+#### Partial Upgrade
+
+> **Note**
+>
+>This will only work ElasticSearch upgrade from version 3.6.2-1
+
+This command updates just the ES version without running a full Installer upgrade.
+
+ `kubectl set image -n  <NAMESPACE> sts/sysdigcloud-elasticsearch elasticsearch=quay.io/sysdig/elasticsearch:6.8.6.7 --record`
+
 ## Release Notes
 
 - See [Release Notes](release_notes.md) for upgrade matrix, supported platforms & link to full feature notes

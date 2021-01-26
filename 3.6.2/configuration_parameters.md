@@ -694,12 +694,12 @@ sysdig:
 **Required**: `false`<br>
 **Description**: The docker image tag of the Sysdig Anchore Core.<br>
 **Options**:<br>
-**Default**: 0.6.1.2<br>
+**Default**: 0.8.1.8<br>
 **Example**:
 
 ```yaml
 sysdig:
-  anchoreVersion: 0.8.1.2
+  anchoreVersion: 0.8.1.8
 ```
 
 ## **sysdig.accessKey**
@@ -1018,6 +1018,18 @@ sysdig:
 ```yaml
 sysdig:
   elasticsearchVersion: 5.6.16.18
+```
+
+## **sysdig.elasticsearch6Version**
+**Required**: `false`<br>
+**Description**: The docker image tag of Elasticsearch 6.<br>
+**Options**:<br>
+**Default**: 6.8.6.7<br>
+**Example**:
+
+```yaml
+sysdig:
+  elasticsearchVersion: 6.8.6.7
 ```
 
 ## **sysdig.haproxyVersion**
