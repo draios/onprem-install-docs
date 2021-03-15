@@ -24,7 +24,7 @@ Supported Upgrade From: 3.6.x and 3.5.x
 
 ### Sysdig Agent Version
 
-Qualified with agent release 10.6.0
+Qualified with agent release 11.0.0
 
 ### Supported Backend Components
 
