@@ -33,11 +33,11 @@ The migration process is initiated by the Installer if the following requirement
 
 3. Ensure that collector block for the new agent connections is enabled. To do so, run
 
-  `HTTP GET /api/admin/agents/new/connections?block=true`
+        `HTTP GET /api/admin/agents/new/connections?block=true`
 
- If successful, you will see the following:
+    If successful, you will see the following:
 
-  `deploy.go:1560] toggled collector block to true: Accepting new agent connections is OFF`
+        `deploy.go:1560] toggled collector block to true: Accepting new agent connections is OFF`
 
 4. Ensure that the following services on MySQL or PostgreSQL are scaled to 0 replicas.
 
@@ -109,11 +109,11 @@ The migration process is initiated by the Installer if the following requirement
 
 8.  Ensure that collector block for the new agent connections is disabled. To do so, run `Run GET /api/admin/agents/new/connections?block=false`
 
-    `deploy.go:1560] toggled collector block to false: Accepting new agent connections is ON`
+        `deploy.go:1560] toggled collector block to false: Accepting new agent connections is ON`
 
 9. Ensure that MySQL deployments (non-HA setup) or stateful sets (HA setup) and services are deleted.
 
-  `deploy.go:1664] removing mysql deployments, stateful sets and services`
+        `deploy.go:1664] removing mysql deployments, stateful sets and services`
 
    At this point, the migration is successfully concluded and installation will continue as before.
    For the following runs, installer will always generate the manifest for `mysql-to-postgresql-migration` and `mysql-latest-migrations jobs:`.
@@ -142,7 +142,9 @@ Running PostgreGRE init job even after 10 checks indicates that the `postgres-in
    `kubectl -n sysdigcloud describe pod -l "job-name=postgres-init-job"`
 
 3. Find out which container in the pod is not terminated correctly by looking at State and Reason fields.
+   
    It should indicate that failed containers are one or more of the following: `profiling-worker-init`, `scanning-anchore-init`, `scanning-init`, `padvisor-init`, `sysdig-init` and `quartz-init`.
+   
 4. Check the logs associated with the container that was failed to initialize:
 
     `kubectl -n sysdigcloud logs -l "job-name=mysql-latest-migrations" -c sysdig-init`
