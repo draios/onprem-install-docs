@@ -20,7 +20,7 @@ The migration process is initiated by the Installer if the following requirement
 
 1. Run the following:
 
-  `installer deploy`
+        `installer deploy`
 
 2. Ensure that PostgreSQL databases, users, and grants are initialized by the `postgres-init-job` job:
 
