@@ -13,6 +13,10 @@ Refer to the appropriate workflow, depending on your environment:
 
 ## Upgrade Notes
 
+### MySQL to PostgreSQL migration
+
+For consolidation and to meet higher performance requirements, upgrading to v4.0.0 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [MySQL to PostgreSQL Migration](migration).
+
 ### Elastic search 6.8.6 upgrade
 
 With Sysdig 3.6.0 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
