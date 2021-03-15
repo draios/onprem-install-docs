@@ -1,10 +1,13 @@
 # Migrating MySQL to PostgreSQL Database
 
+This topic is meant for the Support organization and Professional Services that will work closely with you for your Sysdig On-Prem deployment. For more information, see [Oversight Services Now Offered for All Installs and Upgrades](https://docs.sysdig.com/en/on-premises-installation.html#UUID-7946fc46-b37c-24f4-f251-2f84ca3f5e1c_UUID-435c9483-c9b6-bacd-cb89-b587b1fe1558).
+
 ## Migration
 
-Sysdig consolidates all its databases by migrating all the existing databases running on MySQL  to PostgreSQL. The database names remain the same except for `draois`. On PostgreGRE, the database will named as `sysdig`
+Sysdig consolidates all its databases by migrating all the existing databases running on MySQL to PostgreSQL. The database names remain the same except for `draois`. On PostgreGRE, the database will named as `sysdig`.
 
-The migration process is handled by the Installer.
+The migration process is handled by the Installer. However, closely monitor the migration process at each stage as described in this document. The troubleshooting tips should help you fix specific migration issues.
+
 
 ### Prerequisites
 
