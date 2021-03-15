@@ -157,15 +157,15 @@ Running PostgreGRE init job even after 10 checks indicates that the `postgres-in
 
 Stopping the MySQL migration job after 10 hours indicates that the `mysql-latest-migrations` job has not finished correctly.
 
-   deploy.go:1567] removing mysql latest migrations job
-   deploy.go:1570] running mysql latest migrations job
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 1/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 2/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 3/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 4/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 5/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 6/3600)
-   deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 7/3600)
+        deploy.go:1567] removing mysql latest migrations job
+        deploy.go:1570] running mysql latest migrations job
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 1/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 2/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 3/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 4/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 5/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 6/3600)
+        deploy.go:1583] waiting mysql latest migrations job to finish... (attempt 7/3600)
 
 
 1. Stop the installer  with CTRL + c because the migration will be retried on the next run.
