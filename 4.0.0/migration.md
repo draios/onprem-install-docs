@@ -20,7 +20,7 @@ The migration process is initiated by the Installer if the following requirement
 
 1. Run the following:
 
-        `installer deploy`
+        installer deploy
 
 2. Ensure that PostgreSQL databases, users, and grants are initialized by the `postgres-init-job` job:
 
@@ -33,11 +33,11 @@ The migration process is initiated by the Installer if the following requirement
 
 3. Ensure that collector block for the new agent connections is enabled. To do so, run
 
-        `HTTP GET /api/admin/agents/new/connections?block=true`
+        HTTP GET /api/admin/agents/new/connections?block=true
 
     If successful, you will see the following:
 
-        `deploy.go:1560] toggled collector block to true: Accepting new agent connections is OFF`
+        deploy.go:1560] toggled collector block to true: Accepting new agent connections is OFF
 
 4. Ensure that the following services on MySQL or PostgreSQL are scaled to 0 replicas.
 
@@ -109,11 +109,11 @@ The migration process is initiated by the Installer if the following requirement
 
 8.  Ensure that collector block for the new agent connections is disabled. To do so, run `Run GET /api/admin/agents/new/connections?block=false`
 
-        `deploy.go:1560] toggled collector block to false: Accepting new agent connections is ON`
+        deploy.go:1560] toggled collector block to false: Accepting new agent connections is ON
 
 9. Ensure that MySQL deployments (non-HA setup) or stateful sets (HA setup) and services are deleted.
 
-        `deploy.go:1664] removing mysql deployments, stateful sets and services`
+        deploy.go:1664] removing mysql deployments, stateful sets and services
 
    At this point, the migration is successfully concluded and installation will continue as before.
    For the following runs, installer will always generate the manifest for `mysql-to-postgresql-migration` and `mysql-latest-migrations jobs:`.
