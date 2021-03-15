@@ -15,7 +15,7 @@ Refer to the appropriate workflow, depending on your environment:
 
 ### MySQL to PostgreSQL migration
 
-For consolidation and to meet higher performance requirements, upgrading to v4.0.0 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [MySQL to PostgreSQL Migration](migration).
+For consolidation and to meet higher performance requirements, upgrading to v4.0.0 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [Migrating MySQL to PostgreSQL Database].
 
 ### Elastic search 6.8.6 upgrade
 
