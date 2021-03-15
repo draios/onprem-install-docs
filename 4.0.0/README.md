@@ -99,7 +99,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
           ```
           > **Note**
           >
-          > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath [values.yaml](examples/openshift-with-hostpath/values.yaml). 
+          > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath [values.yaml](examples/openshift-with-hostpath/values.yaml).
 3. Edit the following values:
 
     -   [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
@@ -153,7 +153,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 5. Run the installer:
     ```bash
     ./installer deploy
-    ``` 
+    ```
 6. See [*Output*](#output) (below) to finish.
 
     > **Note**
@@ -224,12 +224,12 @@ the installation machine.
 ### Docker Log In to quay.io
 
 Retrieve Quay username and password from Quay pull secret and login using credentials.
-   
+
 ```bash
 AUTH=$(echo REPLACE_WITH_quaypullsecret | base64 --decode | jq -r '.auths."quay.io".auth'| base64 --decode)
 QUAY_USERNAME=${AUTH%:*}
 QUAY_PASSWORD=${AUTH#*:}
-docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io 
+docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 ```
 
 ### Workflow
@@ -239,11 +239,11 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 1. Follow the Docker Log In to quay.io steps, above.
 2. Pull the image containing the self-extracting tar:
       ```bash
-      docker pull quay.io/sysdig/installer:3.6.0-1-uber
+      docker pull quay.io/sysdig/installer:4.0.0-1-uber
       ```
 3. Extract the tarball:
       ```bash
-      docker create --name uber_image quay.io/sysdig/installer:3.6.0-1-uber
+      docker create --name uber_image quay.io/sysdig/installer:4.0.0-1-uber
       docker cp uber_image:/sysdig_installer.tar.gz .
       docker rm uber_image
       ```
@@ -252,7 +252,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 #### On the Installation Machine:
 1. Copy the current version sysdig-chart/values.yaml to your working directory.
       ```bash
-      wget https://github.com/draios/onprem-install-docs/blob/main/3.6.0/values.yaml
+      wget https://github.com/draios/onprem-install-docs/blob/main/4.0.0/values.yaml
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
@@ -330,16 +330,16 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       password: "awesome-password"
       ```
 
-> **NOTE**: 
+> **NOTE**:
 >
-> Save the values.yaml file in a secure location; it will be used for future upgrades. 
+> Save the values.yaml file in a secure location; it will be used for future upgrades.
 >
 > There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
 
 ### Updating Vulnerability Feed
 
-> **NOTE:** 
+> **NOTE:**
 >
 > Sysdig Secure users who install in an airgapped environment do not have internet access to the continuous checks of vulnerability databases that are used in image scanning. (See also: [/document/preview/117822\#UUIDc24a6ed8cdde754219092e4b32b6fd79](file:////document/preview/117822#UUIDc24a6ed8cdde754219092e4b32b6fd79).)How Sysdig Image Scanning Works
 
@@ -413,4 +413,3 @@ There will also be a generated directory containing various Kubernetes configura
 - See [Agent Install](agent_install.md) for Installer agent install
 
 - See [Permissions](permissions.md) for running the Installer
- 

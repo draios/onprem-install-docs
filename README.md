@@ -32,11 +32,10 @@ In general, Sysdig tests and supports direct upgrade from **five releases** back
 
 |Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
 |---|---|---|---|---|
-| [3.6.2 (by request)](3.6.2)| | 3.2.x, 3.5.x, (3.6.0 or 3.6.1 if it was installed) | [3.6.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.2](3.6.2)
-| [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, (3.6.0 if it was installed) | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.1](3.6.1)
-| [3.6.0 (by request)](3.6.0)| | 3.2.x, 3.5.x | [3.6.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.0](3.6.0)
+| [4.0.0 (by request)](4.0.0)| | 3.6.x and 3.5.x | [4.0.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.0](4.0.0)
+| [3.6.2 (by request)](3.6.2)| | 3.2.x, 3.5.x, and 3.6.0 or 3.6.1 if it was installed | [3.6.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.2](3.6.2)
+| [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, and 3.6.0 if it was installed | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.1](3.6.1)
+| [3.6.0 (by request)](3.6.0)| | 3.2.x and 3.5.x | [3.6.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.0](3.6.0)
 
 
 See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
-   
-
