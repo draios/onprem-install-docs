@@ -5,7 +5,7 @@ This topic is meant for the Support organization and Professional Services that 
 
 ## Migration
 
-Sysdig consolidates all its databases by migrating all the existing databases running on MySQL to PostgreSQL. The database names remain the same except for `draois`: on PostgreSQL the database will be named`sysdig`.
+Sysdig consolidates all its databases by migrating all the existing databases running on MySQL to PostgreSQL. The database names remain the same except for `draios`: on PostgreSQL the database will be named`sysdig`.
 
 The migration process is handled by the Installer. However, closely monitor the migration process at each stage as described in this document. The troubleshooting tips should help you fix specific migration issues.
 
@@ -20,15 +20,15 @@ The migration process is initiated by the Installer if the following requirement
 
 * MySQL stateful sets (HA) or deployments (no HA) are running
 
-As a preflight check, it's suggested to run a SQL procedure on a MySQL pod in order to check if there are constraint violations:
+* As a preflight check, we recommend that you run a SQL procedure on a MySQL pod and check for constraint violations:
 
 ```sql
 DELIMITER $$
 DROP PROCEDURE IF EXISTS ANALYZE_INVALID_FOREIGN_KEYS$$
 CREATE
     PROCEDURE `ANALYZE_INVALID_FOREIGN_KEYS`(
-        checked_database_name VARCHAR(64) CHARACTER SET utf8, 
-        checked_table_name VARCHAR(64) CHARACTER SET utf8, 
+        checked_database_name VARCHAR(64) CHARACTER SET utf8,
+        checked_table_name VARCHAR(64) CHARACTER SET utf8,
         temporary_result_table ENUM('Y', 'N'))
     LANGUAGE SQL
     NOT DETERMINISTIC
@@ -36,7 +36,7 @@ CREATE
     BEGIN
         DECLARE TABLE_SCHEMA_VAR VARCHAR(64);
         DECLARE TABLE_NAME_VAR VARCHAR(64);
-        DECLARE COLUMN_NAME_VAR VARCHAR(64); 
+        DECLARE COLUMN_NAME_VAR VARCHAR(64);
         DECLARE CONSTRAINT_NAME_VAR VARCHAR(64);
         DECLARE REFERENCED_TABLE_SCHEMA_VAR VARCHAR(64);
         DECLARE REFERENCED_TABLE_NAME_VAR VARCHAR(64);
@@ -52,9 +52,9 @@ CREATE
                 `REFERENCED_TABLE_SCHEMA`,
                 `REFERENCED_TABLE_NAME`,
                 `REFERENCED_COLUMN_NAME`
-            FROM 
-                information_schema.KEY_COLUMN_USAGE 
-            WHERE 
+            FROM
+                information_schema.KEY_COLUMN_USAGE
+            WHERE
                 `CONSTRAINT_SCHEMA` LIKE checked_database_name AND
                 `TABLE_NAME` LIKE checked_table_name AND
                 `REFERENCED_TABLE_SCHEMA` IS NOT NULL;
@@ -63,9 +63,9 @@ CREATE
             DROP TEMPORARY TABLE IF EXISTS INVALID_FOREIGN_KEYS;
             DROP TABLE IF EXISTS INVALID_FOREIGN_KEYS;
             CREATE TABLE INVALID_FOREIGN_KEYS(
-                `TABLE_SCHEMA` VARCHAR(64), 
-                `TABLE_NAME` VARCHAR(64), 
-                `COLUMN_NAME` VARCHAR(64), 
+                `TABLE_SCHEMA` VARCHAR(64),
+                `TABLE_NAME` VARCHAR(64),
+                `COLUMN_NAME` VARCHAR(64),
                 `CONSTRAINT_NAME` VARCHAR(64),
                 `REFERENCED_TABLE_SCHEMA` VARCHAR(64),
                 `REFERENCED_TABLE_NAME` VARCHAR(64),
@@ -77,9 +77,9 @@ CREATE
             DROP TEMPORARY TABLE IF EXISTS INVALID_FOREIGN_KEYS;
             DROP TABLE IF EXISTS INVALID_FOREIGN_KEYS;
             CREATE TEMPORARY TABLE INVALID_FOREIGN_KEYS(
-                `TABLE_SCHEMA` VARCHAR(64), 
-                `TABLE_NAME` VARCHAR(64), 
-                `COLUMN_NAME` VARCHAR(64), 
+                `TABLE_SCHEMA` VARCHAR(64),
+                `TABLE_NAME` VARCHAR(64),
+                `COLUMN_NAME` VARCHAR(64),
                 `CONSTRAINT_NAME` VARCHAR(64),
                 `REFERENCED_TABLE_SCHEMA` VARCHAR(64),
                 `REFERENCED_TABLE_NAME` VARCHAR(64),
@@ -90,43 +90,43 @@ CREATE
         END IF;
         OPEN foreign_key_cursor;
         foreign_key_cursor_loop: LOOP
-            FETCH foreign_key_cursor INTO 
-            TABLE_SCHEMA_VAR, 
-            TABLE_NAME_VAR, 
-            COLUMN_NAME_VAR, 
-            CONSTRAINT_NAME_VAR, 
-            REFERENCED_TABLE_SCHEMA_VAR, 
-            REFERENCED_TABLE_NAME_VAR, 
+            FETCH foreign_key_cursor INTO
+            TABLE_SCHEMA_VAR,
+            TABLE_NAME_VAR,
+            COLUMN_NAME_VAR,
+            CONSTRAINT_NAME_VAR,
+            REFERENCED_TABLE_SCHEMA_VAR,
+            REFERENCED_TABLE_NAME_VAR,
             REFERENCED_COLUMN_NAME_VAR;
             IF done THEN
                 LEAVE foreign_key_cursor_loop;
             END IF;
-            SET @from_part = CONCAT('FROM ', '`', TABLE_SCHEMA_VAR, '`.`', TABLE_NAME_VAR, '`', ' AS REFERRING ', 
-                 'LEFT JOIN `', REFERENCED_TABLE_SCHEMA_VAR, '`.`', REFERENCED_TABLE_NAME_VAR, '`', ' AS REFERRED ', 
-                 'ON (REFERRING', '.`', COLUMN_NAME_VAR, '`', ' = ', 'REFERRED', '.`', REFERENCED_COLUMN_NAME_VAR, '`', ') ', 
+            SET @from_part = CONCAT('FROM ', '`', TABLE_SCHEMA_VAR, '`.`', TABLE_NAME_VAR, '`', ' AS REFERRING ',
+                 'LEFT JOIN `', REFERENCED_TABLE_SCHEMA_VAR, '`.`', REFERENCED_TABLE_NAME_VAR, '`', ' AS REFERRED ',
+                 'ON (REFERRING', '.`', COLUMN_NAME_VAR, '`', ' = ', 'REFERRED', '.`', REFERENCED_COLUMN_NAME_VAR, '`', ') ',
                  'WHERE REFERRING', '.`', COLUMN_NAME_VAR, '`', ' IS NOT NULL ',
                  'AND REFERRED', '.`', REFERENCED_COLUMN_NAME_VAR, '`', ' IS NULL');
             SET @full_query = CONCAT('SELECT COUNT(*) ', @from_part, ' INTO @invalid_key_count;');
             PREPARE stmt FROM @full_query;
             EXECUTE stmt;
             IF @invalid_key_count > 0 THEN
-                INSERT INTO 
-                    INVALID_FOREIGN_KEYS 
-                SET 
-                    `TABLE_SCHEMA` = TABLE_SCHEMA_VAR, 
-                    `TABLE_NAME` = TABLE_NAME_VAR, 
-                    `COLUMN_NAME` = COLUMN_NAME_VAR, 
-                    `CONSTRAINT_NAME` = CONSTRAINT_NAME_VAR, 
-                    `REFERENCED_TABLE_SCHEMA` = REFERENCED_TABLE_SCHEMA_VAR, 
-                    `REFERENCED_TABLE_NAME` = REFERENCED_TABLE_NAME_VAR, 
-                    `REFERENCED_COLUMN_NAME` = REFERENCED_COLUMN_NAME_VAR, 
+                INSERT INTO
+                    INVALID_FOREIGN_KEYS
+                SET
+                    `TABLE_SCHEMA` = TABLE_SCHEMA_VAR,
+                    `TABLE_NAME` = TABLE_NAME_VAR,
+                    `COLUMN_NAME` = COLUMN_NAME_VAR,
+                    `CONSTRAINT_NAME` = CONSTRAINT_NAME_VAR,
+                    `REFERENCED_TABLE_SCHEMA` = REFERENCED_TABLE_SCHEMA_VAR,
+                    `REFERENCED_TABLE_NAME` = REFERENCED_TABLE_NAME_VAR,
+                    `REFERENCED_COLUMN_NAME` = REFERENCED_COLUMN_NAME_VAR,
                     `INVALID_KEY_COUNT` = @invalid_key_count,
-                    `INVALID_KEY_SQL` = CONCAT('SELECT ', 
-                        'REFERRING.', '`', COLUMN_NAME_VAR, '` ', 'AS "Invalid: ', COLUMN_NAME_VAR, '", ', 
-                        'REFERRING.* ', 
+                    `INVALID_KEY_SQL` = CONCAT('SELECT ',
+                        'REFERRING.', '`', COLUMN_NAME_VAR, '` ', 'AS "Invalid: ', COLUMN_NAME_VAR, '", ',
+                        'REFERRING.* ',
                         @from_part, ';');
             END IF;
-            DEALLOCATE PREPARE stmt; 
+            DEALLOCATE PREPARE stmt;
         END LOOP foreign_key_cursor_loop;
     END$$
 DELIMITER ;
@@ -135,7 +135,7 @@ DROP PROCEDURE IF EXISTS ANALYZE_INVALID_FOREIGN_KEYS;
 SELECT * FROM INVALID_FOREIGN_KEYS;
 ```
 
-If the query does not return any row, the migration process can be initiated. Otherwise, it will be needed to delete the orphaned rows before starting with the migration.
+If the query does not return any row, the migration process can be initiated. Otherwise, delete the orphaned rows before starting with the migration.
 
 
 ### Run the Installer
@@ -144,7 +144,7 @@ If the query does not return any row, the migration process can be initiated. Ot
 
         installer deploy
 
-2. Ensure that PostgreSQL databases, users, and grants are initialized by the `postgres-init-job` job:
+2. Ensure that the PostgreSQL databases, users, and grants are initialized by the `postgres-init-job` job:
 
         deploy.go:1711] removing postgres db init job
         deploy.go:1714] running postgres db init job
@@ -152,11 +152,11 @@ If the query does not return any row, the migration process can be initiated. Ot
         deploy.go:1730] postgres db init finished correctly
 
 
-3. Ensure that collector block for the new agent connections is enabled. If successful, you will see the following:
+3. Ensure that the collector block for the new agent connections is enabled. If successful, you will see the following:
 
         deploy.go:1560] toggled collector block to true: Accepting new agent connections is OFF
 
-   Under the hood, Installer run this HTTP request to API to block new agent connections:
+   Under the hood, Installer sends the following HTTP request to the API to block new agent connections:
 
         HTTP GET /api/admin/agents/new/connections?block=true
 
@@ -197,7 +197,7 @@ If the query does not return any row, the migration process can be initiated. Ot
         deploy.go:1580] mysql latest migrations finished correctly
 
 
-6. Ensure that MySQL databases are migrated to PostgreSQL by the mysql-to-postgresql-migration job:
+6. Ensure that the MySQL databases are migrated to PostgreSQL by the `mysql-to-postgresql-migration` job:
 
         deploy.go:1623] removing mysql to postgres migration job
         deploy.go:1626] running mysql to postgres migration job
@@ -206,7 +206,7 @@ If the query does not return any row, the migration process can be initiated. Ot
         deploy.go:1636] mysql to postgres migration finished correctly
 
 
-7. Ensure that collector (running at this point) and the API server (not running at this point, as it was scaled it to 0 replicas earlier) are deployed using the new manifests pointing to PostgreSQL:
+7. Ensure that the collector (running at this point) and the API server (not running at this point, as it was scaled it to 0 replicas earlier) are deployed by using the new manifests pointing to PostgreSQL:
 
         deploy.go:1640] applying sysdigcloud-collector
         deploy.go:1645] applying sysdigcloud-api
@@ -230,12 +230,13 @@ If the query does not return any row, the migration process can be initiated. Ot
         waitforpods.go:74] waitforpods(sysdigcloud-collector,sysdigcloud-api) completed in 1m32s
 
 
-8.  Ensure that collector block for the new agent connections is disabled (`GET /api/admin/agents/new/connections?block=false` HTTP request to API will be performed under the hood):
+8.  Ensure that the collector block for the new agent connections is disabled.
+    Under the hood, Installer sends the following HTTP request to the API to block new agent connections: `GET /api/admin/agents/new/connections?block=false`
 
         deploy.go:1560] toggled collector block to false: Accepting new agent connections is ON
 
 
-9. Ensure that MySQL deployments (non-HA setup) or stateful sets (HA setup) and services are deleted:
+9. Ensure that the MySQL deployments (non-HA setup) or statefulsets (HA setup) and the services are deleted:
 
         deploy.go:1664] removing mysql deployments, stateful sets and services
 
@@ -245,14 +246,14 @@ If the query does not return any row, the migration process can be initiated. Ot
 10.  As the PVC is retained by default, delete it after the migration is completed.
 
 
-**For the following runs, Installer will always generate the manifests for `mysql-to-postgresql-migration` and `mysql-latest-migrations` jobs: even if so, the migration will not run again if it has completed once.**
+**For the subsequent runs, Installer will always generate the manifests for `mysql-to-postgresql-migration` and `mysql-latest-migrations` jobs. The migration will not run again if it is completed once.**
 
 
 ## Troubleshooting
 
 ### PostgreSQL Initialization Job Failed
 
-The whole migration process will continue even if after 10 checks the `postgres-init-job` job has not finished correctly:
+If the whole migration process will continue even if after 10 checks the `postgres-init-job` job has not finished correctly:
 
         deploy.go:1711] removing postgres db init job
         deploy.go:1714] running postgres db init job
@@ -277,9 +278,9 @@ The whole migration process will continue even if after 10 checks the `postgres-
     `kubectl -n sysdigcloud describe pod -l "job-name=postgres-init-job"`
 
 3. Find out which container in the pod is not terminated correctly by looking at `State` and `Reason` fields.
-   
+
    It should indicate that failed containers are one or more of the following: `profiling-worker-init`, `scanning-anchore-init`, `scanning-init`, `padvisor-init`, `sysdig-init` and `quartz-init`.
-   
+
 4. Check the logs associated with the container that has failed to complete:
 
     `kubectl -n sysdigcloud logs -l "job-name=mysql-latest-migrations" -c sysdig-init`
@@ -287,7 +288,7 @@ The whole migration process will continue even if after 10 checks the `postgres-
 
 ### Latest MySQL Migrations Job Failed
 
-The whole migration process in this case will stop if after 10 hours the `mysql-latest-migrations` job has not finished correctly.
+The whole migration process in this case might be terminated after 10 hours. It indicates that the `mysql-latest-migrations` job has not finished correctly.
 
         deploy.go:1567] removing mysql latest migrations job
         deploy.go:1570] running mysql latest migrations job
@@ -303,9 +304,9 @@ The whole migration process in this case will stop if after 10 hours the `mysql-
         deploy.go:1587] mysql-latest-migrations-job failed
 
 
-1. It’s also safe to stop the Installer with `CTRL + c` instead of waiting for 10 hours: the migration will be retried on the next run, as it's an idempotent operation.
+1. Stop the Installer with `CTRL + C` instead of waiting for 10 hours. The migration will be retried on the next run because it's an idempotent operation.
 
-2. Check which MySQL migration failed. To do so, describe the pod related to the `mysql-latest-migrations` job:
+2. Check which MySQL migration is failed. To do so, describe the pod related to the `mysql-latest-migrations` job:
 
     `kubectl -n sysdigcloud describe pod -l "job-name=mysql-latest-migrations"`
 
@@ -320,7 +321,7 @@ The whole migration process in this case will stop if after 10 hours the `mysql-
 
 ### MySQL To PostgreSQL Migration Job Failed
 
-The whole migration process will stop if after 10 hours the `mysql-to-postgres-migration` job has not finished correctly.
+The whole migration process might be terminated after 10 hours. It indicates that the `mysql-to-postgres-migration` job has not finished correctly.
 
       deploy.go:1623] removing mysql to postgres migration job
       deploy.go:1626] running mysql to postgres migration job
@@ -336,8 +337,8 @@ The whole migration process will stop if after 10 hours the `mysql-to-postgres-m
       deploy.go:1587] mysql-to-postgres-migration-job failed
 
 
-1. It’s also safe to stop the Installer with `CTRL + c` instead of waiting for 10 hours: the migration will be retried on the next run, as it's an idempotent operation.
+1. Stop the Installer with `CTRL + C` instead of waiting for 10 hours. The migration will be retried on the next run because it is an idempotent operation.
 
-2. Read logs for the failed container:
+2. Read the logs for the failed container:
 
     `kubectl -n sysdigcloud logs -l "job-name=mysql-to-postgresql-migration"`
