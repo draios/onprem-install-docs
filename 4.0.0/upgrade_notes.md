@@ -45,6 +45,14 @@ There are 2 ways to fix this issue
 
 2. An initContainer which runs as `privileged: true` and `root` and set vm.max_map_count [example overlay](examples/elasticsearch-init-vmmaxmapcount)
 
+### Cassandra container now runs as non `root` and uses a new ServiceAccount `sysdig-cassandra`
+
+- Cassandra will now run using a non-root, non privileged user within its container
+- The only exception is the `initContainer` required when using `hostPath` storage: it still requires to run as `root` to be able to `chown` mount point used by Cassandra
+- The `ServiceAccount` changes to `sysdig-cassandra` from `sysdig-with-root`. 
+- **PLEASE NOTE:** if the previous ServiceAccount was used in onPrem installs with local resources (such as PSPs for example), please make sure that these are updated using the new ServiceAccount.
+- **PLEASE NOTE:** the ServiceAccount `sysdig-cassandra` is used to let Cassandra use the `nodes-labels-to-files` utility when the snitch is `customGossipingPropertyFileSnitch`.
+
 ## Release Notes
 
 - See [Release Notes](release_notes.md) for upgrade matrix, supported platforms & link to full feature notes
