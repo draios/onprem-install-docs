@@ -17,11 +17,13 @@ Refer to the appropriate workflow, depending on your environment:
 
 For consolidation and to meet higher performance requirements, upgrading to v4.0.0 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [Migrating MySQL to PostgreSQL Database](./migration.md).
 
-### Elastic search 6.8.6 upgrade
+Please note that Installer will always generate the manifests for `mysql-to-postgresql-migration` and `mysql-latest-migrations` jobs: even if so, the migration will not run again if it has successfully completed once.
 
-With Sysdig 3.6.0 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
+### Elasticsearch 6.8.6 upgrade
 
-There are some cases where ElasticSearch will fail with an error like below
+With Sysdig 3.6.0 install, Elasticsearch runs with `privileged: false` by default. In most cases this should work automatically.
+
+There are some cases where Elasticsearch will fail with an error like below:
 
 ```bash
 kubectl -n sysdig logs -f sysdigcloud-elasticsearch-0
@@ -35,9 +37,9 @@ kubectl -n sysdig logs -f sysdigcloud-elasticsearch-0
 sysctl vm.max_map_count is not set to the correct value, and I do not have the privileges to set it!
 ```
 
-There are 2 ways to fix this issue
+There are 2 ways to fix this issue:
 
-1. run systemctl command on hosts that run ElasticSearch,
+1. run systemctl command on hosts that run Elasticsearch,
 
     ```bash
     VM_MAX_MAP_COUNT=${VM_MAX_MAP_COUNT:-262144}; sysctl -w vm.max_map_count=${VM_MAX_MAP_COUNT}
