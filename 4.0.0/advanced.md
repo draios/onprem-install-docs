@@ -11,7 +11,7 @@
    * [Replace a Self-Signed Cert with Custom Cert](#replace-a-self-signed-cert-with-custom-cert)
    * [Optional: Custom Self-Signed Certificate](#optional-custom-self-signed-certificate)
    * [Patching Process](#patching-process)
-   * [Airgapped installations](#airgapped-installations)
+   * [Airgapped Installations](#airgapped-installations)
    * [Updating Vulnerability Feed](#updating-vulnerability-feed)
 
 ## Upgrade License
