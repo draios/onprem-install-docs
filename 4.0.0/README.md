@@ -8,6 +8,7 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
+   * [Output](output)
    * [Additional Installer Resources](#Additional-Installer-Resources)
       * [Frequently Used Options](advanced.md)
       * [Configuration Parameters](configuration_parameters.md)
@@ -334,6 +335,19 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 >
 > There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
+
+# Output
+
+A successful installation should display output in the terminal such as:
+
+    All Pods Ready.....Continuing
+    Congratulations, your Sysdig installation was successful!
+    You can now login to the UI at "https://awesome-domain.com:443" with:
+
+    username: "configured-username@awesome-domain.com"
+    password: "awesome-password"
+
+There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
 # Additional Installer Resources
 
