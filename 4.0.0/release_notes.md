@@ -8,7 +8,7 @@ Upgrade Matrix
 
 Sysdig Platform version 4.0.0 has been tested and qualified against the following:
 
-Supported Upgrade From: 3.6.2
+Supported Upgrade From: 3.5.x, 3.6.x
 
 ### Supported Platforms
 
