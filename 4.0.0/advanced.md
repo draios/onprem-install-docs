@@ -11,7 +11,9 @@
    * [Replace a Self-Signed Cert with Custom Cert](#replace-a-self-signed-cert-with-custom-cert)
    * [Optional: Custom Self-Signed Certificate](#optional-custom-self-signed-certificate)
    * [Patching Process](#patching-process)
-   
+   * [Airgapped installations](#airgapped-installations)
+   * [Updating Vulnerability Feed](#updating-vulnerability-feed)
+
 ## Upgrade License
 
 On-premises environments may require a license upgrade to renew, extend an expiration date, enable new features, add a service (Sysdig Secure), or change the number of licensed agents.
@@ -25,7 +27,7 @@ sysdig:
 
 ## SMTP Configs for Email Notifications
 
-The available fields for SMTP configuration are documented in the [configuration_parameters.md](configuration_parameters.md). Each includes `SMTP` in its name. 
+The available fields for SMTP configuration are documented in the [configuration_parameters.md](configuration_parameters.md). Each includes `SMTP` in its name.
 For example:    
 
 ```yaml
@@ -44,7 +46,7 @@ To configure email settings to be used for a notification channel, copy the para
 
 ## Configure AWS Credentials Using the Installer
 
-The available fields for AWS credentials are documented in the [configuration_parameters.md.](configuration_parameters.md#sysdigaccesskey) 
+The available fields for AWS credentials are documented in the [configuration_parameters.md.](configuration_parameters.md#sysdigaccesskey)
 
 ```yaml
 sysdig:      
@@ -119,11 +121,11 @@ The basic process is:
 1. Assign labels and taints to the relevant nodes.
 2. Review the sample [node-labels-and-taints values.yaml](examples/node-labels-and-taints/values.yaml) in the Sysdig github repo.
 3. Copy that section to your own `values.yaml` file and edit with labels and taints you assigned.
-    
+
 Example from the sample file:
 
 ```yaml
-# To make the ‘tolerations’ code sample below functional, assign nodes the taint 
+# To make the ‘tolerations’ code sample below functional, assign nodes the taint
 # dedicated=sysdig:NoSchedule. E.g:
 # kubectl taint my-awesome-node01 dedicated=sysdig:NoSchedule
   tolerations:
@@ -131,8 +133,8 @@ Example from the sample file:
       operator: "Equal"
       value: sysdig
       effect: "NoSchedule"
-# To make the Label code sample below functional, assign nodes the label 
-# role=sysdig. 
+# To make the Label code sample below functional, assign nodes the label
+# role=sysdig.
 # e.g: kubectl label nodes my-awesome-node01 role=sysdig
   nodeaffinityLabel:
     key: role
@@ -167,13 +169,13 @@ The example command below creates a custom, unsigned certificate called `MyCert.
 sudo openssl req -new -x509 -sha256 -days 1825 -nodes -out ./MyCert.pem -keyout ./MyCert.key
 ```
 
-# Patching Process
+## Patching Process
 
 Patching can be used to customize or "tweak" the default behavior of the Installer to accommodate the unique requirements of a specific environment. Use patching to modify the parameters that are not exposed by the`values.yaml`. Refer to the `configuration_parameters.md` for more detail about various parameters.  
 
 The most common use case for patching is during updates. When generating the differences between an existing installation and the upgrade, you may see previously customized configurations that the upgrade would overwrite, but that you want to preserve.
 
-### Patching Process
+### About Patching Process
 
 If you have run ` generate diff ` and found a configuration that you need to tweak (e.g. the installer will delete something you want to keep, or you need to add something that isn't there), then follow these general steps:
 
@@ -306,3 +308,107 @@ Run the installer again, and the configuration would be as follows:
       sessionAffinity: None
       type: ClusterIP
 ```
+## Airgapped Installations
+
+### Automatically Updating the Feeds Database in Airgapped Environments
+This is a procedure that can be used to automatically update the feeds database:
+
+1. download the image file quay.io/sysdig/vuln-feed-database:latest from Sysdig registry to the jumpbox server and save it locally
+2. move the file from the jumpbox server to the customer airgapped environment (optional)
+3. load the image file and push it to the customer's airgapped image registry
+4. restart the pod sysdigcloud-feeds-db
+5. restart the pod feeds-api
+
+Finally, steps 1 to 5 will be performed periodically once a day.
+
+This is an example script that contains all the steps:
+```bash
+#!/bin/bash
+QUAY_USERNAME="<change_me>"
+QUAY_PASSWORD="<change_me>"
+
+# Download image
+docker login quay.io/sysdig -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD}
+docker image pull quay.io/sysdig/vuln-feed-database:latest
+# Save image
+docker image save quay.io/sysdig/vuln-feed-database:latest -o vuln-feed-database.tar
+# Optionally move image
+mv vuln-feed-database.tar /var/shared-folder
+# Load image remotely
+ssh -t user@airgapped-host "docker image load -i /var/shared-folder/vuln-feed-database.tar"
+# Push image remotely
+ssh -t user@airgapped-host "docker tag vuln-feed-database:latest airgapped-registry/vuln-feed-database:latest"
+ssh -t user@airgapped-host "docker image push airgapped-registry/vuln-feed-database:latest"
+# Restart database pod
+ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=0"
+ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=1"
+# Restart feeds-api pod
+ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=0"
+ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=1"
+```
+
+The script can be scheduled using a cron job that run every day
+```bash
+0 8 * * * feeds-database-update.sh >/dev/null 2>&1
+```
+
+### Updating Vulnerability Feed
+
+> **NOTE:**
+>
+> Sysdig Secure users who install in an airgapped environment do not have internet access to the continuous checks of vulnerability databases that are used in image scanning. (See also: [/document/preview/117822\#UUIDc24a6ed8cdde754219092e4b32b6fd79](file:////document/preview/117822#UUIDc24a6ed8cdde754219092e4b32b6fd79).)How Sysdig Image Scanning Works
+
+As of **installer version 3.2.0-9**, airgapped environments can also receive periodic vulnerability database updates.
+
+When you install with the \"`airgapped_`\" parameters enabled (see [/document/preview/206196\#UUIDc198e7424136aa205f91d28f1495bfaf](file:////document/preview/206196#UUIDc198e7424136aa205f91d28f1495bfaf) instructions), the installer will automatically push the latest vulnerability database to your environment. Follow the steps below to reinstall/refresh the vuln db, or use the script and chron job to schedule automated updates (daily, weekly, etc.).Full Airgap Install
+
+To automatically update the vulnerability database, you can:
+
+1. Download the image file [quay.io/sysdig/vuln-feed-database:latest](https://quay.io/sysdig/vulnfeeddatabase:latest) from the Sysdig registry to the jump box server and save it locally.
+2. Move the file from the jump box server to the airgapped environment (if needed)
+3. Load the image file and push it to the airgapped image registry.
+4. Restart the pod `sysdigcloud-feeds-db`
+5. Restart the pod `feeds-api`
+
+The following script (`feeds_database_update.sh`) performs the five steps:
+
+```bash
+    #!/bin/bash
+    QUAY_USERNAME="<change_me>"
+    QUAY_PASSWORD="<change_me>"
+
+    # Download image
+    docker login quay.io/sysdig -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD}
+    docker image pull quay.io/sysdig/vuln-feed-database:latest
+    # Save image
+    docker image save quay.io/sysdig/vuln-feed-database:latest -o vuln-feed-database.tar
+    # Optionally move image
+    mv vuln-feed-database.tar /var/shared-folder
+    # Load image remotely
+    ssh -t user@airgapped-host "docker image load -i /var/shared-folder/vuln-feed-database.tar"
+    # Push image remotely
+    ssh -t user@airgapped-host "docker tag vuln-feed-database:latest airgapped-registry/vuln-feed-database:latest"
+    ssh -t user@airgapped-host "docker image push airgapped-registry/vuln-feed-database:latest"
+    # Restart database pod
+    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=0"
+    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=1"
+    # Restart feeds-api pod
+    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=0"
+    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=1"
+```
+Schedule a chron job to run the script on a chosen schedule (e.g. every day):
+
+    0 8 * * * feeds-database-update.sh >/dev/null 2>&1
+
+# Output
+
+A successful installation should display output in the terminal such as:
+
+    All Pods Ready.....Continuing
+    Congratulations, your Sysdig installation was successful!
+    You can now login to the UI at "https://awesome-domain.com:443" with:
+
+    username: "configured-username@awesome-domain.com"
+    password: "awesome-password"
+
+There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.

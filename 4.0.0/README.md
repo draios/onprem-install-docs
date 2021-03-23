@@ -8,7 +8,6 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
-      * [Updating Vulnerability Feed](#updating-vulnerability-feed)
    * [Output](#output)
    * [Additional Installer Resources](#Additional-Installer-Resources)
       * [Frequently Used Options](advanced.md)
@@ -336,67 +335,6 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 >
 > There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
 your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
-
-### Updating Vulnerability Feed
-
-> **NOTE:**
->
-> Sysdig Secure users who install in an airgapped environment do not have internet access to the continuous checks of vulnerability databases that are used in image scanning. (See also: [/document/preview/117822\#UUIDc24a6ed8cdde754219092e4b32b6fd79](file:////document/preview/117822#UUIDc24a6ed8cdde754219092e4b32b6fd79).)How Sysdig Image Scanning Works
-
-As of **installer version 3.2.0-9**, airgapped environments can also receive periodic vulnerability database updates.
-
-When you install with the \"`airgapped_`\" parameters enabled (see [/document/preview/206196\#UUIDc198e7424136aa205f91d28f1495bfaf](file:////document/preview/206196#UUIDc198e7424136aa205f91d28f1495bfaf) instructions), the installer will automatically push the latest vulnerability database to your environment. Follow the steps below to reinstall/refresh the vuln db, or use the script and chron job to schedule automated updates (daily, weekly, etc.).Full Airgap Install
-
-To automatically update the vulnerability database, you can:
-
-1. Download the image file [quay.io/sysdig/vuln-feed-database:latest](https://quay.io/sysdig/vulnfeeddatabase:latest) from the Sysdig registry to the jump box server and save it locally.
-2. Move the file from the jump box server to the airgapped environment (if needed)
-3. Load the image file and push it to the airgapped image registry.
-4. Restart the pod `sysdigcloud-feeds-db`
-5. Restart the pod `feeds-api`
-
-The following script (`feeds_database_update.sh`) performs the five steps:
-
-```bash
-    #!/bin/bash
-    QUAY_USERNAME="<change_me>"
-    QUAY_PASSWORD="<change_me>"
-
-    # Download image
-    docker login quay.io/sysdig -u ${QUAY_USERNAME} -p ${QUAY_PASSWORD}
-    docker image pull quay.io/sysdig/vuln-feed-database:latest
-    # Save image
-    docker image save quay.io/sysdig/vuln-feed-database:latest -o vuln-feed-database.tar
-    # Optionally move image
-    mv vuln-feed-database.tar /var/shared-folder
-    # Load image remotely
-    ssh -t user@airgapped-host "docker image load -i /var/shared-folder/vuln-feed-database.tar"
-    # Push image remotely
-    ssh -t user@airgapped-host "docker tag vuln-feed-database:latest airgapped-registry/vuln-feed-database:latest"
-    ssh -t user@airgapped-host "docker image push airgapped-registry/vuln-feed-database:latest"
-    # Restart database pod
-    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=0"
-    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-db --replicas=1"
-    # Restart feeds-api pod
-    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=0"
-    ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=1"
-```
-Schedule a chron job to run the script on a chosen schedule (e.g. every day):
-
-    0 8 * * * feeds-database-update.sh >/dev/null 2>&1
-
-# Output
-
-A successful installation should display output in the terminal such as:
-
-    All Pods Ready.....Continuing
-    Congratulations, your Sysdig installation was successful!
-    You can now login to the UI at "https://awesome-domain.com:443" with:
-
-    username: "configured-username@awesome-domain.com"
-    password: "awesome-password"
-
-There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
 # Additional Installer Resources
 
