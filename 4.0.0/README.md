@@ -8,7 +8,6 @@
    * [Airgapped Installation Options](#airgapped-installation-options)
       * [Airgapped with Multi-Homed Installation Machine](#airgapped-with-multi-homed-installation-machine)
       * [Full Airgap Install](#full-airgap-install)
-   * [Output](#output)
    * [Additional Installer Resources](#Additional-Installer-Resources)
       * [Frequently Used Options](advanced.md)
       * [Configuration Parameters](configuration_parameters.md)
