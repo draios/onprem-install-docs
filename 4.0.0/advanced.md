@@ -399,16 +399,3 @@ The following script (`feeds_database_update.sh`) performs the five steps:
 Schedule a chron job to run the script on a chosen schedule (e.g. every day):
 
     0 8 * * * feeds-database-update.sh >/dev/null 2>&1
-
-# Output
-
-A successful installation should display output in the terminal such as:
-
-    All Pods Ready.....Continuing
-    Congratulations, your Sysdig installation was successful!
-    You can now login to the UI at "https://awesome-domain.com:443" with:
-
-    username: "configured-username@awesome-domain.com"
-    password: "awesome-password"
-
-There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
