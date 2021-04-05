@@ -43,6 +43,6 @@ Qualified with agent release 11.0.0
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| 53c0abed589a2ac425cbf5468039705fd63cdb3cd631b1ed6b7c3d20ac84a217 | installer-darwin-amd64 |
-| 223d818dd43d5a3d6ef4b8f7152382a74984a4943d487913b013b60edb2a2706 | installer-linux-amd64 |
-| 75417fe747a208ceeb38c37a54a5a4706ded78b1ca6982c3bd41a3febaae5bc5 | installer-windows-amd64.exe |
+| c7837a9bc973dbdf6b9039069fe63a523b04275105937a24cf4fe56682a8cb58 | installer-darwin-amd64 |
+| ed6663c68295a53a3565eb2b180aedb578f926a3c0d84b16c2a43591aa0bfdbd | installer-linux-amd64 |
+| e3d9ea674a6b038d7f4a3e8713a4397346f36b60940cec41ecf4a3ddd757ae48 | installer-windows-amd64.exe |
