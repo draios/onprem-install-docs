@@ -1,5 +1,3 @@
-# [WIP] This 4.0 documentation is under development
-
    * [Installation Overview](#installation-overview)
       * [About the Installer](#about-the-installer)
       * [Install vs Upgrade](#Install-vs-Upgrade)
