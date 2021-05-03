@@ -31,7 +31,6 @@ Qualified with agent release 11.2.0
 | Redis                      | 6.0.12 |
 | ElasticSearch              | 6.8.6 |
 | Cassandra                  | release_version: 2.1.21 cql_version: 3.2.1 |
-| RDS                        | 8.0.16 |
 | Postgres (image scanning)  | 12.5|
 | Anchore (image scanning)   | 0.9.1 |
 | NATS Exporter              | 0.6.2 |
