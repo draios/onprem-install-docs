@@ -1,4 +1,4 @@
-Release 4.0.1 April 29, 2020
+Release 4.0.1 May 5, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
