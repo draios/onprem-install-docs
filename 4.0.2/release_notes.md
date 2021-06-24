@@ -44,6 +44,6 @@ Current version: 4.0.2-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| ? | installer-darwin-amd64 |
-| ? | installer-linux-amd64 |
-| ? | installer-windows-amd64.exe |
+| 1bdd4d2e4f8dbaa1ca22e80f3d3202c19254311a378b5aa25f36df3c080c9c30 | installer-darwin-amd64 |
+| 819b94755609071e43d3a9aa679ea42694f7807321c8864693558bbd98bc20ea | installer-linux-amd64 |
+| a2ea9303589ccb6f19db0482e0330cf5f420f3b08e735b4ded32ba7aea927a17 | installer-windows-amd64.exe |
