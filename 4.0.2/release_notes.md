@@ -40,10 +40,10 @@ Qualified with agent release 11.3.0
 
 ### Installer binaries sha256sum
 
-Current version: 4.0.2-1
+Current version: 4.0.2-2
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| 1bdd4d2e4f8dbaa1ca22e80f3d3202c19254311a378b5aa25f36df3c080c9c30 | installer-darwin-amd64 |
-| 819b94755609071e43d3a9aa679ea42694f7807321c8864693558bbd98bc20ea | installer-linux-amd64 |
-| a2ea9303589ccb6f19db0482e0330cf5f420f3b08e735b4ded32ba7aea927a17 | installer-windows-amd64.exe |
+| 2637faa9461a60ab9f646585839199d0d943b5d7a7ed9b2a3197e34dc0436838 | installer-darwin-amd64 |
+| db94b477ff2b66b4645602fbbeea1522e9d2ac77019a62a2c2c1546892e0ce7b | installer-linux-amd64 |
+| 9fe6b14606ef65124b38ef93ee11381d70333a46fee11c58940452520d239762 | installer-windows-amd64.exe |
