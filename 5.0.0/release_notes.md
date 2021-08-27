@@ -14,11 +14,11 @@ Supported Upgrade From: 4.0.X
 
 | **Platform** | **Version** |
 |---|---|
-| Vanilla Kubernetes          | 1.16.X, 1.17.X, 1.18.X, 1.19.X, 1.20.X, 1.21.X |
+| Vanilla Kubernetes          | 1.16.15, 1.17.17, 1.18.20, 1.19.13, 1.20.9, 1.21.3 |
 | OpenShift                   | 3.11, 4.7 |
 | GKE                         | 1.19.11-gke.1701 |
 | EKS                         | 1.20 |
-| Rancher                     | 2.5.3 |
+| Rancher                     | 2.5.7 |
 
 ### Sysdig Agent Version
 
