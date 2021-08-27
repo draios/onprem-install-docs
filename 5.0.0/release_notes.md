@@ -44,6 +44,6 @@ Current version: TBD
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-|  | installer-darwin-amd64 |
-|  | installer-linux-amd64 |
-|  | installer-windows-amd64.exe |
+| 899bdb4e901a29c6a2a6fff52242155945c9714bdf5af2baaca2f76d0c8140ac | installer-darwin-amd64 |
+| ff5d29f8e30830d41b23600b41be19cbcba9916843a4f5d9c9100ef3957edc06 | installer-linux-amd64 |
+| b11067ed642bbb89df47afe386de968ac39724c227e703f6e434ef89d282dd7e | installer-windows-amd64.exe |
