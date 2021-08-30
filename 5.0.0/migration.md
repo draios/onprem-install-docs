@@ -1,1 +1,0 @@
-Check with Miguel/Pravin if pgsql to pgsql HA migration should be documented here
