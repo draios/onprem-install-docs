@@ -1,4 +1,7 @@
-# Agent Install
+# Agent Install 
+
+**DEPRECATED**
+**Agent installs will be dropped from the `installer` in future releases**
 
 The Sysdig agent can be installed along with Sysdig Monitor and/or Sysdig Secure, or by itself. This is determined by the value `apps` in the `values.yaml` file.
 
