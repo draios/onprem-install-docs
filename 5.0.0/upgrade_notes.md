@@ -13,6 +13,18 @@ Refer to the appropriate workflow, depending on your environment:
 
 ## Upgrade Notes
 
+### Cassandra 3 is now the default for fresh installs
+
+Fresh installs by default will use Cassandra version 3.x.
+
+### Known limitations for OpenShift 3.11 and Kubernetes < 1.16
+
+PostgreSQL HA is not supported on OpenShift 3.11 and on clusters running Kubernetes < 1.16
+
+### MySql removal (breaking change)
+
+Any MySql related entry in the `values.yaml` must be removed or it will cause the installer to fail.
+
 ### Preflight checks
 
 #### Elastic Search
