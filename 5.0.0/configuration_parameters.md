@@ -4727,21 +4727,6 @@ sysdig:
         scanningGRPCEndpoint: sysdigcloud-scanning-api:6000
 ```
 
-## **sysdig.secure.scanning.retentionMgr.scanningDBEngine**
-**Required**: `false`<br>
-**Description**: Scanning DB engine<br>
-**Options**:<br>
-**Default**: mysql<br>
-**Example**:
-
-```yaml
-sysdig:
-  secure:
-    scanning:
-      retentionMgr:
-        scanningDBEngine: mysql
-```
-
 ## **sysdig.secure.scanning.retentionMgr.defaultValues.datePolicy**
 **Required**: `false`<br>
 **Description**: Default value for the date policy<br>
@@ -8999,15 +8984,15 @@ sysdig:
 ## **sysdig.secure.scanning.veJanitor.scanningDbEngine**
 **Required**: `false`<br>
 **Description**: which scanning database engine to use. <br>
-**Options**: mysql<br>
-**Default**: "mysql"<br>
+**Options**: postgres<br>
+**Default**: "postgres"<br>
 **Example**:
 
 ```yaml
 sysdig:
   secure:
     veJanitor:
-      scanningDbEngine: "mysql"
+      scanningDbEngine: "postgres"
 ```
 
 
