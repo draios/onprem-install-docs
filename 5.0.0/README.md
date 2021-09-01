@@ -77,7 +77,7 @@ It is also possible that you are using dynamic storage but have already created 
 
 In cases where dynamic storage is not available, you can use static storage for the Sysdig stateful sets. In this case, you would use:
 
--   `storageclassProvisioner`: Enter `hostpath`, then define the nodes for the four main Sysdig components: ElasticSearch, Cassandra, MySQL, and Postgres.storageclassProvisioner
+-   `storageclassProvisioner`: Enter `hostpath`, then define the nodes for the main Sysdig components: ElasticSearch, Cassandra, and Postgres.storageclassProvisioner
 
 -   See [Advanced Configurations](advanced.md#use-hostpath-for-static-storage-of-sysdig-components) for details.
 
