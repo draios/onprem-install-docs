@@ -64,7 +64,7 @@ configure static storage.
 Based on the `size` entered in the values.yaml file (small/medium/large), the
 Installer assumes a minimum number of replicas and nodes to be provided.
 You will enter the names of the nodes on which you will run the Cassandra,
-ElasticSearch, mySQL and Postgres components of Sysdig in the values.yaml, as
+ElasticSearch, Postgres components of Sysdig in the values.yaml, as
 in the parameters and example below.
 
 ### Parameters
@@ -76,9 +76,6 @@ be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
 `elasticsearch.hostPathNodes`: The number of nodes configured here needs to be
 be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
 `medium` and 6 when configured `size` is large.<br>
-`sysdig.mysql.hostPathNodes`: When sysdig.mysqlHa is configured to true this has
-to be at least 3 nodes and when sysdig.mysqlHa is not configured it should be
-at least one node.<br>
 `sysdig.postgresql.hostPathNodes`: This can be ignored if Sysdig Secure is not
 licensed or used on this environment. If Secure is used, then the parameter
 should be set to 1, regardless of the environment size setting.<br>
@@ -104,9 +101,6 @@ sysdig:
       - my-cool-host4.com
       - my-cool-host5.com
       - my-cool-host6.com
-  mysql:
-    hostPathNodes:
-      - my-cool-host1.com
   postgresql:
     hostPathNodes:
       - my-cool-host1.com
