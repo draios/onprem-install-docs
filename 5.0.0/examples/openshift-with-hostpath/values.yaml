@@ -22,10 +22,6 @@ sysdig:
   openshiftPassword: <REPLACE_WITH_OPENSHIFT_PASSWORD>
   collector:
     dnsName: <PLEASE_REPLACE>
-  mysql:
-    hostPathNodes:
-      # replace with the name section of kubectl get nodes
-      - my-cool-host1.com
   postgresql:
     hostPathNodes:
       # replace with the name section of kubectl get nodes

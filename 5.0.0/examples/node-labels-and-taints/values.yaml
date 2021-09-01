@@ -13,10 +13,6 @@ elasticsearch:
     - my-awesome-node02
     - my-awesome-node03
 sysdig:
-  mysql:
-    hostPathNodes:
-      # replace with the name section of kubectl get nodes
-      - my-awesome-node01
   postgresql:
     hostPathNodes:
       # replace with the name section of kubectl get nodes

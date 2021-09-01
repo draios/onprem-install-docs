@@ -67,6 +67,9 @@ app, for example, `monitor`.<br>
 apps: monitor secure
 ```
 
+**DEPRECATION NOTICE**: installation of the `agent` using the `installer` is being deprecated and will be removed in a future version.
+
+
 ## **airgapped_registry_name**
 **Required**: `false`<br>
 **Description**: The URL of the airgapped (internal) docker registry. This URL
@@ -455,20 +458,6 @@ hostPathCustomPaths:
   elasticsearch: `/sysdig/elasticsearch`
 ```
 
-## **hostPathCustomPaths.mysql**
-**Required**: `false`<br>
-**Description**: The directory to bind mount mysql pod's `/var/lib/mysql` to
-on the host. This is relevant only when `storageClassProvisioner` is
-`hostPath`.<br>
-**Options**:<br>
-**Default**: `/var/lib/mysql`<br>
-**Example**:
-
-```yaml
-hostPathCustomPaths:
-  mysql: `/sysdig/mysql`
-```
-
 ## **hostPathCustomPaths.postgresql**
 **Required**: `false`<br>
 **Description**: The directory to bind mount PostgreSQL pod's
@@ -543,20 +532,6 @@ pvStorageSize:
     elasticsearch: 500Gi
 ```
 
-## **pvStorageSize.large.mysql**
-**Required**: `false`<br>
-**Description**: The size of the persistent volume assigned to MySQL in a
-cluster of [`size`](#size) large. This option is ignored if
-[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br>
-**Options**:<br>
-**Default**: 25Gi<br>
-**Example**:
-
-```yaml
-pvStorageSize:
-  large:
-    mysql: 100Gi
-```
 
 ## **pvStorageSize.large.postgresql**
 **Required**: `false`<br>
@@ -603,21 +578,6 @@ pvStorageSize:
     elasticsearch: 300Gi
 ```
 
-## **pvStorageSize.medium.mysql**
-**Required**: `false`<br>
-**Description**: The size of the persistent volume assigned to MySQL in a
-cluster of [`size`](#size) medium. This option is ignored if
-[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br>
-**Options**:<br>
-**Default**: 25Gi<br>
-**Example**:
-
-```yaml
-pvStorageSize:
-  medium:
-    mysql: 100Gi
-```
-
 ## **pvStorageSize.medium.postgresql**
 **Required**: `false`<br>
 **Description**: The size of the persistent volume assigned to PostgreSQL in a
@@ -661,21 +621,6 @@ in a cluster of [`size`](#size) small. This option is ignored if
 pvStorageSize:
   small:
     elasticsearch: 100Gi
-```
-
-## **pvStorageSize.small.mysql**
-**Required**: `false`<br>
-**Description**: The size of the persistent volume assigned to MySQL in a
-cluster of [`size`](#size) small. This option is ignored if
-[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br>
-**Options**:<br>
-**Default**: 25Gi<br>
-**Example**:
-
-```yaml
-pvStorageSize:
-  small:
-    mysql: 100Gi
 ```
 
 ## **pvStorageSize.small.postgresql**
@@ -1427,171 +1372,6 @@ sysdig:
       apiToken: A_VALID_TOKEN
 ```
 
-## **sysdig.mysqlHa**
-**Required**: `false`<br>
-**Description**: Determines if mysql should run in HA mode.<br>
-**Options**: `true|false`<br>
-**Default**: `false`<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlHa: false
-```
-
-## **sysdig.useMySQL8**
-**Required**: `false`<br>
-**Description**: Determines if standalone mysql should run MySQL8.<br>
-**Options**: `true|false`<br>
-**Default**: `false`<br>
-**Example**:
-
-```yaml
-sysdig:
-  useMySQL8: true
-```
-
-## **sysdig.mysqlHaVersion**
-**Required**: `false`<br>
-**Description**: The docker image tag of MySQL used for HA.<br>
-**Options**:<br>
-**Default**: 8.0.16.4<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlHaVersion: 8.0.16.4
-```
-
-## **sysdig.mysqlHaAgentVersion**
-**Required**: `false`<br>
-**Description**: The docker image tag of MySQL Agent used for HA.<br>
-**Options**:<br>
-**Default**: 0.1.1.6<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlHaAgentVersion: 0.1.1.6
-```
-
-## **sysdig.mysqlVersion**
-**Required**: `false`<br>
-**Description**: The docker image tag of MySQL.<br>
-**Options**:<br>
-**Default**: 5.6.44.0<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlVersion: 5.6.44.0
-```
-
-## **sysdig.mysql8Version**
-**Required**: `false`<br>
-**Description**: The docker image tag of MySQL8.<br>
-**Options**:<br>
-**Default**: 8.0.16.0<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlVersion: 8.0.16.0
-```
-
-## **sysdig.mysql.external**
-**Required**: `false`<br>
-**Description**: If set, the installer does not create a local mysql cluster, instead it sets up the sysdig platform to connect to the configured
-[`sysdig.mysql.hostname`](#sysdigmysqlhostname) <br>
-**Options**: `true|false`<br>
-**Default**: `false`<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    external: true
-```
-
-## **sysdig.mysql.hostname**
-**Required**: `false`<br>
-**Description**: Name of the mySQL host that the sysdig platform components
-should connect to.<br>
-**Options**: <br>
-**Default**: <br>
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    hostname: mysql.foo.com
-```
-
-## **sysdig.mysql.hostPathNodes**
-**Required**: `false`<br>
-**Description**: An array of node hostnames printed out by the `kubectl get
-node -o name` command. These are the nodes where MySQL hostPath persistent
-volumes should be created on. The number of nodes must be at minimum whatever
-the value of [`sysdig.mysqlReplicaCount`](#sysdigmysqlreplicacount) is. This
-parameter is required if configured
-[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br>
-**Options**:<br>
-**Default**: [] <br>
-
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    hostPathNodes:
-      - my-cool-host1.com
-```
-
-## **sysdig.mysql.maxConnections**
-**Required**: `false`<br>
-**Description**: The maximum permitted number of simultaneous client connections.<br>
-**Options**:<br>
-**Default**: `1024`<br>
-
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    maxConnections: 1024
-```
-
-## **sysdig.mysql.password**
-**Required**: `false`<br>
-**Description**: The password of the MySQL user that the Sysdig Platform backend
-components will use in communicating with MySQL.<br>
-**Options**:<br>
-**Default**: `mysql-admin`<br>
-
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    user: awesome-user
-```
-
-## **sysdig.mysql.user**
-**Required**: `false`<br>
-**Description**: The username of the MySQL user that the Sysdig Platform backend
-components will use in communicating with MySQL.<br>
-_**Note**: Do NOT use `root` user for this value._<br>
-**Options**:<br>
-**Default**: `mysql-admin`<br>
-
-**Example**:
-
-```yaml
-sysdig:
-  mysql:
-    user: awesome-user
-```
-
 ## **sysdig.natsExporterVersion**
 **Required**: `false`<br>
 **Description**: Docker image tag of the Prometheus exporter for NATS.<br>
@@ -1765,18 +1545,6 @@ sysdig:
   postgresVersion: 10.6.11
 ```
 
-## **sysdig.mysqlToPostgresMigrationVersion**
-**Required**: `false`<br>
-**Description**: The docker image tag for MySQL to PostgreSQL migration.<br>
-**Options**:<br>
-**Default**: 1.2.5-mysql-to-postgres<br>
-**Example**:
-
-```yaml
-sysdig:
-  mysqlToPostgresMigrationVersion: 1.2.5-mysql-to-postgres
-```
-
 ## **sysdig.postgresql.rootUser**
 **Required**: `false`<br>
 **Description**: Root user of the in-cluster postgresql instance.<br>
@@ -1814,19 +1582,6 @@ sysdig:
 sysdig:
   postgresql:
     rootPassword: my_root_password
-```
-
-## **sysdig.postgresql.primary**
-**Required**: `false`<br>
-**Description**: If set, the installer starts the mysql to postgresql migration (if not already performed), services will start in postgresql mode.<br>
-**Options**: `true|false`<br>
-**Default**: `true`<br>
-**Example**:
-
-```yaml
-sysdig:
-  postgresql:
-    primary: true
 ```
 
 ## **sysdig.postgresql.external**
@@ -3022,170 +2777,6 @@ sysdig:
 sysdig:
   resources:
     elasticsearch:
-      requests:
-        memory: 2Gi
-```
-
-## **sysdig.resources.mysql-router.limits.cpu**
-**Required**: `false`<br>
-**Description**: The amount of cpu assigned to mysql-router pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | limits |
-| ------------ | ------ |
-| small        | 500m   |
-| medium       | 500m   |
-| large        | 500m   |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql-router:
-      limits:
-        cpu: 2
-```
-
-## **sysdig.resources.mysql-router.limits.memory**
-**Required**: `false`<br>
-**Description**: The amount of memory assigned to mysql-router pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | limits |
-| ------------ | ------ |
-| small        | 500Mi  |
-| medium       | 500Mi  |
-| large        | 500Mi  |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql-router:
-      limits:
-        memory: 8Gi
-```
-
-## **sysdig.resources.mysql-router.requests.cpu**
-**Required**: `false`<br>
-**Description**: The amount of cpu required to schedule mysql-router pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | requests |
-| ------------ | -------- |
-| small        | 250m     |
-| medium       | 250m     |
-| large        | 250m     |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql-router:
-      requests:
-        cpu: 2
-```
-
-## **sysdig.resources.mysql-router.requests.memory**
-**Required**: `false`<br>
-**Description**: The amount of memory required to schedule mysql-router pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | requests |
-| ------------ | -------- |
-| small        | 100Mi    |
-| medium       | 100Mi    |
-| large        | 100Mi    |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql-router:
-      requests:
-        memory: 2Gi
-```
-
-## **sysdig.resources.mysql.limits.cpu**
-**Required**: `false`<br>
-**Description**: The amount of cpu assigned to mysql pods<br>
-**Options**:<br>
-**Default**:<br>
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql:
-      limits:
-        cpu: 2
-```
-
-## **sysdig.resources.mysql.limits.memory**
-**Required**: `false`<br>
-**Description**: The amount of memory assigned to mysql pods<br>
-**Options**:<br>
-**Default**:<br>
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql:
-      limits:
-        memory: 8Gi
-```
-
-## **sysdig.resources.mysql.requests.cpu**
-**Required**: `false`<br>
-**Description**: The amount of cpu required to schedule mysql pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | requests |
-| ------------ | -------- |
-| small        | 500m     |
-| medium       | 500m     |
-| large        | 500m     |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql:
-      requests:
-        cpu: 2
-```
-
-## **sysdig.resources.mysql.requests.memory**
-**Required**: `false`<br>
-**Description**: The amount of memory required to schedule mysql pods<br>
-**Options**:<br>
-**Default**:
-
-| cluster-size | requests |
-| ------------ | -------- |
-| small        | 1Gi      |
-| medium       | 1Gi      |
-| large        | 1Gi      |
-
-**Example**:
-
-```yaml
-sysdig:
-  resources:
-    mysql:
       requests:
         memory: 2Gi
 ```

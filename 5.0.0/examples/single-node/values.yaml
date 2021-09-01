@@ -11,10 +11,6 @@ elasticsearch:
       # replace with the name section of kubectl get nodes
     - minikube
 sysdig:
-  mysql:
-    hostPathNodes:
-      # replace with the name section of kubectl get nodes
-      - minikube
   postgresql:
     hostPathNodes:
       # replace with the name section of kubectl get nodes
