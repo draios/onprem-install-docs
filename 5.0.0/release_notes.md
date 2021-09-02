@@ -30,7 +30,7 @@ Qualified with agent release 11.4.1
 |---|---|
 | Redis                      | 6.0.14 |
 | ElasticSearch              | 6.8.6 |
-| Cassandra                  | Fresh: 3.11.11 - Update: 2.1.22.4 |
+| Cassandra                  | Fresh: 3.11.11 - Upgrade: 2.1.22.4 |
 | Postgres                   | 12.8 |
 | Anchore (image scanning)   | 0.9.1 |
 | NATS Exporter              | 0.7.0 |
