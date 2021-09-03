@@ -13,6 +13,24 @@ Refer to the appropriate workflow, depending on your environment:
 
 ## Upgrade Notes
 
+### OpenShift `HostAlreadyClaimed` Error in Routes when Prometheus ingestion is enabled (workaround provided)
+
+If Prometheus metric ingestion is enabled (`sysdig.beacon.platformMetricsEnabled` is `true`), an overlay is required to avoid an error in Routes which will prevent the `Collector` Route to be active and able to receive data from the agents.
+
+This is what the error would look like:
+
+```
+oc get route
+NAME                                                 HOST/PORT                                                       PATH                                             SERVICES                                             PORT    TERMINATION   WILDCARD
+[omitted lines]
+sysdigcloud-collector                                HostAlreadyClaimed
+[omitted lines]
+```
+
+Use [this](examples/openshift-routes-overlay/overlays/patch.yaml) overlay to avoid the error `HostAlreadyClaimed`
+
+The `domain_name` must be different from the name used for the Collectors endpoint and it must be used for Prometheus metrics ingestion.
+
 ### Cassandra 3 is now the default for fresh installs
 
 Fresh installs by default will use Cassandra version 3.x.
