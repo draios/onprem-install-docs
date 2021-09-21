@@ -1,4 +1,4 @@
-Release 5.0.0 DATE TBD
+Release 5.0.0 DATE September 7, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
