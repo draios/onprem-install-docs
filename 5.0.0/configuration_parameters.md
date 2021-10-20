@@ -1307,7 +1307,7 @@ sysdig:
 **Required**: `false`<br>
 **Description**: Enable or disable the new alert-manager and alert-notifier deployment<br>
 **Options**:`true|false`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 **Example**:
 
 ```yaml
@@ -1370,6 +1370,32 @@ sysdig:
   alertingSystem:
     alertNotifier:
       apiToken: A_VALID_TOKEN
+```
+
+## **sysdig.alertingSystem.alertNotifierReplicaCount**
+**Required**: `false`<br>
+**Description**: Number of Replica for the alertNotifier<br>
+**Options**:<br>
+**Default**: small: 1, medium: 3, large: 5<br>
+**Example**:
+
+```yaml
+sysdig:
+  alertingSystem:
+    alertNotifierReplicaCount: 3
+```
+
+## **sysdig.alertingSystem.alertManagerReplicaCount**
+**Required**: `false`<br>
+**Description**: Number of Replica for the alertManager<br>
+**Options**:<br>
+**Default**: small: 1, medium: 3, large: 5<br>
+**Example**:
+
+```yaml
+sysdig:
+  alertingSystem:
+    alertManagerReplicaCount: 3
 ```
 
 ## **sysdig.natsExporterVersion**
