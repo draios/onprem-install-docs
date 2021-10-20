@@ -1372,6 +1372,32 @@ sysdig:
       apiToken: A_VALID_TOKEN
 ```
 
+## **sysdig.alertingSystem.alertNotifierReplicaCount**
+**Required**: `false`<br>
+**Description**: Number of Replica for the alertNotifier<br>
+**Options**:<br>
+**Default**: small: 1, medium: 3, large: 5<br>
+**Example**:
+
+```yaml
+sysdig:
+  alertingSystem:
+    alertNotifierReplicaCount: 3
+```
+
+## **sysdig.alertingSystem.alertManagerReplicaCount**
+**Required**: `false`<br>
+**Description**: Number of Replica for the alertManager<br>
+**Options**:<br>
+**Default**: small: 1, medium: 3, large: 5<br>
+**Example**:
+
+```yaml
+sysdig:
+  alertingSystem:
+    alertManagerReplicaCount: 3
+```
+
 ## **sysdig.natsExporterVersion**
 **Required**: `false`<br>
 **Description**: Docker image tag of the Prometheus exporter for NATS.<br>
