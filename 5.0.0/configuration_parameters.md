@@ -1307,7 +1307,7 @@ sysdig:
 **Required**: `false`<br>
 **Description**: Enable or disable the new alert-manager and alert-notifier deployment<br>
 **Options**:`true|false`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 **Example**:
 
 ```yaml
