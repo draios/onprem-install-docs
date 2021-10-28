@@ -1,4 +1,4 @@
-Release 4.0.4 September 29, 2021
+Release 4.0.5 October 28, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,9 +6,9 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 4.0.4 has been tested and qualified against the following:
+Sysdig Platform version 4.0.5 has been tested and qualified against the following:
 
-Supported Upgrade From: 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3
+Supported Upgrade From: 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4
 
 ### Supported Platforms
 

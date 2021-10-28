@@ -59,7 +59,7 @@ sysdig:
 
 ### MySQL to PostgreSQL migration
 
-For consolidation and to meet higher performance requirements, upgrading to v4.0.4 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [Migrating MySQL to PostgreSQL Database](./migration.md).
+For consolidation and to meet higher performance requirements, upgrading to v4.0.5 from v3.x.x involves migrating MySQL to the PostgreSQL database. The migration process is seamless and no user intervention is expected. For migration instructions and troubleshooting tips, see [Migrating MySQL to PostgreSQL Database](./migration.md).
 
 Please note that Installer will always generate the manifests for `mysql-to-postgresql-migration` and `mysql-latest-migrations` jobs: even if so, the migration will not run again if it has successfully completed once.
 
