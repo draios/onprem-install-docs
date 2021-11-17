@@ -8,7 +8,7 @@ Upgrade Matrix
 
 Sysdig Platform version 5.0.1 has been tested and qualified against the following:
 
-Supported Upgrade From: 4.0.X
+Supported Upgrade From: 4.0.X, 5.0.0
 
 ### Supported Platforms
 
