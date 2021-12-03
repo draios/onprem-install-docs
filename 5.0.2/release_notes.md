@@ -1,4 +1,4 @@
-Release 5.0.1 November 17, 2021
+Release 5.0.2 December 13, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,9 +6,9 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 5.0.1 has been tested and qualified against the following:
+Sysdig Platform version 5.0.2 has been tested and qualified against the following:
 
-Supported Upgrade From: 4.0.X, 5.0.0
+Supported Upgrade From: 4.0.X, 5.0.0, 5.0.1
 
 ### Supported Platforms
 
