@@ -1,4 +1,4 @@
-Release 3.6.2 December 14, 2020
+Release 3.6.3 December 14, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,9 +6,9 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 3.6.2 has been tested and qualified against the following:
+Sysdig Platform version 3.6.3 has been tested and qualified against the following:
 
-Supported Upgrade From: 3.2.2, 3.5.1, (3.6.0 or 3.6.1 if it was installed)
+Supported Upgrade From: 3.2.2, 3.5.1, (3.6.0, 3.6.1, or 3.6.2 if it was installed)
 
 ### Supported Platforms
 
