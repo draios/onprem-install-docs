@@ -36,6 +36,7 @@ In general, Sysdig tests and supports direct upgrade from **five releases** back
 | [5.0.2 (by request)](5.0.2)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0, 5.0.1 | [5.0.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.2](5.0.2)
 | [5.0.1 (by request)](5.0.1)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0 | [5.0.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.1](5.0.1)
 | [5.0.0 (by request)](5.0.0)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3 | [5.0.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.0](5.0.0)
+| [4.0.6 (by request)](4.0.6)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5 | [4.0.6](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.6](4.0.6)
 | [4.0.5 (by request)](4.0.5)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4 | [4.0.5](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.5](4.0.5)
 | [4.0.4 (by request)](4.0.4)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3 | [4.0.4](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.4](4.0.4)
 | [4.0.3 (by request)](4.0.3)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2 | [4.0.3](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.3](4.0.3)
