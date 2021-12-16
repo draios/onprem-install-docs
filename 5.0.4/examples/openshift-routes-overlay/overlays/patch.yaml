@@ -1,0 +1,8 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: sysdigcloud-beacon-prom-remote-write
+  namespace: sysdigcloud
+spec:
+  host: domain_name
