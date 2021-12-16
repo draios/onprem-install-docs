@@ -15,7 +15,7 @@ Refer to the appropriate workflow, depending on your environment:
 
 ### Elastic search 6.8.6 upgrade
 
-With Sysdig 3.6.3 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
+With Sysdig 3.6.4 install, ElasticSearch(ES) runs `privileged: false` by default. In most cases this should work automatically.
 
 There are some cases where ElasticSearch will fail with an error like below
 
@@ -47,7 +47,7 @@ The default certificates used by ES version 6.8.6.5 has an expiry of 30 days.
 This causes ES cluster to fail after the expiry.
 The workaround is to restart ES pods to renew certs which will extend the validity.
 
-3.6.3-1 Installer patch version extends ES(6.8.6.7) certificate validity to 2 years.
+3.6.4-1 Installer patch version extends ES(6.8.6.7) certificate validity to 2 years.
 
 #### Full Upgrade using Installer
 
@@ -57,7 +57,7 @@ The workaround is to restart ES pods to renew certs which will extend the validi
 
 > **Note**
 >
->This will only work ElasticSearch upgrade from version 3.6.3-1
+>This will only work ElasticSearch upgrade from version 3.6.4-1
 
 This command updates just the ES version without running a full Installer upgrade.
 
