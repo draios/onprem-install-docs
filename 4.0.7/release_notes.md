@@ -1,4 +1,4 @@
-Release 4.0.6 December 14, 2021
+Release 4.0.7 December 14, 2021
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,9 +6,9 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 4.0.6 has been tested and qualified against the following:
+Sysdig Platform version 4.0.7 has been tested and qualified against the following:
 
-Supported Upgrade From: 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5
+Supported Upgrade From: 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 4.0.6
 
 ### Supported Platforms
 
@@ -40,10 +40,10 @@ Qualified with agent release 11.3.0
 
 ### Installer binaries sha256sum
 
-Current version: 4.0.6-1
+Current version: 4.0.7-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| c670cdbc92290e777f5fe79f6f7df0ea5fdae630cbe108db48f7adb9ca470b00 | installer-darwin-amd64 |
-| ef316f288f939465d6c01235db52fea20baab543248b1997b484c25aec568aa1 | installer-linux-amd64 |
-| 90169c63ebf3878cd23db1e81e5743c68b6b0c966ee86fb88ca09ee6ec8d9317 | installer-windows-amd64.exe |
+|  | installer-darwin-amd64 |
+|  | installer-linux-amd64 |
+|  | installer-windows-amd64.exe |
