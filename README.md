@@ -43,6 +43,7 @@ In general, Sysdig tests and supports direct upgrade from **five releases** back
 | [4.0.2 (by request)](4.0.2)| | 3.6.2, 4.0.0, 4.0.1 | [4.0.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.2](4.0.2)
 | [4.0.1 (by request)](4.0.1)| | 3.6.2, 4.0.0 | [4.0.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.1](4.0.1)
 | [4.0.0 (by request)](4.0.0)| | 3.6.2 | [4.0.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.0](4.0.0)
+| [3.6.4 (by request)](3.6.4)| | 3.2.x, 3.5.x, and 3.6.0, 3.6.1, 3.6.2 or 3.6.3 if it was installed | [3.6.4](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.4](3.6.4)
 | [3.6.3 (by request)](3.6.3)| | 3.2.x, 3.5.x, and 3.6.0, 3.6.1, or 3.6.2 if it was installed | [3.6.3](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.3](3.6.3)
 | [3.6.2 (by request)](3.6.2)| | 3.2.x, 3.5.x, and 3.6.0 or 3.6.1 if it was installed | [3.6.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.2](3.6.2)
 | [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, and 3.6.0 if it was installed | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.1](3.6.1)
