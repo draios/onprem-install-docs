@@ -40,7 +40,7 @@ Qualified with agent release 11.4.1
 
 ### Installer binaries sha256sum
 
-Current version: 5.0.4
+Current version: 5.0.4-2
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
