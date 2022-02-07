@@ -1,6 +1,6 @@
 # Sysdig Onprem Install Documentation
 
-The Sysdig Platform is a highly available application for securing and monitoring cloud-native infrastructures. 
+The Sysdig Platform is a highly available application for securing and monitoring cloud-native infrastructures.
 
 ## Table of Contents
   * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
