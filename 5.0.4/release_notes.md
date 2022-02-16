@@ -32,7 +32,7 @@ Qualified with agent release 11.4.1
 | ElasticSearch              | 6.8.6 |
 | Cassandra                  | Fresh: 3.11.11 - Upgrade: 2.1.22.4 |
 | Postgres                   | 12.8 |
-| Anchore (image scanning)   | 0.9.1 |
+| Anchore (image scanning)   | 0.8.1.34 |
 | NATS Exporter              | 0.7.0 |
 | NATS Streaming             | 0.22.0 |
 | HA Proxy                   | 0.10 |
