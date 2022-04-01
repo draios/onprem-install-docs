@@ -13,10 +13,6 @@ Refer to the appropriate workflow, depending on your environment:
 
 ## Upgrade Notes
 
-### Kubernetes 1.22 not yet supported
-
-Version 5.0.4 is not yet supported on Kubernetes 1.22 due to breaking changes to the Ingress Controller. We expect to add support for 1.22 in the near future.
-
 ### OpenShift `HostAlreadyClaimed` Error in Routes when Prometheus ingestion is enabled (workaround provided)
 
 If Prometheus metric ingestion is enabled (`sysdig.beacon.platformMetricsEnabled` is `true`), an overlay is required to avoid an error in Routes which will prevent the `Collector` Route to be active and able to receive data from the agents.
