@@ -30,28 +30,16 @@ The Sysdig Platform is a highly available application for securing and monitorin
 
 ## Supported Migration Paths
 
-In general, Sysdig tests and supports direct upgrade from **five releases** back to the current version. Release-specific requirements are listed in the table below.
+In general, Sysdig tests and supports direct upgrade from **two releases** back to the current version.
 
-|Install version | Included Hotfixes | Supported Upgrade From | Notes | Baseline Documentation |
-|---|---|---|---|---|
-| [5.0.4 (by request)](5.0.4)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0, 5.0.1, 5.0.2, 5.0.3 | [5.0.4](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.4](5.0.4)
-| [5.0.3 (by request)](5.0.3)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0, 5.0.1, 5.0.2 | [5.0.3](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.3](5.0.3)
-| [5.0.2 (by request)](5.0.2)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0, 5.0.1 | [5.0.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.2](5.0.2)
-| [5.0.1 (by request)](5.0.1)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 5.0.0 | [5.0.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.1](5.0.1)
-| [5.0.0 (by request)](5.0.0)| | 4.0.0, 4.0.1, 4.0.2, 4.0.3 | [5.0.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [5.0.0](5.0.0)
-| [4.0.7 (by request)](4.0.7)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 4.0.6 | [4.0.7](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.7](4.0.7)
-| [4.0.6 (by request)](4.0.6)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5 | [4.0.6](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.6](4.0.6)
-| [4.0.5 (by request)](4.0.5)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4 | [4.0.5](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.5](4.0.5)
-| [4.0.4 (by request)](4.0.4)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2, 4.0.3 | [4.0.4](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.4](4.0.4)
-| [4.0.3 (by request)](4.0.3)| | 3.6.2, 4.0.0, 4.0.1, 4.0.2 | [4.0.3](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.3](4.0.3)
-| [4.0.2 (by request)](4.0.2)| | 3.6.2, 4.0.0, 4.0.1 | [4.0.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.2](4.0.2)
-| [4.0.1 (by request)](4.0.1)| | 3.6.2, 4.0.0 | [4.0.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.1](4.0.1)
-| [4.0.0 (by request)](4.0.0)| | 3.6.2 | [4.0.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [4.0.0](4.0.0)
-| [3.6.4 (by request)](3.6.4)| | 3.2.x, 3.5.x, and 3.6.0, 3.6.1, 3.6.2 or 3.6.3 if it was installed | [3.6.4](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.4](3.6.4)
-| [3.6.3 (by request)](3.6.3)| | 3.2.x, 3.5.x, and 3.6.0, 3.6.1, or 3.6.2 if it was installed | [3.6.3](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.3](3.6.3)
-| [3.6.2 (by request)](3.6.2)| | 3.2.x, 3.5.x, and 3.6.0 or 3.6.1 if it was installed | [3.6.2](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.2](3.6.2)
-| [3.6.1 (by request)](3.6.1)| | 3.2.x, 3.5.x, and 3.6.0 if it was installed | [3.6.1](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.1](3.6.1)
-| [3.6.0 (by request)](3.6.0)| | 3.2.x and 3.5.x | [3.6.0](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html) | [3.6.0](3.6.0)
+Beyond info at this repo, take a look to our [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/)
 
+
+|Install version | Supported Upgrade From | Latest Release |
+|---|---|---|
+| 5.1 (by request) | 4.0.X, 5.0.X, 5.1.X | [5.1.0](5.1.0) |
+| 5.0 (by request) | 4.0.X, 5.0.X | [5.0.4](5.0.4) |
+| 4.0 (by request) | 3.6.X, 4.0.X | [4.0.7](4.0.7) |
+| 3.6 (by request) | 3.2.X, 3.5.X, 3.6.X | [3.6.4](3.6.4) |
 
 See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
