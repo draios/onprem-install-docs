@@ -1,4 +1,4 @@
-Release 5.0.4 December 16, 2021
+Release 5.0.5 April, 2022
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,9 +6,9 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 5.0.4 has been tested and qualified against the following:
+Sysdig Platform version 5.0.5 has been tested and qualified against the following:
 
-Supported Upgrade From: 4.0.X, 5.0.0, 5.0.1, 5.0.2. 5.0.3
+Supported Upgrade From: 4.0.X, 5.0.X
 
 ### Supported Platforms
 
@@ -40,7 +40,7 @@ Qualified with agent release 11.4.1
 
 ### Installer binaries sha256sum
 
-Current version: 5.0.4-4
+Current version: 5.0.5-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|

@@ -15,7 +15,7 @@ Refer to the appropriate workflow, depending on your environment:
 
 ### Kubernetes 1.22 not yet supported
 
-Version 5.0.4 is not yet supported on Kubernetes 1.22 due to breaking changes to the Ingress Controller. We expect to add support for 1.22 in the near future.
+Version 5.0.5 is not yet supported on Kubernetes 1.22 due to breaking changes to the Ingress Controller. Version 5.1.X includes that support.
 
 ### OpenShift `HostAlreadyClaimed` Error in Routes when Prometheus ingestion is enabled (workaround provided)
 
