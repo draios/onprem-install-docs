@@ -359,6 +359,8 @@ There will also be a generated directory containing various Kubernetes configura
 
 - See [Examples](examples/README.md) of single-node, openshift... values.yaml
 
+- See [RKE/RKE2 Nginx Config](rke_rke2_nginx.md) for RKE and RKE2 installs using external Nginx Ingress Controllers
+
 - See [Agent Install](agent_install.md) for Installer agent install
 
 - See [Permissions](permissions.md) for running the Installer
