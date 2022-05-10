@@ -11,6 +11,7 @@
       * [Frequently Used Options](advanced.md)
       * [Configuration Parameters](configuration_parameters.md)
       * [Example values.yaml](examples/README.md)
+      * [RKE/RKE2 Nginx Config](rke_rke2_nginx.md)
       * [Agent Install](agent_install.md)
       * [Permissions](permissions.md)
       * [Upgrade notes](upgrade_notes.md)
