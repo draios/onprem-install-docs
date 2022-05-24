@@ -2,7 +2,7 @@
 
 ## Overview
 
-Version 5.1.1-1 has the Ingres Objects created if the `sysdig.ingressNetworking` is set for `external`. This will assume the customer is using their own Ingress Controller.  In this case the default Ingress controller is Nginx.  We will provide the steps to configure Ngonx Ingress controller to pass through the TCP traffic to the collector pod in the Sysdig backend.
+Starting version 5.1.1-1 has the Ingres Objects created if the `sysdig.ingressNetworking` is set for `external`. This will assume the customer is using their own Ingress Controller.  In this case the default Ingress controller is Nginx.  We will provide the steps to configure Ngonx Ingress controller to pass through the TCP traffic to the collector pod in the Sysdig backend.
 
 Some guidance from Sysdig Support may be warranted in highly customized installations. 
 
