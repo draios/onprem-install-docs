@@ -1,4 +1,4 @@
-Release 5.1.1 May, 2022
+Release 5.1.2 May, 2022
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -40,10 +40,10 @@ Qualified with agent release 11.4.1
 
 ### Installer binaries sha256sum
 
-Current version: 5.1.1-1
+Current version: 5.1.2-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| d9fc93dface65d894ced2c2039ce1f9e101b3cc799679715a6596f964e4cb939 | installer-darwin-amd64 |
-| 617bbdb013063bf3b16b867d3296516dcadffe28664f7d94215972575170af3c | installer-linux-amd64 |
-| 4b6b7818cf6a27947b957f792444ebea23b230d10d03a909f76d1358f9299bf8 | installer-windows-amd64.exe |
+| 5a55b6ef876f223b0085bba40460bffad8d6cb7166f7e9e156ebf2051061eceb | installer-darwin-amd64 |
+| bcd2d4cadcd4a16ddcfd950009db9a8d2e5b39ea942ba5952ddab4afdd2ad9ac | installer-linux-amd64 |
+| 1b9c7620bf467927a0675b8a6167764a9a97a14c999f05c9b356adf611cbd739 | installer-windows-amd64.exe |
