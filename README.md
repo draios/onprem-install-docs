@@ -38,7 +38,7 @@ Beyond info at this repo, take a look to our [Sysdig On-Premises Release Notes](
 |Install version | Supported Upgrade From | Latest Release |
 |---|---|---|
 | 5.1 (by request) | 4.0.X, 5.0.X, 5.1.X | [5.1.0](5.1.0) |
-| 5.0 (by request) | 4.0.X, 5.0.X | [5.0.4](5.0.4) |
+| 5.0 (by request) | 4.0.X, 5.0.X | [5.0.5](5.0.5) |
 | 4.0 (by request) | 3.6.X, 4.0.X | [4.0.7](4.0.7) |
 | 3.6 (by request) | 3.2.X, 3.5.X, 3.6.X | [3.6.4](3.6.4) |
 
