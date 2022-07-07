@@ -39,7 +39,7 @@ Beyond info at this repo, take a look to our [Sysdig On-Premises Release Notes](
 |---|---|---|
 | 5.1 (by request) | 4.0.X, 5.0.X, 5.1.X | [5.1.2](5.1.2) |
 | 5.0 (by request) | 4.0.X, 5.0.X | [5.0.5](5.0.5) |
-| 4.0 (by request) | 3.6.X, 4.0.X | [4.0.7](4.0.7) |
+| 4.0 (by request) | 3.6.X, 4.0.X | [4.0.8](4.0.8) |
 | 3.6 (by request) | 3.2.X, 3.5.X, 3.6.X | [3.6.4](3.6.4) |
 
 See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
