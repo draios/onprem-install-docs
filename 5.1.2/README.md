@@ -236,11 +236,11 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 1. Follow the Docker Log In to quay.io steps, above.
 2. Pull the image containing the self-extracting tar:
       ```bash
-      docker pull quay.io/sysdig/installer:5.0.4-1-uber
+      docker pull quay.io/sysdig/installer:5.1.2-2-uber
       ```
 3. Extract the tarball:
       ```bash
-      docker create --name uber_image quay.io/sysdig/installer:5.0.4-1-uber
+      docker create --name uber_image quay.io/sysdig/installer:5.1.2-2-uber
       docker cp uber_image:/sysdig_installer.tar.gz .
       docker rm uber_image
       ```
@@ -249,7 +249,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 #### On the Installation Machine:
 1. Copy the current version sysdig-chart/values.yaml to your working directory.
       ```bash
-      wget https://github.com/draios/onprem-install-docs/blob/main/5.0.4/values.yaml
+      wget https://github.com/draios/onprem-install-docs/blob/main/5.1.2/values.yaml
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
