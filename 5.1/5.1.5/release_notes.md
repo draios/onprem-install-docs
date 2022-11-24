@@ -1,4 +1,4 @@
-Release 5.1.4 Oct, 2022
+Release 5.1.5 Nov, 2022
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,7 +6,7 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 5.1.4 has been tested and qualified against the following:
+Sysdig Platform version 5.1.5 has been tested and qualified against the following:
 
 Supported Upgrade From: 4.0.X, 5.0.X
 
@@ -40,10 +40,10 @@ Qualified with agent release 11.4.1
 
 ### Installer binaries sha256sum
 
-Current version: 5.1.4-1
+Current version: 5.1.5-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-| 4c344b6e2fcdc4638861c08ae0512bc8e7cbfa425de43b8f61199863e8d5e771 | installer-darwin-amd64 |
-| c9d2fca0211231344cbbce1ae353151f565dcbcccede197e0422fa2d7aff83c4 | installer-linux-amd64 |
-| 1d57b49e8e6d6d1d772ba61b2dacd659924df3b911c75cbf652e6f151c829894 | installer-windows-amd64.exe |
+| 8aee1c7c34147a538754ede8109e594c020f9af726f4d3f288b2a96809614725 |  installer-darwin-amd64 |
+| e1339b7fb767c926956797989d66098434a8364d0163afdb8bd1832461a250ba |  installer-linux-amd64 |
+| 51d989ff138828eb2205fbe7bd4d8f0634965b63949e3a2502826c23744dc6ed |  installer-windows-amd64.exe |
