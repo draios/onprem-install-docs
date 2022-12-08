@@ -1,7 +1,12 @@
-Release 4.0.8 ~July, 2022~ update Dec, 2022
+Release 4.0.8 ~~July, 2022~~ Updated Dec, 2022
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+
+Patch Release updates in 4.0.8-2 (from 4.0.8-1)
+---
+1. Uber Image is updated with correct images
+2. Fixes NodeAffinity in migration jobs
 
 Upgrade Matrix
 ---
