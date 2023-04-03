@@ -14,10 +14,10 @@ Supported Upgrade From: Not yet supported
 
 | **Platform** | **Version** |
 |---|---|
-| Vanilla Kubernetes          | 1.18.20, 1.19.13, 1.20.9, 1.21.3, 1.22.8, 1.23.5, 1.24.10 |
-| OpenShift                   | 3.11, 4.9, 4.10, 4.11 |
-| GKE                         | 1.19.11-gke.1701 |
-| EKS                         | 1.20, 1.21, 1.22 |
+| Vanilla Kubernetes          | 1.21.14, 1.22.17, 1.23.17, 1.24.12, 1.25.8, 1.26.3 |
+| OpenShift                   | 4.10, 4.11, 4.12 |
+| GKE                         | v1.24.9-gke.3200 |
+| EKS                         | 1.22 |
 | Rancher                     | 2.5.7 |
 
 ### Sysdig Agent Version
@@ -28,14 +28,13 @@ Qualified with agent release 11.4.1
 
 | **Components** | **Kubernetes with Statefulsets** |
 |---|---|
-| Redis                      | 6.0.12 |
-| ElasticSearch              | 6.8.6 |
-| Cassandra                  | Fresh: 3.11.11 - Upgrade: 2.1.22.5 |
-| Postgres                   | 12.10 |
-| Anchore (image scanning)   | 0.8.1.32 |
-| NATS Exporter              | 0.9.2 |
-| NATS Streaming             | 0.22.0 |
-| HA Proxy                   | 0.13 (Old K8s versions: 0.10) |
+| Redis                      | 6.0.14 |
+| OpenSearch                 | 1.3.8 |
+| Cassandra                  | 3.11.14 |
+| Postgres                   | 12.13 |
+| Anchore (image scanning)   | 0.9.4 |
+| NATS Streaming             | 0.24.6 |
+| HA Proxy                   | 0.14.2 |
 
 
 ### Installer binaries sha256sum
