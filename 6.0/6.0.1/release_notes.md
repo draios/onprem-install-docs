@@ -1,4 +1,4 @@
-Release 5.1.8 Feb, 2023
+Release 6.0.1 March, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,7 +6,7 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 5.1.8 has been tested and qualified against the following:
+Sysdig Platform version 6.0.1 has been tested and qualified against the following:
 
 Supported Upgrade From: 4.0.X, 5.0.X
 
@@ -40,12 +40,12 @@ Qualified with agent release 11.4.1
 
 ### Installer binaries sha256sum
 
-Current version: 5.1.8-1
+Current version: 6.0.1-1
 
 | **sha256sum** | **Installer binary ** |
 |---|---|
-
-| 4052235598522bd0e1c0e28797ed5eb70850e60df6d6cd9e9ca179504d1766ab | installer-darwin-amd64 |
-| 36fdd12da7d1f4b814294e49824a3de4dd80f38332b97cf8882c8f0cbba4c05e | installer-linux-amd64 |
-| 3b552e92b3f3f29f23d262f9b621bd64ddf632a703f83e5679aa10f1a84a69d0 | installer-windows-amd64.exe |
-
+| b821a4809956e39784bd1198a894474477138f2fdbb183f4a6ea90c4302e12c6 | installer-darwin-amd64 |
+| b6d29140617d6ae517fc192fef84b70a8795daa59245ed5d970ae1ebe16d3415 | installer-darwin-arm64 |
+| 5140ff6345e915390ae325ef9c73a86368b1bf8b31535949e209f3a1dcd6d2a2 | installer-linux-amd64 |
+| d936794246c300655133544f131720d7d4e7c17106f132e6decb2b84ba790c4b | installer-linux-arm |
+| 9d3b8433a994eb0d02a2e8489e9acab7775041c07b51a3c13c9728932cc6102a | installer-linux-arm64 |
