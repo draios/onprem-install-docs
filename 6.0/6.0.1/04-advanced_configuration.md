@@ -19,13 +19,13 @@ Based on the `size` entered in the values.yaml file (small/medium/large), the In
 
 ### Parameters
 
-`storageClassProvisioner`: hostPath.<br />
-`sysdig.cassandra.hostPathNodes`: The number of nodes configured here needs to be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
-`medium` and 6 when configured `size` is large.<br />
-`elasticsearch.hostPathNodes`: The number of nodes configured here needs to be be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
-`medium` and 6 when configured `size` is large.<br />
-`sysdig.mysql.hostPathNodes`: When sysdig.mysqlHa is configured to true this has to be at least 3 nodes and when sysdig.mysqlHa is not configured it should be at least one node.<br />
-`sysdig.postgresql.hostPathNodes`: This can be ignored if Sysdig Secure is not licensed or used on this environment. If Secure is used, then the parameter should be set to 1, regardless of the environment size setting.<br />
+- `storageClassProvisioner`: hostPath.
+- `sysdig.cassandra.hostPathNodes`: The number of nodes configured here needs to be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
+- `medium` and 6 when configured `size` is large.
+- `elasticsearch.hostPathNodes`: The number of nodes configured here needs to be be at minimum 1 when configured `size` is `small`, 3 when configured `size` is
+- `medium` and 6 when configured `size` is large.
+- `sysdig.mysql.hostPathNodes`: When sysdig.mysqlHa is configured to true this has to be at least 3 nodes and when sysdig.mysqlHa is not configured it should be at least one node.
+- `sysdig.postgresql.hostPathNodes`: This can be ignored if Sysdig Secure is not licensed or used on this environment. If Secure is used, then the parameter should be set to 1, regardless of the environment size setting.
 
 ### Example
 
@@ -72,7 +72,7 @@ eksctl create cluster \
    --vpc-public-subnets=<subnet1,subnet2>
 ```
 
-### Additional config for installer
+### Additional installer configurations
 
 EKS uses aws-iam-authenticator to authorize kubectl commands.
 aws-iam-authenticator needs aws credentials mounted from **~/.aws** to the installer.
@@ -96,7 +96,7 @@ EKS=true bash sysdig_installer.tar.gz
 The above ensures the `~/.aws` directory is correctly mounted for the airgap
 installer container.
 
-### Exposing the sysdig endpoint
+### Exposing the Sysdig endpoint
 
 Get the external ip/endpoint for the ingress service.
 
@@ -112,7 +112,7 @@ Make sure that subnets have internet gateway configured and has enough ips.
 
 ## Airgapped installations
 
-### Method for automatically updating the feeds database in airgapped environments
+### Updating the feeds database in airgapped environments
 
 This is a procedure that can be used to automatically update the feeds database:
 
