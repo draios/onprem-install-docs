@@ -42,9 +42,8 @@ Qualified with agent release 11.4.1
 
 Current version: 5.1.9-1
 
-| **sha256sum** | **Installer binary ** |
+| **sha256sum** | **Installer binary** |
 |---|---|
-
 | 055348b177e6597ef43d50599c2ba8238c0949a66660af55d0e7ddaa2e1846bc | installer-darwin-amd64 |
 | 94805ade8c1bdc2c35e15b5eafe30babbf3fb8e06658be895f9f2f1717f9bcf2 | installer-linux-amd64 |
 | a41ffb1df8b379bb73a08561e1757d7029e7455007a7c95c478303f2f07f7396 | installer-windows-amd64.exe |
