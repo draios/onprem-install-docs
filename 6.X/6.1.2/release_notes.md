@@ -18,7 +18,6 @@ Supported Upgrade From: 5.0.X, 5.1.x, 6.0.x
 | OpenShift                   | 4.10, 4.11, 4.12 |
 | GKE                         | v1.24.9-gke.3200 |
 | EKS                         | 1.22 |
-| Rancher                     | 2.5.7 |
 
 ### Sysdig Agent Version
 
