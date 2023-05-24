@@ -41,7 +41,7 @@ Qualified with agent release 11.4.1
 
 Current version: 6.1.1-1
 
-| **sha256sum** | **Installer binary ** |
+| **sha256sum** | **Installer binary** |
 |---|---|
 | e9b013743ef15b21c086d123570ebe3af7e7508cf7be73f4a84ee628813c861e | installer-darwin-amd64 |
 | c34a5392b1418d06ddce6373f8ebae79f685edbc4cdb9ecb026d15feb178de49 | installer-darwin-arm64 |
