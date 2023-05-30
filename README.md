@@ -1,6 +1,6 @@
 # Sysdig Onprem Install Documentation
 
-The Sysdig Platform is a highly available application for securing and monitoring cloud-native infrastructures. 
+The Sysdig Platform is a highly available application for securing and monitoring cloud-native infrastructures.
 
 ## Table of Contents
   * [Oversight Services Now Offered for All Installs and Upgrades](#oversight-services-now-offered-for-all-installs-and-upgrades)
@@ -37,7 +37,7 @@ Beyond info at this repo, take a look to our [Sysdig On-Premises Release Notes](
 
 |Install version | Supported Upgrade From | Latest Release |
 |---|---|---|
-| 6.0 (by request) | (Upgrade not yet supported) | [6.0](6.0) |
+| 6.x (by request) | 4.0.X, 5.0.X, 5.1.X 6.X.X (to 6.1.1 and above) | [6.1.1](6.X/6.1.1) |
 | 5.1 (by request) | 4.0.X, 5.0.X, 5.1.X | [5.1](5.1) |
 | 5.0 (by request) | 4.0.X, 5.0.X | [5.0](5.0) |
 | 4.0 (by request) | 3.6.X, 4.0.X | [4.0](4.0) |
