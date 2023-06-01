@@ -1,4 +1,4 @@
-Release 6.1.2 May, 2023
+Release 6.2.0 Jun, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -6,7 +6,7 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 Upgrade Matrix
 ---
 
-Sysdig Platform version 6.1.2 has been tested and qualified against the following:
+Sysdig Platform version 6.2.0 has been tested and qualified against the following:
 
 Supported Upgrade From: 5.0.X, 5.1.x, 6.0.x
 
@@ -38,7 +38,7 @@ Qualified with agent release 11.4.1
 
 ### Checksum for Installer binaries
 
-Current version: 6.1.2-1
+Current version: 6.2.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
