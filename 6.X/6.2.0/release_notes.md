@@ -28,7 +28,7 @@ Qualified with agent release 11.4.1
 | **Components** | **Kubernetes with Statefulsets** |
 |---|---|
 | Redis                      | 6.2.7 |
-| OpenSearch                 | 1.3.8 |
+| OpenSearch                 | 1.3.9 |
 | Cassandra                  | 3.11.14 |
 | Postgres                   | 12.13 |
 | Anchore (image scanning)   | 0.9.4 |
