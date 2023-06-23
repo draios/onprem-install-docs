@@ -3,10 +3,10 @@ Release 6.2.1 May, 2023
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
+Note: 6.2.1 release introduces the new ScanningV2 engine, which still does not qualifies for air-gap environments.
+
 Upgrade Matrix
 ---
-
-Sysdig Platform version 6.2.1 has been tested and qualified against the following:
 
 Supported Upgrade From: 5.0.X, 5.1.x, 6.0.x, 6.1.x
 
