@@ -28,6 +28,16 @@ The Sysdig Platform is a highly available application for securing and monitorin
 >
 > If you are a new customer looking to explore Sysdig, please head over [here](https://sysdig.com/company/freetrial/) to sign up for a trial on our SaaS Platform. Alternatively, you can contact us [here](https://sysdig.com/company/contactus/).
 
+## K8s support matrix
+
+Sysdig platform is continuosly being validated at multiple K8s flavors including k0ps, Openshift4, EKS, GKE, AKS, IKS, ROKS or RKE2. You can find below the K8s version support matrix. If you might have a question about a custom flavor or K8s version, please just share it with your TAM.
+
+| Install version | Validated K8s versions |
+|---|---|
+| 5.0.X | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
+| 5.1.X | 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24 |
+| 6.X | 1.23, 1.24, 1.25, 1.16, 1.27 |
+
 ## Supported Migration Paths
 
 In general, Sysdig tests and supports direct upgrade from **two releases** back to the current version.
