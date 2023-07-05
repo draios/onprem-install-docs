@@ -15,9 +15,8 @@ Qualified with agent release 11.4.1
 |---|---|
 | Redis                      | 6.2.7 |
 | OpenSearch                 | 1.3.9 |
-| Cassandra                  | 3.11.14 |
+| Cassandra                  | 3.11.15 |
 | Postgres                   | 12.13 |
-| Anchore (image scanning)   | 0.9.4 |
 | NATS Streaming             | 0.24.6 |
 | HA Proxy                   | 0.14.2 |
 
