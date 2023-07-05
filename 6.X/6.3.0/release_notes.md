@@ -3,7 +3,7 @@ Release 6.3.0 Jul, 2023
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
-Note: 6.3.0 release introduces the new ScanningV2 engine, which still does not qualifies for air-gap environments.
+Note: For 6.3.0 release ScanningV2 engine still does not qualifies for air-gap environments.
 
 ### Sysdig Agent Version
 
