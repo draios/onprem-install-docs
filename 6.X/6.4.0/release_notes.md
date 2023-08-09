@@ -23,12 +23,12 @@ Qualified with agent release 12.15.0
 
 ### Checksum for Installer binaries
 
-Current version: 6.4.0-1
+Current version: 6.4.0-2
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 796097ec7a812779bd0897f3e9cba6935f2ac5cccd9b789cbd66048c68eafba2 | installer-darwin-amd64 |
-| ef2a10b9fa8d8598a6105d206e00b3c359f49bbd676e8a6415be9f4ed9f1fc5a | installer-darwin-arm64 |
-| 7746e552e7e7f3a971c5a46b3079bdf28d03febcc8defe6ff0e6f7180656bbbc | installer-linux-amd64  |
-| d3f67f950efc48d19c43508a221c9b96a199f3b02ab640008cca8564dd0c4a7d | installer-linux-arm    |
-| d95ddfa5b4a1b5582637a4724a3c65bcacfda83e8ddc2f223a9878c191e71c77 | installer-linux-arm64  |
+| 4a0dd1052d63fda1d3b584679282b4cd27aacf5661ebd1648194d4c2ec9ed7ea | installer-darwin-amd64 |
+| 8592926a3a176f1725d06dffa5ea334fc645f43207863a4e4701dd48ca590a94 | installer-darwin-arm64 |
+| 6c302b826e1662ef85c85b254600417b8c06f8551373dcfefe932d6ea341c1d0 | installer-linux-amd64 |
+| fdb04a1077c14f6ead24c079b6d0ae1f4c7f7c7b901c63a4c1f60d080838edbb | installer-linux-arm |
+| 2f19969259e1219eaa0ea3c6ba79600a01ed5a8177c79c1fffc72054031ae77a | installer-linux-arm64 |
