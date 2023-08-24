@@ -1,9 +1,9 @@
-Release 6.4.0 Aug, 2023
+Release 6.4.1 Aug, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
-Note: For 6.4.0 release ScanningV2 engine still does not qualifies for air-gap environments.
+Note: For 6.4.1 release ScanningV2 engine still does not qualifies for air-gap environments.
 
 ### Sysdig Agent Version
 
@@ -23,7 +23,7 @@ Qualified with agent release 12.15.0
 
 ### Checksum for Installer binaries
 
-Current version: 6.4.0-2
+Current version: 6.4.1-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
