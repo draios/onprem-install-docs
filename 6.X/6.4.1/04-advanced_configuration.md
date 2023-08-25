@@ -115,7 +115,7 @@ installer container.
 
 ### Exposing the Sysdig endpoint
 
-Get the external ip/endpoint for the ingress service.
+Get the external IP/endpoint for the ingress service.
 
 ```bash
 kubectl -n <namespace>  get service haproxy-ingress-service
