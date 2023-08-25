@@ -125,7 +125,7 @@ In route53, create an A record with the DNS name pointing to the external IP/end
 
 ### Gotchas
 
-Make sure that subnets have internet gateway configured and has enough ips.
+Make sure that subnets have an internet gateway configured and have a sufficient number of IP addresses.
 
 ## Airgapped installations
 
