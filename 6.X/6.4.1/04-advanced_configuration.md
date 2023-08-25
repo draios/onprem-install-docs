@@ -131,7 +131,7 @@ Make sure that subnets have an internet gateway configured and have a sufficient
 
 ### Updating the feeds database in airgapped environments
 
-This is a procedure that can be used to automatically update the feeds database:
+Use this procedure to automatically update the feeds database:
 
 1. Download the image file, `quay.io/sysdig/vuln-feed-database-12:latest`, from the Sysdig registry to the jumpbox server, and save it locally.
 2. move the file from the jumpbox server to the customer airgapped environment (optional)
