@@ -12,7 +12,7 @@
 `--skip-namespace`
 
 - installer does not deploy the `namespace.yaml` manifest.
-  It expects the Namespace to exist and to match the value in `values.yaml`
+  It expects an existing namespace that matches the value given in `values.yaml`. The installer will fail if there is a mismatch. 
   There is no validation, in case of mismatch the installer will fail
 
 `--skip-pull-secret`
