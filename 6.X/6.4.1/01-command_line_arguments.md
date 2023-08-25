@@ -39,7 +39,7 @@ sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 - One implication of this is that unless the `node-to-labels` SA is added,
   rack awareness will not work neither in Cassandra nor in ES (to be verified)
   Another implication is that if SA(s) are missing, the user will have to `describe`
-  the STS because Pods will not start at all:
+  the Statefullset because Pods will not start at all:
 
 ```
 Events:
@@ -59,8 +59,8 @@ Events:
 `--zookeeper-workloadname <string value>`
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
-The default value is `zookeeper`, and this argument must be used when the actual name of the STS in the cluster differs.
-actual name of the STS in the cluster differs
+The default value is `zookeeper`, and this argument must be used when the actual name of the Statefullset in the cluster differs.
+actual name of the Statefullset in the cluster differs
 
 `--kafka-workloadname <value>`
 
