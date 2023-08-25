@@ -3,7 +3,7 @@
 <!-- Title: Command Line Arguments -->
 <!-- Layout: plain -->
 
-# Command line arguments explained
+# Command line arguments
 
 <br />
 
