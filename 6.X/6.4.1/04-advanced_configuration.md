@@ -121,7 +121,7 @@ Get the external IP/endpoint for the ingress service.
 kubectl -n <namespace>  get service haproxy-ingress-service
 ```
 
-In route53 create an A record with the dns name pointing to external ip/endpoint.
+In route53, create an A record with the DNS name pointing to the external IP/endpoint.
 
 ### Gotchas
 
