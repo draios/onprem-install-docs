@@ -59,7 +59,7 @@ Events:
 `--zookeeper-workloadname <string value>`
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
-The default value is `zookeeper`, this argument must be used when the
+The default value is `zookeeper`, and this argument must be used when the actual name of the STS in the cluster differs.
 actual name of the STS in the cluster differs
 
 `--kafka-workloadname <value>`
