@@ -12,8 +12,7 @@
 `--skip-namespace`
 
 - installer does not deploy the `namespace.yaml` manifest.
-  It expects the Namespace to exist and to match the value in `values.yaml`
-  There is no validation, in case of mismatch the installer will fail
+  It expects the Namespace to exist and to match the value in `values.yaml`.
 
 `--skip-pull-secret`
 
@@ -60,7 +59,7 @@ Events:
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
 The default value is `zookeeper`, this argument must be used when the
-actual name of the STS in the cluster differs
+actual name of the Statefulset in the cluster differs.
 
 `--kafka-workloadname <value>`
 
