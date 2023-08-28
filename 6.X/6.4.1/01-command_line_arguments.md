@@ -3,7 +3,7 @@
 <!-- Title: Command Line Arguments -->
 <!-- Layout: plain -->
 
-# Command line arguments explained
+# Command line arguments
 
 <br />
 
@@ -12,7 +12,8 @@
 `--skip-namespace`
 
 - installer does not deploy the `namespace.yaml` manifest.
-  It expects the Namespace to exist and to match the value in `values.yaml`.
+  It expects an existing namespace that matches the value given in `values.yaml`. The installer will fail if there is a mismatch. 
+  There is no validation, in case of mismatch the installer will fail
 
 `--skip-pull-secret`
 
@@ -25,7 +26,7 @@
 
 `--skip-serviceaccount`
 
-- The user must provide SAs with the exact same name expected:
+- The user must provide the Service Account (SA) with the expected name:
 
 ```
 sysdig-serviceaccount.yaml:  name: sysdig
@@ -38,7 +39,7 @@ sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 - One implication of this is that unless the `node-to-labels` SA is added,
   rack awareness will not work neither in Cassandra nor in ES (to be verified)
   Another implication is that if SA(s) are missing, the user will have to `describe`
-  the STS because Pods will not start at all:
+  the Statefullset because Pods will not start at all:
 
 ```
 Events:
@@ -58,8 +59,8 @@ Events:
 `--zookeeper-workloadname <string value>`
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
-The default value is `zookeeper`, this argument must be used when the
-actual name of the Statefulset in the cluster differs.
+The default value is `zookeeper`, and this argument must be used when the actual name of the Statefullset in the cluster differs.
+actual name of the Statefullset in the cluster differs
 
 `--kafka-workloadname <value>`
 
