@@ -44,7 +44,6 @@ Current version: 5.1.10-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 055348b177e6597ef43d50599c2ba8238c0949a66660af55d0e7ddaa2e1846bc | installer-darwin-amd64 |
-| 94805ade8c1bdc2c35e15b5eafe30babbf3fb8e06658be895f9f2f1717f9bcf2 | installer-linux-amd64 |
-| a41ffb1df8b379bb73a08561e1757d7029e7455007a7c95c478303f2f07f7396 | installer-windows-amd64.exe |
-
+| 238f7a95dce2e64ec4154b13f3a7c05d387fe04cd45dfea366889eed7b82c030 | installer-darwin-amd64 |
+| 27c69d54cc382cade91ad83f402a22a3135b4fc29a951a04ef513721a628aba8 | installer-linux-amd64 |
+| 72cb2c6efb2755bf706994ef9db17ce32fed4b3e29c517a5a994916befea84fe | installer-windows-amd64.exe |
