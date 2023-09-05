@@ -26,7 +26,7 @@ to be at least 3 nodes and when sysdig.mysqlHa is not configured it should be
 at least one node.
 - `sysdig.postgresql.hostPathNodes`: This can be ignored if Sysdig Secure is not
 licensed or used in this environment. If Secure is used, then the parameter
-should be set to 1, regardless of the environment size setting.<br>
+should be set to 1, regardless of the environment size setting.
 
 ### Example
 
