@@ -17,7 +17,7 @@
 
 # Installation Overview
 
-To install, you will download the installer binary and a values.yaml file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
+To install, you will download the installer binary and a `values.yaml` file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
 
 You can perform a quick install if your environment has access to the internet, or a partial or full airgapped installation, as needed. Each is described below.
 
@@ -55,11 +55,11 @@ If you are installing the Sysdig Platform for the first time, ignore the *ForUpg
 
 ### Storage Requirements
 
-You may use dynamic or static storage on a variety of platforms to store the Sysdig platform components (stateful sets). Different configuration parameters and values are used during the install, depending on which scenario you have.
+You may use dynamic or static storage on a variety of platforms to store the Sysdig platform components (stateful sets). Different configuration parameters and values are used during the installation, depending on which scenario you have.
 
 **Use Case 1: Default, undefined (AWS/GKE)**
 
-If you will use dynamic storage on AWS or GKE and haven't configured any storage class there yet, then the Quick Install streamlines the process for you.
+If you use dynamic storage on AWS or GKE and haven't configured any storage class there yet, then the Quick Install streamlines the process for you.
 
 -   `storageclassProvision``er:` Enter `aws` or `gke`. The installer will create the appropriate storage class and then use it for all the Sysdig platform stateful sets.
 
@@ -69,7 +69,7 @@ If you will use dynamic storage on AWS or GKE and haven't configured any storage
 
 It is also possible that you are using dynamic storage but have already created storage classes there. This dynamic storage could be AWS, GKE, or any other functioning dynamic storage you use.  In this case, you would enter: 
 
--   `storageclassProvisioner`: Leave empty; anything put here would be ignored.
+-   `storageclassProvisioner`: Leave empty; anything put here will be ignored.
 
 -   `storageclass``Name`: Provide the name of the pre-configured storage class you want to use. The installer will use this storage class for all the Sysdig platform stateful sets.
 
@@ -81,7 +81,7 @@ In cases where dynamic storage is not available, you can use static storage for 
 
 -   See [Advanced Configurations](advanced.md#use-hostpath-for-static-storage-of-sysdig-components) for details.
 
-# Quickstart Install
+# Quick Installation
 
 This install assumes the Kubernetes cluster has network access to pull images from quay.io.
 
@@ -89,8 +89,8 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
 2.  **For Upgrades Only:** Preparing values.yaml
 
-    -  Option1: Use the previous values.yaml used to install your current version (recommended)
-    -  Option2: If you dont have a copy of previous values.yaml, use Installer's import function:
+    -  Option1: Use the previous `values.yaml` used to install your current version (recommended)
+    -  Option2: If you don't have a copy of previous `values.yaml`, use Installer's import function:
           ```bash
          ./installer-image import -n <namespace> --certs-directory certs -o values.yaml
           ```
@@ -113,13 +113,13 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     -   [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
 
-    -   [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking): The networking construct used to expose the Sysdig API and collector.Options are:
+    -   [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking): The networking construct used to expose the Sysdig API and collector. Options are:
 
-        -   **hostnetwork:** sets the hostnetworking in the ingress daemonset and opens host ports for api and collector. This does not create a Kubernetes service.
+        -   **hostnetwork:** sets the `hostnetworking` in the ingress daemonset and opens host ports for API and collector. This does not create a Kubernetes service.
 
-        -   **loadbalancer:** creates a service of type loadbalancer and expects that your Kubernetes cluster can provision a load balancer with your cloud provider.
+        -   **loadbalancer:** creates a service of type `loadbalancer` and expects that your Kubernetes cluster can provision a load balancer with your cloud provider.
 
-        -   **nodeport:** creates a service of type nodeport.The node ports can be customized with:
+        -   **nodeport:** creates a service of type `nodeport`.The node ports can be customized with:
 
             -   `sysdig.ingressNetworkingInsecureApiNodePort`
 
@@ -145,7 +145,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
         ```bash
         ./installer diff
         ```
-        This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
+        This will generate the differences between the installed environment and the upgraded version. The changes will be displayed in your terminal.
         If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
 5. Run the installer:
     ```bash
@@ -162,7 +162,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 # Airgapped Installation Options
 
 The Installer can be used to install in airgapped environments, either with
-a multi-homed installation machine that has internet access, or in an
+a multi-homed installation machine that has internet access, or is in an
 environment with no internet access.
 
 ## Airgapped with Multi-Homed Installation Machine
@@ -220,7 +220,7 @@ the installation machine.
 
 ### Docker Log In to quay.io
 
-Retrieve Quay username and password from Quay pull secret and login using credentials.
+Retrieve Quay username and password from Quay pull secret and log in using the credentials.
 
 ```bash
 AUTH=$(echo REPLACE_WITH_quaypullsecret | base64 --decode | jq -r '.auths."quay.io".auth'| base64 --decode)
@@ -247,13 +247,13 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 4. Copy the tarball to the installation machine.
 
 #### On the Installation Machine:
-1. Copy the current version sysdig-chart/values.yaml to your working directory.
+1. Copy the current version `sysdig-chart/values.yaml` to your working directory.
       ```bash
       wget https://github.com/draios/onprem-install-docs/blob/main/6.X/6.4.1/examples/values.yaml
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
-        defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
+        defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium, and
         large
       - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
         your Sysdig purchase confirmation mail
@@ -267,9 +267,9 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
         The networking construct used to expose the Sysdig API and collector. Options
         are:
-        - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
-          host ports for api and collector. This does not create a Kubernetes service.
-        - loadbalancer: creates a service of type loadbalancer and expects that
+        - hostnetwork: sets the `hostnetworking` in the ingress daemonset and opens
+          host ports for API and collector. This does not create a Kubernetes service.
+        - loadbalancer: creates a service of type `loadbalancer` and expects that
           your Kubernetes cluster can provision a load balancer with your cloud provider.
         - nodeport: creates a service of type nodeport. The node ports can be
           customized with:
@@ -284,7 +284,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
         installations where the Kubernetes cluster can not pull images directly from
         Quay.
       - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
-          This defines custom repository prefix for airgapped_registry.
+          This defines the custom repository prefix for airgapped_registry.
           Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
       - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
         The password for the configured airgapped_registry_username. Ignore this
@@ -307,7 +307,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
     ./installer diff
     ```
 
-    This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
+    This will generate the differences between the installed environment and the upgraded version. The changes will be displayed in your terminal.
 
     If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
 
@@ -315,8 +315,8 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       ```bash
       ./installer deploy
       ```
-7. On successful run of Installer towards the end of your terminal you should
-  see the below:
+7. On a successful run of Installer towards the end of your terminal you should
+  see the below message:
 
       ```
       All Pods Ready.....Continuing
@@ -345,7 +345,7 @@ A successful installation should display output in the terminal such as:
     username: "configured-username@awesome-domain.com"
     password: "awesome-password"
 
-There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
+There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by the installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
 # Additional Installer Resources
 
