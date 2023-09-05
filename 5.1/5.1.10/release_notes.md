@@ -1,7 +1,7 @@
 Release 5.1.10 September, 2023
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+For additional information, review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
 
 Upgrade Matrix
 ---
