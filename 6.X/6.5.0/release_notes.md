@@ -5,7 +5,7 @@ Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on
 
 ## Use of MinIO in the Sysdig OnPrem
 
-Starting from release 6.5.0 we have added [MinIO](https://min.io/) to our stack, specifically using the OpenSource MinIO Docker image as upstream for one of our services.
+Starting from release 6.5.0 we have added [MinIO](https://github.com/minio/minio) to our stack, specifically importing the MinIO binary from upstream for one of our services.
 
 ### Sysdig Agent Version
 
