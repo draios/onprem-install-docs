@@ -1,4 +1,4 @@
-# Advanced configuration
+# Advanced Configuration
 
 ## Use hostPath for Static Storage of Sysdig Components
 
