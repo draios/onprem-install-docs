@@ -38,7 +38,7 @@ Qualified with agent release 11.4.1
 | HA Proxy                   | 0.13 (Old K8s versions: 0.10) |
 
 
-### Installer binaries sha256sum
+### Sha256sum for the Installer Binaries 
 
 Current version: 5.1.10-1
 
