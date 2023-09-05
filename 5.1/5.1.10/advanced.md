@@ -62,7 +62,7 @@ sysdig:
 
 ### Create a Cluster
 
-Please do not use `eksctl` 0.10.0 and 0.10.1 as those are known to be defective. For more information, see kubernetes/kubernetes#73906 (comment)
+Please do not use `eksctl` 0.10.0 and 0.10.1 as those are known to be defective. For more information, see kubernetes/kubernetes#73906.
 ```bash
 eksctl create cluster \
    --name=eks-installer1 \
