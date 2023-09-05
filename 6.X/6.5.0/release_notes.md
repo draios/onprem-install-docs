@@ -3,6 +3,9 @@ Release 6.5.0 Sept, 2023
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
+## Use of MinIO in the Sysdig OnPrem
+
+Starting from release 6.5.0 we have added [MinIO](https://min.io/) to our stack, specifically using the OpenSource MinIO Docker image as upstream for one of our services.
 
 ### Sysdig Agent Version
 
