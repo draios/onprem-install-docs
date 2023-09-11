@@ -1,4 +1,4 @@
-Release 5.1.10 September, 2023
+Release 5.1.11 September, 2023
 ===
 
 For additional information, review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
@@ -6,7 +6,7 @@ For additional information, review the full feature [release notes](https://docs
 Upgrade Matrix
 ---
 
-Sysdig Platform version 5.1.10 has been tested and qualified against the following:
+Sysdig Platform version 5.1.11 has been tested and qualified against the following:
 
 Supported Upgrade From: 4.0.X, 5.0.X
 
@@ -40,7 +40,7 @@ Qualified with agent release 11.4.1
 
 ### Sha256sum for the Installer Binaries 
 
-Current version: 5.1.10-1
+Current version: 5.1.11-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
