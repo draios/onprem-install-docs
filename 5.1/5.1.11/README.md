@@ -240,7 +240,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       ```
 3. Extract the tarball:
       ```bash
-      docker create --name uber_image quay.io/sysdig/installer:5.1.10-1-uber
+      docker create --name uber_image quay.io/sysdig/installer:5.1.11-1-uber
       docker cp uber_image:/sysdig_installer.tar.gz .
       docker rm uber_image
       ```
@@ -250,7 +250,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 
 1. Copy the current version sysdig-chart/values.yaml to your working directory.
       ```bash
-      wget https://github.com/draios/onprem-install-docs/blob/main/5.1/5.1.10/examples/values.yaml
+      wget https://github.com/draios/onprem-install-docs/blob/main/5.1/5.1.11/examples/values.yaml
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
