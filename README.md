@@ -72,6 +72,7 @@ See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-
 
 ### Version 5.x
 
+- [5.1.11 Hotfix Release, September 2023](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#5111-hotfix-release-september-2023)
 - [5.1.10 Hotfix Release, September 2023](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#5110-hotfix-release-september-2023)
 - [5.1.9 Hotfix Release, April 2023](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#519-hotfix-release-april-2023)
 - [5.1.8 Hotfix Release, February 2023](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#518-hotfix-release-february-2023)
