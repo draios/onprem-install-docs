@@ -1,4 +1,4 @@
-# RBAC for Installer (work in progress) v0.0.0a
+# RBAC for Installer v0.0.0a ((work in progress) 
 
 - RBAC resources required to run the `installer`
 - Each of the three directories contains YAMLs for a specific case:
