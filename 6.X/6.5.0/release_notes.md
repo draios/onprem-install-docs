@@ -13,18 +13,18 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 ### Sysdig Agent Version
 
-Qualified with agent release 
+Qualified with agent release
 
 ### Supported Backend Components
 
 | **Components** | **Kubernetes with Statefulsets** |
 |---|---|
-| Redis                      | 6.2.7 |
+| Redis                      | 6.2.9 |
 | OpenSearch                 | 1.3.9 |
-| Cassandra                  | 3.11.15 |
+| Cassandra                  | 3.11.16 |
 | Postgres                   | 12.13 |
 | NATS Streaming             | 0.24.6 |
-| HA Proxy                   | 0.14.2 |
+| HA Proxy                   | 0.14.3 |
 
 
 ### Checksum for Installer binaries
