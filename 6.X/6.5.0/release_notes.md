@@ -29,12 +29,12 @@ Qualified with agent release
 
 ### Checksum for Installer binaries
 
-Current version: 6.
+Current version: 6.5.0
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-|  | installer-darwin-amd64 |
-|  | installer-darwin-arm64 |
-|  | installer-linux-amd64 |
-|  | installer-linux-arm |
-|  | installer-linux-arm64 |
+| a5b0d01a2a66b71e2713235932a7b65048fa509c92141e9046b782521d24c48b | installer-darwin-amd64 |
+| 589217125ce4721ab5e0105513176e1460f581fda73100b73eadc896af9cbb47 | installer-darwin-arm64 |
+| c9858a0d84b1cd57f7b33158b60fc00f404e6b6f63d31ffb2c316d18036f5da2 | installer-linux-amd64 |
+| 0363266d1e970dd56c92b7c395914fb0b444aaddfc3ada67ab5e7a2ba5cc3ea1 | installer-linux-arm |
+| 4c2047e5d19809c29d747b4d0022be4e3678207cf4a58aca5c6300b1625f167f | installer-linux-arm64 |
