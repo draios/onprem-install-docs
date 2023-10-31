@@ -17,7 +17,7 @@
 
 # Installation Overview
 
-To install, you will download the installer binary and a values.yaml file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
+To install, you will download the installer binary and a `values.yaml` file, provide a few basic parameters, and launch the Installer. In a normal installation, the rest is automatically configured and deployed.
 
 You can perform a quick install if your environment has access to the internet, or a partial or full airgapped installation, as needed. Each is described below.
 
@@ -55,11 +55,11 @@ If you are installing the Sysdig Platform for the first time, ignore the *ForUpg
 
 ### Storage Requirements
 
-You may use dynamic or static storage on a variety of platforms to store the Sysdig platform components (stateful sets). Different configuration parameters and values are used during the install, depending on which scenario you have.
+You may use dynamic or static storage on a variety of platforms to store the Sysdig platform components (stateful sets). Different configuration parameters and values are used during the installation, depending on which scenario you have.
 
 **Use Case 1: Default, undefined (AWS/GKE)**
 
-If you will use dynamic storage on AWS or GKE and haven't configured any storage class there yet, then the Quick Install streamlines the process for you.
+If you use dynamic storage on AWS or GKE and haven't configured any storage class there yet, then the Quick Install streamlines the process for you.
 
 -   `storageclassProvision``er:` Enter `aws` or `gke`. The installer will create the appropriate storage class and then use it for all the Sysdig platform stateful sets.
 
@@ -69,7 +69,7 @@ If you will use dynamic storage on AWS or GKE and haven't configured any storage
 
 It is also possible that you are using dynamic storage but have already created storage classes there. This dynamic storage could be AWS, GKE, or any other functioning dynamic storage you use.  In this case, you would enter: 
 
--   `storageclassProvisioner`: Leave empty; anything put here would be ignored.
+-   `storageclassProvisioner`: Leave empty; anything put here will be ignored.
 
 -   `storageclass``Name`: Provide the name of the pre-configured storage class you want to use. The installer will use this storage class for all the Sysdig platform stateful sets.
 
@@ -90,7 +90,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 2.  **For Upgrades Only:** Preparing values.yaml
 
     -  Option1: Use the previous values.yaml used to install your current version (recommended)
-    -  Option2: If you dont have a copy of previous values.yaml, use Installer's import function:
+    -  Option2: If you don't have a copy of previous values.yaml, use Installer's import function:
           ```bash
          ./installer-image import -n <namespace> --certs-directory certs -o values.yaml
           ```
@@ -121,11 +121,11 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
         -   **nodeport:** creates a service of type nodeport.The node ports can be customized with:
 
-            -   `sysdig.ingressNetworkingInsecureApiNodePort`
+            - `sysdig.ingressNetworkingInsecureApiNodePort`
 
-            -   `sysdig.ingressNetworkingApiNodePort`
+            - `sysdig.ingressNetworkingApiNodePort`
 
-            -    `sysdig.ingressNetworkingCollectorNodePort`
+            - `sysdig.ingressNetworkingCollectorNodePort`
 
             When not configured, `sysdig.ingressNetworking` defaults to `hostnetwork`.
 
@@ -162,7 +162,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 # Airgapped Installation Options
 
 The Installer can be used to install in airgapped environments, either with
-a multi-homed installation machine that has internet access, or in an
+a multi-homed installation machine that has internet access, or is in an
 environment with no internet access.
 
 ## Airgapped with Multi-Homed Installation Machine
@@ -174,7 +174,7 @@ The Prerequisites and workflow are the same as in the Quickstart Install, with
 the following exceptions:
 
 - In step 2, add the airgap registry information.
-- After step 3, make the installer push sysdig images to the airgapped registry by running:
+- After step 3, make the installer push Sysdig images to the airgapped registry by running:
     ```bash
     ./installer airgap
     ```
