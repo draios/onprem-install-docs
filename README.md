@@ -18,7 +18,7 @@ The Sysdig Platform is a highly available application for securing and monitorin
 
 -   Review and provide recommendations for backing up your Sysdig data
 
--   Work with you to ensure our teams are ready to assist you during the install and upgrade process
+-   Work with you to ensure our teams are ready to assist you during the installation and upgrade process
 
 -   Provide the software for the install
 
@@ -30,7 +30,7 @@ The Sysdig Platform is a highly available application for securing and monitorin
 
 ## K8s support matrix
 
-Sysdig platform is continuosly being validated at multiple K8s flavors including k0ps, Openshift4, EKS, GKE, AKS, IKS, ROKS or RKE2. You can find below the K8s version support matrix. If you might have a question about a custom flavor or K8s version, please just share it with your TAM.
+Sysdig platform is continuously being validated at multiple K8s flavors including k0ps, Openshift4, EKS, GKE, AKS, IKS, ROKS or RKE2. You can find below the K8s version support matrix. If you have a question about a custom flavor or K8s version, please just share it with your TAM.
 
 | Install version | Validated K8s versions |
 |---|---|
@@ -42,9 +42,9 @@ Sysdig platform is continuosly being validated at multiple K8s flavors including
 
 ## Supported Migration Paths
 
-In general, Sysdig tests and supports direct upgrade from **two releases** back to the current version.
+In general, Sysdig tests and supports direct upgrades from **two releases** back to the current version.
 
-Beyond info at this repo, take a look to our [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/)
+Beyond info at this repo, take a look at our [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/)
 
 
 |Install version | Supported Upgrade From | Latest Release |
