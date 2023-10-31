@@ -1,4 +1,4 @@
-Release 6.5.1 Nov, 2023
+Release 6.5.1 Oct, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
