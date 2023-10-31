@@ -240,7 +240,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       ```
 3. Extract the tarball:
       ```bash
-      docker create --name uber_image quay.io/sysdig/installer:6.5.0-1-uber
+      docker create --name uber_image quay.io/sysdig/installer:6.5.1-1-uber
       docker cp uber_image:/sysdig_installer.tar.gz .
       docker rm uber_image
       ```
