@@ -44,11 +44,11 @@ Edit the following values:
 
 - [`scripts`](docs/configuration_parameters.md#scripts): Set this to
   `generate diff`. This setting will generate the differences between the
-  installed environment and the upgrade version. The changes will be displayed
+  installed environment and the upgraded version. The changes will be displayed
   in your terminal.
 - [`size`](docs/configuration_parameters.md#size): Specifies the size of the
   cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are:
-  small, medium and large.
+  small, medium, and large.
 - [`quaypullsecret`](docs/configuration_parameters.md#quaypullsecret):
   quay.io credentials provided with your Sysdig purchase confirmation mail.
 - [`storageClassProvisioner`](docs/configuration_parameters.md#storageClassProvisioner):
@@ -65,21 +65,21 @@ Edit the following values:
   (OpenShift installs only) Domain name the Sysdig collector will be served on.
   When not configured it defaults to whatever is configured for sysdig.dnsName.
 - [`sysdig.ingressNetworking`](docs/configuration_parameters.md#sysdigingressnetworking):
-  The networking construct used to expose the Sysdig API and collector. Options
+  The networking construct that exposes the Sysdig API and collector. Options
   are:
 
-  - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
-    host ports for api and collector. This does not create a Kubernetes service.
+  - hostnetwork: sets the host networking in the ingress daemonset and opens
+    host ports for API and collector. This does not create a Kubernetes service.
   - loadbalancer: creates a service of type loadbalancer and expects that
     your Kubernetes cluster can provision a load balancer with your cloud provider.
   - nodeport: creates a service of type nodeport. The node ports can be
     customized with:
 
-    - sysdig.ingressNetworkingInsecureApiNodePort
-    - sysdig.ingressNetworkingApiNodePort
-    - sysdig.ingressNetworkingCollectorNodePort
+    - `sysdig.ingressNetworkingInsecureApiNodePort`
+    - `sysdig.ingressNetworkingApiNodePort`
+    - `sysdig.ingressNetworkingCollectorNodePort`
 
-**NOTE**: If doing an airgapped install (see Airgapped Installation Options), you
+**NOTE**: If you are performing an airgapped install (see Airgapped Installation Options), you
 would also edit the following values:
 
 - [`airgapped_registry_name`](docs/configuration_parameters.md#airgapped_registry_name):
@@ -97,9 +97,9 @@ would also edit the following values:
 
 ### Step 3
 
-Run the Installer (if you are in airgapped environment make sure you follow
-instructions from installation on how to get the images to your airgapped
-registry)
+Run the Installer.
+
+If you are in an airgapped environment, make sure you follow instructions from installation on how to get the images to your airgapped registry.
 
 ```bash
 ./installer diff
@@ -118,7 +118,7 @@ If you are fine with the differences displayed, then run:
 If you find differences that you want to preserve you should
 look in the [Configuration Parameters](docs/configuration_parameters.md)
 documentation for the configuration parameter that matches the difference
-you intend preserving and update your values.yaml accordingly then repeat
+you intend to preserve and update your `values.yaml` accordingly then repeat
 step 3 until you are fine with the differences. Then set scripts to deploy
 and run for the final time.
 
