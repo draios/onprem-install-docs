@@ -9265,9 +9265,6 @@ sysdig:
 
 **Required**: `false`<br />
 **Description**: Whether to enable metadata-service or not
-**Do not modify this unless you
-know what you are doing as modifying it could have unintended
-consequences**<br />
 **Options**:`true|false`<br />
 **Default**: `true`<br />
 **Example**:
@@ -9282,9 +9279,6 @@ sysdig:
 
 **Required**: `false`<br />
 **Description**: Whether to enable metadata-service-operator or not, this controls the HA capabilities of the Metadata Service but it requires several k8s permissions in the cluster.
-**Do not modify this unless you
-know what you are doing as modifying it could have unintended
-consequences**<br />
 **Options**:`true|false`<br />
 **Default**: `true`<br />
 **Example**:
@@ -9480,9 +9474,6 @@ sysdig:
 
 **Required**: `false`<br />
 **Description**: Whether to enable helm-renderer or not
-**Do not modify this unless you
-know what you are doing as modifying it could have unintended
-consequences**<br />
 **Options**:`true|false`<br />
 **Default**: `true`<br />
 **Example**:

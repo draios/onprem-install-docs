@@ -70,14 +70,14 @@ hostPathCustomPaths:
   cassandra: /sysdig/cassandra
   elasticsearch: /sysdig/elasticsearch
   mysql: /sysdig/mysql
-  postgresql: /sysdig/postgresql
+  postgresql: /sysdig/postgresql    
 ```
 
 ## Installer on EKS
 
 ### Creating a cluster
 
-Please do not use eksctl 0.10.0 and 0.10.1 as those are known to be defective, as given in kubernetes/kubernetes#73906 (comment)
+Please do not use eksctl 0.10.0 and 0.10.1 as those are known to be buggy see: kubernetes/kubernetes#73906 (comment)
 
 ```bash
 eksctl create cluster \
@@ -115,17 +115,17 @@ installer container.
 
 ### Exposing the Sysdig endpoint
 
-Get the external IP/endpoint for the ingress service.
+Get the external ip/endpoint for the ingress service.
 
 ```bash
 kubectl -n <namespace>  get service haproxy-ingress-service
 ```
 
-In route53, create an A record with the DNS name pointing to the external IP/endpoint.
+In route53 create an A record with the dns name pointing to external ip/endpoint.
 
 ### Gotchas
 
-Make sure that subnets have an internet gateway configured and have a sufficient number of IP addresses.
+Make sure that subnets have internet gateway configured and has enough ips.
 
 ## Airgapped installations
 
@@ -167,13 +167,13 @@ The above script could be scheduled using a cron job that run every day like
 
 ### Updating the feeds database in airgapped environments [Legacy Scanning]
 
-Use this procedure to automatically update the feeds database:
+This is a procedure that can be used to automatically update the feeds database:
 
-1. Download the image file, `quay.io/sysdig/vuln-feed-database-12:latest`, from the Sysdig registry to the jumpbox server, and save it locally.
-2. Move the file from the jumpbox server to the customer airgapped environment (optional)
-3. load the image file and push it to the customer's airgapped image registry.
-4. Restart the `sysdigcloud-feeds-db` pod.
-5. Restart the `feeds-api` pod.
+1. download the image file quay.io/sysdig/vuln-feed-database-12:latest from Sysdig registry to the jumpbox server and save it locally
+2. move the file from the jumpbox server to the customer airgapped environment (optional)
+3. load the image file and push it to the customer's airgapped image registry
+4. restart the pod sysdigcloud-feeds-db
+5. restart the pod feeds-api
 
 Finally, steps 1 to 5 will be performed periodically once a day.
 

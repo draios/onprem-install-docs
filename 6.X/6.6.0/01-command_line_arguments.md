@@ -3,7 +3,7 @@
 <!-- Title: Command Line Arguments -->
 <!-- Layout: plain -->
 
-# Command line arguments
+# Command line arguments explained
 
 <br />
 
@@ -12,7 +12,7 @@
 `--skip-namespace`
 
 - installer does not deploy the `namespace.yaml` manifest.
-  It expects an existing namespace that matches the value given in `values.yaml`. The installer will fail if there is a mismatch.
+  It expects the Namespace to exist and to match the value in `values.yaml`
   There is no validation, in case of mismatch the installer will fail
 
 `--skip-pull-secret`
@@ -26,7 +26,7 @@
 
 `--skip-serviceaccount`
 
-- The user must provide the Service Account (SA) with the expected name:
+- The user must provide SAs with the exact same name expected:
 
 ```
 sysdig-serviceaccount.yaml:  name: sysdig
@@ -39,7 +39,7 @@ sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 - One implication of this is that unless the `node-to-labels` SA is added,
   rack awareness will not work neither in Cassandra nor in ES (to be verified)
   Another implication is that if SA(s) are missing, the user will have to `describe`
-  the Statefullset because Pods will not start at all:
+  the STS because Pods will not start at all:
 
 ```
 Events:
@@ -59,8 +59,8 @@ Events:
 `--zookeeper-workloadname <string value>`
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
-The default value is `zookeeper`, and this argument must be used when the actual name of the Statefullset in the cluster differs.
-actual name of the Statefullset in the cluster differs
+The default value is `zookeeper`, this argument must be used when the
+actual name of the STS in the cluster differs
 
 `--kafka-workloadname <value>`
 
@@ -70,9 +70,15 @@ actual name of the Statefullset in the cluster differs
 
 - Same as above for `cassandra`
 
+`--use-import-v2`
+
+- This flag will use the new import logic, which will import the values from the cluster and then generate the manifests based on the imported values. Defaults to `false`, which means the old import logic will be used, unless the `--use-import-v2` flag is provided. Import V2 is supported starting from version 6.6.0, and is expected to become the default in the future.
+
 ## Command: `update-license`
 
 Added November 2022, this is a new command.
+
+** WARNING: THIS FEATURE requires `kubectl` to be at least version `1.20.0` **
 
 This command performs the minimal changes and restarts to apply a new license.
 Based on [this page](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/)
@@ -217,6 +223,11 @@ Will perform a diff between the platform objects in a running k8s cluster, and t
 
 Diff command also has options inherited from the generate command options. See **generate** command section.
 
+### Sub-Command: secure-diff [DEPRECATED]
+
+Performs a diff not showing sensitive information.
+This subcommand is DEPRECATED and will be removed starting from version 6.7.0, you can have the same effect with the diff command and the flag `--secure`.
+
 ## Command: `generate`
 
 `--manifest-directory`
@@ -246,4 +257,3 @@ Diff command also has options inherited from the generate command options. See *
 `--k8s-server-version`
 
 - Sets the `kubernetesServerVersion` within values.
-
