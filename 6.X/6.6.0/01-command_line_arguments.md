@@ -13,7 +13,7 @@
 
 - installer does not deploy the `namespace.yaml` manifest.
   It expects the namespace to exist and to match the value in `values.yaml`
-  There is no validation, in case of mismatch the installer will fail
+  There is no validation; in case of a mismatch the installer will fail.
 
 `--skip-pull-secret`
 
