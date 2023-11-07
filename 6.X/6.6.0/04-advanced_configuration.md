@@ -204,7 +204,7 @@ ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feed
 ssh -t user@airgapped-host "kubectl -n sysdigcloud scale deploy sysdigcloud-feeds-api --replicas=1"
 ```
 
-The script can be scheduled using a cron job that runs every day
+The script can be scheduled using a cron job that runs every day:
 
 ```bash
 0 8 * * * feeds-database-update.sh >/dev/null 2>&1
