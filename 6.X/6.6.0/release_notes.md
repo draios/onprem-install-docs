@@ -1,11 +1,11 @@
-Release 6.5.1 Oct, 2023
+Release 6.6.0 Nov, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
 
 ## Use of MinIO in the Sysdig OnPrem
 
-Starting from release 6.5.1 we have added MinIO to our stack (specifically importing the MinIO binary from upstream) for use in conjunction with our services.
+Starting from release 6.6.0 we have added MinIO to our stack (specifically importing the MinIO binary from upstream) for use in conjunction with our services.
 
 The MinIO source code can be downloaded [here](https://github.com/minio/minio) and is licensed under the [AGPL 3.0](https://github.com/minio/minio/blob/master/LICENSE).
 
@@ -29,7 +29,7 @@ Qualified with agent release
 
 ### Checksum for Installer binaries
 
-Current version: 6.5.1-1
+Current version: 6.6.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
