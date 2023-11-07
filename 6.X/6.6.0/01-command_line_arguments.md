@@ -11,17 +11,12 @@
 
 `--skip-namespace`
 
-- installer does not deploy the `namespace.yaml` manifest.
-  It expects the namespace to exist and to match the value in `values.yaml`
-  There is no validation; in case of a mismatch the installer will fail.
+- The installer does not deploy the `namespace.yaml` manifest. It expects the namespace to exist and to match the value given in `values.yaml`. There is no validation; in case of a mismatch the installer will fail.
 
 `--skip-pull-secret`
 
-- the services expect the pull secret to exist,
-  to have the expected name (`sysdigcloud-pull-secret`) and to allow access to the registry.
-- if the pull secret is missing, the behaviour could be unpredictable:
-  some Pods could start if they can find the image locally and if their `imagePullPolicy`
-  is not `Always`
+- the services expect an existing pull secret with the name, `sysdigcloud-pull-secret` and access to the registry.
+- if the pull secret is missing, the behavior could be unpredictable: some pods could start if they can find the image locally and if their `imagePullPolicy` is not `Always`
 - Other Pods will fail because they can't pull the image
 
 `--skip-serviceaccount`
@@ -36,10 +31,7 @@ sysdig-serviceaccount.yaml:  name: sysdig-elasticsearch
 sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 ```
 
-- One implication of this is that unless the `node-to-labels` SA is added,
-  rack awareness will not work neither in Cassandra nor in ES (to be verified)
-  Another implication is that if SA(s) are missing, the user will have to `describe`
-  the STS because Pods will not start at all:
+- One implication of this command is that unless the `node-to-labels` SA is added, rack awareness will not work either in Cassandra or in Elastic Search (to be verified). Another implication is that if SAs are missing, the user will have to `describe` the STS because pods will not start at all:
 
 ```
 Events:
@@ -51,16 +43,13 @@ Events:
 
 `--skip-storageclass`
 
-- installer does not apply the StorageClass manifest.
-  It expects the storageClassName specified in values.yaml to exist.
+- The installer does not apply the StorageClass manifest. It expects the storageClassName specified in values.yaml to exist.
 
 ## Command: `import`
 
 `--zookeeper-workloadname <string value>`
 
-- This is the value that will be used for the `zookeeper` StatefulSet.
-The default value is `zookeeper`, this argument must be used when the
-actual name of the STS in the cluster differs
+- This value will be used for the `zookeeper` StatefulSet. The default value is `zookeeper`, and this argument must be used when the actual name of the STS in the cluster differs
 
 `--kafka-workloadname <value>`
 
@@ -72,7 +61,7 @@ actual name of the STS in the cluster differs
 
 `--use-import-v2`
 
-- This flag will use the new import logic, which will import the values from the cluster and then generate the manifests based on the imported values. Defaults to `false`, which means the old import logic will be used, unless the `--use-import-v2` flag is provided. Import V2 is supported starting from version 6.6.0, and is expected to become the default in the future.
+- This flag will use the new import logic, which will import the values from the cluster and then generate the manifests based on the imported values. The value defaults to `false`, which means the old import logic will be used, unless the `--use-import-v2` flag is provided. Import V2 is supported starting from version v6.6.0, and is expected to become the default in the future.
 
 ## Command: `update-license`
 
@@ -80,8 +69,7 @@ Added November 2022, this is a new command.
 
 ** WARNING: THIS FEATURE requires `kubectl` to be at least version `1.20.0` **
 
-This command performs the minimal changes and restarts to apply a new license.
-Based on [this page](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/)
+This command performs minimal changes and restarts the system to apply the new license. For more information, see [Upgrade On-Prem License](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/).
 
 This command performs the following:
 
@@ -207,36 +195,37 @@ Will perform a diff between the platform objects in a running k8s cluster, and t
 
 `--out-diff-dir`
 
-- Allows you to specify a custom path for the diff files being written on the filesystem. Will be used only if also `--write-diff` is provided. If not set will use a temporary directory.
+- Allows you to specify a custom path for the `diff` files being written on the filesystem. It will be used only if  `--write-diff` also is provided. If not defined, it will use a temporary directory.
 
 `--cleanup`
 
-- If set, will attempt to automatically delete any generated diff files on the filesystem if the directory used to store the diff files already exists. Requires both `--write-diff` and `--out-diff-dir` to be set.
+- If set, it will attempt to automatically delete any generated diff files on the filesystem if the directory used to store the diff files already exists. Requires both `--write-diff` and `--out-diff-dir` to be defined.
 
 `--secure`
 
-- applies some filters to the produced diff in order to avoid printing sensitive informations. This is useful if you need to share diffs to user who shouldn't have access to credentials.
+- applies some filters to the produced diff in order to avoid printing sensitive information. This is useful if you need to share diffs to users who shouldn't have access to credentials.
 
 `--summary`
 
 - Only prints a summary of the diff errors.
 
-Diff command also has options inherited from the generate command options. See **generate** command section.
+Diff command also has options inherited from the generate command options. See the **generate** command section.
 
 ### Sub-Command: secure-diff [DEPRECATED]
 
 Performs a diff not showing sensitive information.
+
 This subcommand is DEPRECATED and will be removed starting from version 6.7.0, you can have the same effect with the diff command and the flag `--secure`.
 
 ## Command: `generate`
 
 `--manifest-directory`
 
-- Set the location where the installer will write the genearted manifests.
+- Set the location where the installer will write the generated manifests.
 
 `--skip-generate`
 
-- Skips generating Kubernetes manifests and attempts to diff whatever is in the manifests directory. Manifest directory can be specified using `--manifest-directory <dir>` flag.
+- Skips generating Kubernetes manifests and attempts to diff whatever is in the manifests directory. The manifest directory can be specified by using the `--manifest-directory <dir>` flag.
 
 `--skip-import`
 
@@ -252,7 +241,7 @@ This subcommand is DEPRECATED and will be removed starting from version 6.7.0, y
 
 `--preserve-templates`
 
-- Preserve directory installer templates are extracted to, this should only be used for debugging purposes
+- Preserves the directory installer templates are as extracted to, this should only be used for debugging purposes.
 
 `--k8s-server-version`
 
