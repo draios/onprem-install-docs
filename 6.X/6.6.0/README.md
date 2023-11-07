@@ -178,7 +178,7 @@ the following exceptions:
     ```bash
     ./installer airgap
     ```
-    That will pull all the images into `images_archive` directory as `tar` files and push them to the airgapped registry
+    That will pull all the images into the `images_archive` directory as `tar` files and push them to the airgapped registry.
 - Run the Installer.
 -   If you are upgrading, run the diff as directed in Step 4.
     ```bash
@@ -211,7 +211,7 @@ the installation machine.
 - Network access to Kubernetes cluster
 - Docker
 - Network and authenticated access to the private registry
-- Edited sysdig-chart/values.yaml, with airgap registry details updated
+- Edited `sysdig-chart/values.yaml`, with airgap registry details updated
 - **Host Disk Space Requirements:** `/tmp `\> 4 GB; directory from which the installer is run \>8GB; and `/var/lib/docker `\> 4GB.
 
     > **NOTE:**
@@ -220,7 +220,7 @@ the installation machine.
 
 ### Docker Log In to quay.io
 
-Retrieve Quay username and password from Quay pull secret and login using credentials.
+Retrieve Quay username and password from Quay pull secret and log in using the credentials.
 
 ```bash
 AUTH=$(echo REPLACE_WITH_quaypullsecret | base64 --decode | jq -r '.auths."quay.io".auth'| base64 --decode)
@@ -247,14 +247,13 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 4. Copy the tarball to the installation machine.
 
 #### On the Installation Machine:
-1. Copy the current version sysdig-chart/values.yaml to your working directory.
+1. Copy the current version `sysdig-chart/values.yaml` to your working directory.
       ```bash
       wget https://github.com/draios/onprem-install-docs/blob/main/6.X/6.6.0/examples
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
-        defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and
-        large
+        defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium, and large
       - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
         your Sysdig purchase confirmation mail
       - [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
@@ -307,7 +306,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
     ./installer diff
     ```
 
-    This will generate the differences between the installed environment and the upgrade version. The changes will be displayed in your terminal.
+    This will generate the differences between the installed environment and the upgraded version. The changes will be displayed in your terminal.
 
     If you want to override a change, based on your environment's custom settings, then contact Sysdig Support for assistance.
 
@@ -315,7 +314,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       ```bash
       ./installer deploy
       ```
-7. On successful run of Installer towards the end of your terminal you should
+7. On a successful run of Installer towards the end of your terminal you should
   see the below:
 
       ```
@@ -329,10 +328,9 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 
 > **NOTE**:
 >
-> Save the values.yaml file in a secure location; it will be used for future upgrades.
+> Save the `values.yaml` file in a secure location; it will be used for future upgrades.
 >
-> There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against
-your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
+> There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by the Installer against your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate it consistently with the same `values.yaml` file.
 
 # Output
 
@@ -345,7 +343,7 @@ A successful installation should display output in the terminal such as:
     username: "configured-username@awesome-domain.com"
     password: "awesome-password"
 
-There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
+There will also be a generated directory containing various Kubernetes configuration `yaml` files which were applied by the installer against your cluster. It is not necessary to keep the generated directory, as the installer can regenerate consistently with the same `values.yaml` file.
 
 # Additional Installer Resources
 
