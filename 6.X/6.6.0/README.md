@@ -249,7 +249,7 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
 #### On the Installation Machine:
 1. Copy the current version sysdig-chart/values.yaml to your working directory.
       ```bash
-      wget https://github.com/draios/onprem-install-docs/blob/main/6.X/6.5.0/examples
+      wget https://github.com/draios/onprem-install-docs/blob/main/6.X/6.6.0/examples
       ```
 2. Edit the following values:
       - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
