@@ -9,9 +9,9 @@
 
 <br />
 
-# Potential breaking changes to the Cassandra snitch in 6.x for existing installations
+# Potential breaking changes to the Cassandra snitch in v6.x for existing installations
 
-- In OnPrem 6.0 we are making changes to the Cassandra snitch we use for MultiAZ environments
+- In OnPrem 6.0, Sysdig is making changes to the Cassandra snitch that is used for MultiAZ environments
 
 - The Cassandra snitch is how Cassandra determines the "rack" or availability zone (AZ) for each node, a datum that needs to be extracted from the Kubernetes worker where the Cassandra Pod will be running and is used by Cassandra for the correct data distribution and redundancy
 
@@ -23,7 +23,7 @@
 
     - `customGossipingPropertyFileSnitch` A custom snitch based on our own tool to extract AZ from the Kubernetes Nodes
 
-- Starting from 6.x, we will use `customGossipingPropertyFileSnitch` on all environments.
+- Starting from v6.x, we will use `customGossipingPropertyFileSnitch` on all environments.
 
 - This could however cause issues in certain cases because the way the AZ is extracted from the Kubernetes worker could change between snitch types and cause a Cassandra blocking error during its bootstrap:
 
