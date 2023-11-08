@@ -580,7 +580,23 @@ only when `storageClassProvisioner` is `hostPath`.<br />
 
 ```yaml
 hostPathCustomPaths:
-  postgresql: `/sysdig/stan`
+  nats: `/sysdig/stan`
+```
+
+## **hostPathCustomPaths.natsJs**
+
+**Required**: `false`<br />
+**Description**: The directory to bind mount nats js pod's
+`/var/lib/natsjs` to on the host. This parameter is relevant
+only when `storageClassProvisioner` is `hostPath`.<br />
+**Options**: <br />
+**Default**: `/var/lib/natsjs`<br />
+**Example**:
+
+```yaml
+hostPathCustomPaths:
+  natsJs: `/sysdig/natsjs`
+```
 
 ## **nodeaffinityLabel.key**
 
@@ -774,6 +790,22 @@ pvStorageSize:
     nats: 10Gi
 ```
 
+## **pvStorageSize.large.natsJs**
+
+**Required**: `false`<br />
+**Description**: The size of the persistent volume assigned to NATS JS HA in a
+cluster of [`size`](#size) small. This option is ignored if
+[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
+**Options**:<br />
+**Default**: 10Gi<br />
+**Example**:
+
+```yaml
+pvStorageSize:
+  large:
+    natsJs: 10Gi
+```
+
 ## **pvStorageSize.medium.nats**
 
 **Required**: `false`<br />
@@ -790,6 +822,22 @@ pvStorageSize:
     nats: 10Gi
 ```
 
+## **pvStorageSize.medium.natsJs**
+
+**Required**: `false`<br />
+**Description**: The size of the persistent volume assigned to NATS JS HA in a
+cluster of [`size`](#size) small. This option is ignored if
+[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
+**Options**:<br />
+**Default**: 10Gi<br />
+**Example**:
+
+```yaml
+pvStorageSize:
+  medium:
+    natsJs: 10Gi
+```
+
 ## **pvStorageSize.small.nats**
 
 **Required**: `false`<br />
@@ -804,6 +852,22 @@ cluster of [`size`](#size) small. This option is ignored if
 pvStorageSize:
   small:
     nats: 10Gi
+```
+
+## **pvStorageSize.small.natsJs**
+
+**Required**: `false`<br />
+**Description**: The size of the persistent volume assigned to NATS JS HA in a
+cluster of [`size`](#size) small. This option is ignored if
+[`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
+**Options**:<br />
+**Default**: 10Gi<br />
+**Example**:
+
+```yaml
+pvStorageSize:
+  small:
+    natsJs: 10Gi
 ```
 
 ## **sysdig.anchoreVersion**
@@ -6835,6 +6899,24 @@ sysdig:
   natsJs:
     ha:
       enabled: false
+```
+
+## **sysdig.natsJs.hostPathNodes**
+
+**Required**: `false`<br />
+**Description**: An array of node hostnames has shown in `kubectl get node -o name` that nats js hostPath persistent volumes should be created on. The number of nodes must be 3. This is
+required if configured [`storageClassProvisioner`](#storageclassprovisioner)
+is `hostPath`.<br />
+**Options**:<br />
+**Default**: [] <br />
+
+**Example**:
+
+```yaml
+sysdig:
+  natsJs:
+    hostPathNodes:
+      - my-cool-host1.com
 ```
 
 ## **sysdig.natsJs.nats.tolerations**
