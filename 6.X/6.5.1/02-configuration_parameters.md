@@ -685,7 +685,7 @@ pvStorageSize:
 cluster of [`size`](#size) medium. This option is ignored if
 [`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
 **Options**:<br />
-**Default**: 100Gi<br />
+**Default**: 150Gi<br />
 **Example**:
 
 ```yaml
@@ -797,13 +797,13 @@ pvStorageSize:
 cluster of [`size`](#size) small. This option is ignored if
 [`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
 **Options**:<br />
-**Default**: 10Gi<br />
+**Default**: 50Gi<br />
 **Example**:
 
 ```yaml
 pvStorageSize:
   large:
-    natsJs: 10Gi
+    natsJs: 50Gi
 ```
 
 ## **pvStorageSize.medium.nats**
@@ -813,13 +813,13 @@ pvStorageSize:
 cluster of [`size`](#size) medium. This option is ignored if
 [`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
 **Options**:<br />
-**Default**: 10Gi<br />
+**Default**: 50Gi<br />
 **Example**:
 
 ```yaml
 pvStorageSize:
   medium:
-    nats: 10Gi
+    nats: 50Gi
 ```
 
 ## **pvStorageSize.medium.natsJs**
@@ -861,13 +861,13 @@ pvStorageSize:
 cluster of [`size`](#size) small. This option is ignored if
 [`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
 **Options**:<br />
-**Default**: 10Gi<br />
+**Default**: 50Gi<br />
 **Example**:
 
 ```yaml
 pvStorageSize:
   small:
-    natsJs: 10Gi
+    natsJs: 50Gi
 ```
 
 ## **sysdig.anchoreVersion**
@@ -10235,7 +10235,7 @@ Please check the [dedicated page](05-networkPolicies.md)
 cluster of [`size`](#size) small. This option is ignored if
 [`storageClassProvisioner`](#storageclassprovisioner) is `hostPath`.<br />
 **Options**:<br />
-**Default**: 20Gi<br />
+**Default**: 50Gi<br />
 **Example**:
 
 ```yaml
@@ -14040,6 +14040,7 @@ sysdig:
 
 **Required**: `false`<br />
 **Description**: Enable Vulnerability Engine V2 for Sysdig Secure.<br />
+NOTE: Vulnerability Engine V2 is not yet supported for airgapped installation.<br />
 **Options**:<br />
 **Default**: true<br />
 **Example**:
