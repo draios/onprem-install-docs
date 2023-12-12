@@ -24,7 +24,7 @@ Note that you can perform a quick install if your environment has access to the 
 
 ### Access Requirements
 
-- Sysdig license key (Monitor and/or Secure)
+- Sysdig license key (Sysdig Monitor, Sysdig Secure, or both)
 - Quay pull secret
 
 # Quickstart Install
