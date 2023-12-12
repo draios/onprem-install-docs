@@ -8,7 +8,7 @@ for the earlier manual install/upgrade procedures.
 
 # Installation Overview
 
-To install, you will log in to quay.io, download a sysdig-chart/values.yaml
+To install, you will log in to quay.io, download a `sysdig-chart/values.yaml`
 file, provide a few basic parameters in it, and launch the Installer. In a
 normal installation, the rest is automatically configured and deployed.
 
