@@ -89,7 +89,7 @@ eksctl create cluster \
    --vpc-public-subnets=<subnet1,subnet2>
 ```
 
-### Additional installer configurations
+### Additional Installer Configurations
 
 EKS uses aws-iam-authenticator to authorize kubectl commands.
 aws-iam-authenticator needs aws credentials mounted from **~/.aws** to the installer.
