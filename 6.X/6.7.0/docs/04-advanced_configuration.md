@@ -165,7 +165,7 @@ The above script could be scheduled using a cron job that run every day like
 0 8 * * * airgap-vuln-feeds-image-update.sh >/dev/null 2>&1
 ```
 
-### Updating the feeds database in airgapped environments [Legacy Scanning]
+### Updating the Feeds Database in Airgapped Environments [Legacy Scanning]
 
 This is a procedure that can be used to automatically update the feeds database:
 
