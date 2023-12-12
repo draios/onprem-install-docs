@@ -27,7 +27,7 @@ Qualified with agent release
 | HA Proxy                   | 0.14.3 |
 
 
-### Checksum for Installer binaries
+### Checksum for Installer Binaries
 
 Current version: 6.7.0-1
 
