@@ -127,7 +127,7 @@ In route53 create an A record with the dns name pointing to external ip/endpoint
 
 Make sure that subnets have internet gateway configured and has enough ips.
 
-## Airgapped installations
+## Airgapped Installations
 
 ### Updating the feeds database in airgapped environments [ScanningV2]
 
