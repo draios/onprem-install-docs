@@ -137,7 +137,7 @@ In this situation, a machine with network access (called the “jump machine”)
 will pull an image containing a self-extracting tarball which can be copied to
 the installation machine.
 
-### Requirements for jump machine
+### Requirements for the jump machine
 
 - Network access to quay.io
 - Docker
