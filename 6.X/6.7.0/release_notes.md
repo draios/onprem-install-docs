@@ -1,13 +1,13 @@
 Release 6.7.0 Dec, 2023
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
 
-## Use of MinIO in the Sysdig OnPrem
+## Using MinIO in the Sysdig On-premises Environments
 
-Starting from release 6.6.0 we have added MinIO to our stack (specifically importing the MinIO binary from upstream) for use in conjunction with our services.
+Starting from release v6.6.0 we have added MinIO to the Sysdig stack (specifically importing the MinIO binary from upstream) for use in conjunction with our services.
 
-The MinIO source code can be downloaded [here](https://github.com/minio/minio) and is licensed under the [AGPL 3.0](https://github.com/minio/minio/blob/master/LICENSE).
+Download the MinIO source code from [minio](https://github.com/minio/minio). It is licensed under the [AGPL 3.0](https://github.com/minio/minio/blob/master/LICENSE).
 
 Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes software developed at [MinIO, Inc](https://min.io/)
 
