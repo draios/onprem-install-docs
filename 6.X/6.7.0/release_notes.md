@@ -1,4 +1,4 @@
-Release 6.6.0 Nov, 2023
+Release 6.7.0 Dec, 2023
 ===
 
 Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
@@ -29,7 +29,7 @@ Qualified with agent release
 
 ### Checksum for Installer binaries
 
-Current version: 6.6.0-1
+Current version: 6.7.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
