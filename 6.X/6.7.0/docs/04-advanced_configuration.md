@@ -169,11 +169,11 @@ The above script could be scheduled using a cron job that run every day like
 
 This is a procedure that can be used to automatically update the feeds database:
 
-1. download the image file quay.io/sysdig/vuln-feed-database-12:latest from Sysdig registry to the jumpbox server and save it locally
-2. move the file from the jumpbox server to the customer airgapped environment (optional)
-3. load the image file and push it to the customer's airgapped image registry
-4. restart the pod sysdigcloud-feeds-db
-5. restart the pod feeds-api
+1. Download the image file quay.io/sysdig/vuln-feed-database-12:latest from Sysdig registry to the jumpbox server and save it locally
+2. Move the file from the jumpbox server to the customer airgapped environment (optional)
+3. Load the image file and push it to the customer's airgapped image registry
+4. Restart the pod sysdigcloud-feeds-db
+5. Restart the pod feeds-api
 
 Finally, steps 1 to 5 will be performed periodically once a day.
 
