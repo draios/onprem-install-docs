@@ -8,12 +8,13 @@
       * [Full Airgap Install](#full-airgap-install)
    * [Output](#output)
    * [Additional Installer Resources](#Additional-Installer-Resources)
-      * [Frequently Used Options](advanced.md)
-      * [Configuration Parameters](configuration_parameters.md)
-      * [Example values.yaml](examples/README.md)
-      * [Agent Install](agent_install.md)
-      * [Permissions](permissions.md)
-      * [Upgrade notes](upgrade_notes.md)
+      * [Command Line arguments](01-command_line_arguments.md)
+      * [Configuration Parameters](02-configuration_parameters.md)
+      * [Upgrade notes](03-upgrade.md)
+      * [Frequently Used Options](04-advanced_configuration.md)
+      * [Network Policies](05-networkPolicies.md)
+      * [Configuration Parameters Beta](06-configuration_parameters_beta.md)
+      * [Examples values.yaml](examples)
 
 # Installation Overview
 
@@ -79,7 +80,7 @@ In cases where dynamic storage is not available, you can use static storage for 
 
 -   `storageclassProvisioner`: Enter `hostpath`, then define the nodes for the main Sysdig components: ElasticSearch, Cassandra, and Postgres.storageclassProvisioner
 
--   See [Advanced Configurations](advanced.md#use-hostpath-for-static-storage-of-sysdig-components) for details.
+-   See [Advanced Configurations](04-advanced_configuration#use-hostpath-for-static-storage-of-sysdig-components) for details.
 
 # Quickstart Install
 
@@ -99,21 +100,21 @@ This install assumes the Kubernetes cluster has network access to pull images fr
           > If you will be editing for an OpenShift installation and want to review a sample, see openshift-with-hostpath [values.yaml](examples/openshift-with-hostpath/values.yaml).
 3. Edit the following values:
 
-    -   [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
+    -   [`size`](02-configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium and large
 
-    -   [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with your Sysdig purchase confirmation mail
+    -   [`quaypullsecret`](02-configuration_parameters.md#quaypullsecret): quay.io provided with your Sysdig purchase confirmation mail
 
-    -   [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
+    -   [`storageClassProvider`](02-configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
 
-    -   [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key provided with your Sysdig purchase confirmation mail
+    -   [`sysdig.license`](02-configuration_parameters.md#sysdiglicense): Sysdig license key provided with your Sysdig purchase confirmation mail
 
-    -   [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+    -   [`sysdig.dnsName`](02-configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
-    -   [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName): **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+    -   [`sysdig.collector.dnsName`](02-configuration_parameters.md#sysdigcollectordnsName): **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
 
-    -   [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
+    -   [`deployment`](02-configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
 
-    -   [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking): The networking construct used to expose the Sysdig API and collector.Options are:
+    -   [`sysdig.ingressNetworking`](02-configuration_parameters.md#sysdigingressnetworking): The networking construct used to expose the Sysdig API and collector.Options are:
 
         -   **hostnetwork:** sets the hostnetworking in the ingress daemonset and opens host ports for api and collector. This does not create a Kubernetes service.
 
@@ -133,13 +134,13 @@ This install assumes the Kubernetes cluster has network access to pull images fr
             >
             > If doing an airgapped install, you would also edit the following values:
 
-    -   [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name): The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
+    -   [`airgapped_registry_name`](02-configuration_parameters.md#airgapped_registry_name): The URL of the airgapped (internal) docker registry. This URL is used for installations where the Kubernetes cluster can not pull images directly from Quay
 
-    -   [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix): This defines custom repository prefix for airgapped\_registry. Tags and pushes images as `airgapped_registry_name/airgapped_repository_prefix``/image_name:tag`
+    -   [`airgapped_repository_prefix`](02-configuration_parameters.md#airgapped_repository_prefix): This defines custom repository prefix for airgapped\_registry. Tags and pushes images as `airgapped_registry_name/airgapped_repository_prefix``/image_name:tag`
 
-    -   [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password): The password for the configured airgapped\_registry\_username. Ignore this parameter if the registry does not require authentication.
+    -   [`airgapped_registry_password`](02-configuration_parameters.md#airgapped_registry_password): The password for the configured airgapped\_registry\_username. Ignore this parameter if the registry does not require authentication.
 
-    -   [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username): The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
+    -   [`airgapped_registry_username`](02-configuration_parameters.md#airgapped_registry_username): The username for the configured airgapped\_registry\_name. Ignore this parameter if the registry does not require authentication.
 
 4.   **[For Upgrades Only]** Generate and review the diff of changes the installer is about to introduce:
         ```bash
@@ -252,18 +253,18 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
       wget https://github.com/draios/onprem-install-docs/blob/main/6.X/6.6.0/examples
       ```
 2. Edit the following values:
-      - [`size`](configuration_parameters.md#size): Specifies the size of the cluster. Size
+      - [`size`](02-configuration_parameters.md#size): Specifies the size of the cluster. Size
         defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium, and large
-      - [`quaypullsecret`](configuration_parameters.md#quaypullsecret): quay.io provided with
+      - [`quaypullsecret`](02-configuration_parameters.md#quaypullsecret): quay.io provided with
         your Sysdig purchase confirmation mail
-      - [`storageClassProvider`](configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
-      - [`sysdig.license`](configuration_parameters.md#sysdiglicense): Sysdig license key
+      - [`storageClassProvider`](02-configuration_parameters.md#storageClassProvider): Review Storage Requirements, above. If you have the default use case, enter `aws` or `gke` in the `storageClassProvisioner` field. Otherwise, refer to Use Case 2 or 3.
+      - [`sysdig.license`](02-configuration_parameters.md#sysdiglicense): Sysdig license key
         provided with your Sysdig purchase confirmation mail
-      - [`sysdig.dnsName`](configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
-      - [`sysdig.collector.dnsName`](configuration_parameters.md#sysdigcollectordnsName):
+      - [`sysdig.dnsName`](02-configuration_parameters.md#sysdigdnsName): The domain name the Sysdig APIs will be served on. Note that the master node may not be used as the DNS name when using hostNetwork mode.
+      - [`sysdig.collector.dnsName`](02-configuration_parameters.md#sysdigcollectordnsName):
         **(OpenShift installs only)** Domain name the Sysdig collector will be served on. When not configured it defaults to whatever is configured for sysdig.dnsName. Note that the master node may not be used as the DNS name when using hostNetwork mode.
-      - [`deployment`](configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
-      - [`sysdig.ingressNetworking`](configuration_parameters.md#sysdigingressnetworking):
+      - [`deployment`](02-configuration_parameters.md#deployment): **(OpenShift installs only)** Add `deployment: openshift` to the root of the `values.yaml` file.
+      - [`sysdig.ingressNetworking`](02-configuration_parameters.md#sysdigingressnetworking):
         The networking construct used to expose the Sysdig API and collector. Options
         are:
         - hostnetwork: sets the hostnetworking in the ingress daemonset and opens
@@ -278,17 +279,17 @@ docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io
             ingressNetworkingApiNodePort: 30002
             ingressNetworkingCollectorNodePort: 30002
           ```
-      - [`airgapped_registry_name`](configuration_parameters.md#airgapped_registry_name):
+      - [`airgapped_registry_name`](02-configuration_parameters.md#airgapped_registry_name):
         The URL of the airgapped (internal) docker registry. This URL is used for
         installations where the Kubernetes cluster can not pull images directly from
         Quay.
-      - [`airgapped_repository_prefix`](configuration_parameters.md#airgapped_repository_prefix):
+      - [`airgapped_repository_prefix`](02-configuration_parameters.md#airgapped_repository_prefix):
           This defines custom repository prefix for airgapped_registry.
           Tags and pushes images as airgapped_registry_name/airgapped_repository_prefix/image_name:tag
-      - [`airgapped_registry_password`](configuration_parameters.md#airgapped_registry_password):
+      - [`airgapped_registry_password`](02-configuration_parameters.md#airgapped_registry_password):
         The password for the configured airgapped_registry_username. Ignore this
         parameter if the registry does not require authentication.
-      - [`airgapped_registry_username`](configuration_parameters.md#airgapped_registry_username):
+      - [`airgapped_registry_username`](02-configuration_parameters.md#airgapped_registry_username):
         The username for the configured airgapped_registry_name. Ignore this
         parameter if the registry does not require authentication.
 3. Copy the tarball file to the directory where you have your values.yaml file.
@@ -349,16 +350,14 @@ There will also be a generated directory containing various Kubernetes configura
 
 - See [Release Notes](release_notes.md) for upgrade matrix, supported platforms & link to full feature notes
 
-- See [Upgrade notes](upgrade_notes.md) for release-specific upgrade information
+- See [Upgrade notes](03-upgrade.md) for release-specific upgrade information
 
-- See [Frequently Used Options](advanced.md) for additional configurations such as static storage and patching
+- See [Frequently Used Options](04-advanced_configuration.md) for additional configurations such as static storage and patching
 
-- See [configuration_parameters.md](configuration_parameters.md) for all the configuration parameters available, as well as their definitions, values, and examples
+- See [configuration_parameters.md](02-configuration_parameters.md) for all the configuration parameters available, as well as their definitions, values, and examples
 
-- See [Examples](examples/README.md) of single-node, openshift... values.yaml
+- See [Cassandra snitch issue](07-cassandra-snitch-issue-6.0.md) potential breaking changes to the Cassandra snitch in 6.x for existing installations
 
-- See [RKE/RKE2 Nginx Config](rke_rke2_nginx.md) for RKE and RKE2 installs using external Nginx Ingress Controllers
+- See [ScanningV2](08-scannnigV2-resources.md) for scanningV2 resources
 
-- See [Agent Install](agent_install.md) for Installer agent install
-
-- See [Permissions](permissions.md) for running the Installer
+- See [Examples](examples)
