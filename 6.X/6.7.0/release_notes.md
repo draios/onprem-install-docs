@@ -11,10 +11,6 @@ Download the MinIO source code from [minio](https://github.com/minio/minio). It 
 
 Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes software developed at [MinIO, Inc](https://min.io/)
 
-### Sysdig Agent Version
-
-Qualified with agent release
-
 ### Supported Backend Components
 
 | **Components** | **Kubernetes with Statefulsets** |
