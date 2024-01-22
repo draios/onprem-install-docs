@@ -20,7 +20,7 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 | Cassandra                  | 3.11.16 |
 | Postgres                   | 12.13 |
 | NATS Streaming             | 0.24.6 |
-| HA Proxy                   | 0.14.3 |
+| HA Proxy                   | 0.14.5 |
 
 
 ### Checksum for Installer Binaries
