@@ -401,13 +401,13 @@ elasticsearch:
 **Required**: `false`<br />
 **Description**: The docker image tag of the elasticsearch jobs<br />
 **Options**:<br />
-**Default**: 0.0.35<br />
+**Default**: 0.0.46<br />
 **Example**:
 
 ```yaml
 elasticsearch:
   jobs:
-    toolsImageVersion: 0.0.35
+    toolsImageVersion: 0.0.46
 ```
 
 ## **elasticsearch.enableMetrics**

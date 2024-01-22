@@ -3,7 +3,7 @@
 <!-- Title: Advanced Configuration -->
 <!-- Layout: plain -->
 
-# Advanced Configuration
+# Advanced configuration
 
 <br />
 
@@ -75,7 +75,7 @@ hostPathCustomPaths:
 
 ## Installer on EKS
 
-### Creating a Cluster
+### Creating a cluster
 
 Please do not use eksctl 0.10.0 and 0.10.1 as those are known to be buggy see: kubernetes/kubernetes#73906 (comment)
 
@@ -89,7 +89,7 @@ eksctl create cluster \
    --vpc-public-subnets=<subnet1,subnet2>
 ```
 
-### Additional Installer Configurations
+### Additional installer configurations
 
 EKS uses aws-iam-authenticator to authorize kubectl commands.
 aws-iam-authenticator needs aws credentials mounted from **~/.aws** to the installer.
@@ -104,7 +104,7 @@ docker run  \
   quay.io/sysdig/installer:<InstallerVersion>
 ```
 
-### Running Airgapped EKS
+### Running airgapped EKS
 
 ```bash
 EKS=true bash sysdig_installer.tar.gz
@@ -123,11 +123,11 @@ kubectl -n <namespace>  get service haproxy-ingress-service
 
 In route53 create an A record with the dns name pointing to external ip/endpoint.
 
-### Guidelines
+### Gotchas
 
 Make sure that subnets have internet gateway configured and has enough ips.
 
-## Airgapped Installations
+## Airgapped installations
 
 ### Updating the feeds database in airgapped environments [ScanningV2]
 
@@ -165,15 +165,15 @@ The above script could be scheduled using a cron job that run every day like
 0 8 * * * airgap-vuln-feeds-image-update.sh >/dev/null 2>&1
 ```
 
-### Updating the Feeds Database in Airgapped Environments [Legacy Scanning]
+### Updating the feeds database in airgapped environments [Legacy Scanning]
 
 This is a procedure that can be used to automatically update the feeds database:
 
-1. Download the image file quay.io/sysdig/vuln-feed-database-12:latest from Sysdig registry to the jumpbox server and save it locally
-2. Move the file from the jumpbox server to the customer airgapped environment (optional)
-3. Load the image file and push it to the customer's airgapped image registry
-4. Restart the pod sysdigcloud-feeds-db
-5. Restart the pod feeds-api
+1. download the image file quay.io/sysdig/vuln-feed-database-12:latest from Sysdig registry to the jumpbox server and save it locally
+2. move the file from the jumpbox server to the customer airgapped environment (optional)
+3. load the image file and push it to the customer's airgapped image registry
+4. restart the pod sysdigcloud-feeds-db
+5. restart the pod feeds-api
 
 Finally, steps 1 to 5 will be performed periodically once a day.
 
