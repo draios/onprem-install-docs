@@ -1,4 +1,4 @@
-Release 5.1.12 September, 2023
+Release 5.1.12 January, 2024
 ===
 
 For additional information, review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
