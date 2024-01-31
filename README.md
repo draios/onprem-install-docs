@@ -38,7 +38,7 @@ Sysdig platform is continuously being validated at multiple K8s flavors includin
 | <= 5.1.9 | 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24 |
 | >= 5.1.10 | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
 | 6.0.X, 6.1.X | 1.23, 1.24, 1.25, 1.26 |
-| >= 6.2.X | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
+| >= 6.2.X | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29 |
 
 ## Supported Migration Paths
 
