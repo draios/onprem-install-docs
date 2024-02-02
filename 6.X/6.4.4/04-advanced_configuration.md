@@ -113,7 +113,7 @@ EKS=true bash sysdig_installer.tar.gz
 The above ensures the `~/.aws` directory is correctly mounted for the airgap
 installer container.
 
-### Exposing the Sysdig endpoint
+### Expose the Sysdig Endpoint
 
 Get the external IP/endpoint for the ingress service.
 
