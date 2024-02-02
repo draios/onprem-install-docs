@@ -75,7 +75,7 @@ hostPathCustomPaths:
 
 ## Installer on EKS
 
-### Creating a cluster
+### Creating a Cluster
 
 Please do not use eksctl 0.10.0 and 0.10.1 as those are known to be defective, as given in kubernetes/kubernetes#73906 (comment)
 
