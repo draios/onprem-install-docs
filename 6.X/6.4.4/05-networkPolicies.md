@@ -11,7 +11,7 @@
 
 <br />
 
-## Introduction
+## Overview
 
 The current version of Sysdig Network policies v2 supports Sysdig HAProxy Ingress and IBM Cloud IKS ALBs.
 
