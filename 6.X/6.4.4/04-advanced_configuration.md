@@ -129,7 +129,7 @@ Make sure that subnets have an internet gateway configured and have a sufficient
 
 ## Airgapped Installations
 
-### Updating the feeds database in airgapped environments
+### Update Database Feeds
 
 Use this procedure to automatically update the feeds database:
 
