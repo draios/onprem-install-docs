@@ -104,7 +104,7 @@ docker run  \
   quay.io/sysdig/installer:<InstallerVersion>
 ```
 
-### Running airgapped EKS
+### Running Airgapped EKS
 
 ```bash
 EKS=true bash sysdig_installer.tar.gz
