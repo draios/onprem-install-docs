@@ -123,7 +123,7 @@ kubectl -n <namespace>  get service haproxy-ingress-service
 
 In route53, create an A record with the DNS name pointing to the external IP/endpoint.
 
-### Gotchas
+### Guidelines
 
 Make sure that subnets have an internet gateway configured and have a sufficient number of IP addresses.
 
