@@ -28,7 +28,7 @@ Options](../README.md#quickstart-install) for more context.
 
 <br />
 
-### Step 1
+### Download base template `values.yaml`
 
 Copy the current version of `sysdig-chart/values.yaml` to your working directory.
 
@@ -38,8 +38,7 @@ wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/ins
 
 <br />
 
-### Step 2
-
+### Customize the `values.yaml`
 Edit the following values:
 
 - [`scripts`](docs/configuration_parameters.md#scripts): Set this to
@@ -95,7 +94,7 @@ would also edit the following values:
 
 <br />
 
-### Step 3
+### Obtain differences from the current environment
 
 Run the Installer (if you are in airgapped environment make sure you follow
 instructions from installation on how to get the images to your airgapped
@@ -107,7 +106,7 @@ registry)
 
 <br />
 
-### Step 4
+### Ran the installation
 
 If you are fine with the differences displayed, then run:
 
