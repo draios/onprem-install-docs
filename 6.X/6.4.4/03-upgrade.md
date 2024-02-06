@@ -28,7 +28,7 @@ Options](../README.md#quickstart-install) for more context.
 
 <br />
 
-### Download base template `values.yaml`
+### Download base template 
 
 Copy the current version of `sysdig-chart/values.yaml` to your working directory.
 
