@@ -38,7 +38,7 @@ wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/ins
 
 <br />
 
-### Customize the `values.yaml`
+### Customize `values.yaml`
 Edit the following values:
 
 - [`scripts`](docs/configuration_parameters.md#scripts): Set this to
