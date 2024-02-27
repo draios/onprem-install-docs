@@ -9,7 +9,7 @@
 
 <br />
 
-# Potential breaking changes to the Cassandra snitch in 6.x for existing installations
+# Potential Breaking Changes to the Cassandra Snitch for Existing 6.X installations
 
 - In OnPrem 6.0 we are making changes to the Cassandra snitch we use for MultiAZ environments
 
