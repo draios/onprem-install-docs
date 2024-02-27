@@ -3,7 +3,7 @@
 <!-- Title: Network policies v2 in the installer -->
 <!-- Layout: plain -->
 
-# Network policies
+# Network Policies
 
 <br />
 
