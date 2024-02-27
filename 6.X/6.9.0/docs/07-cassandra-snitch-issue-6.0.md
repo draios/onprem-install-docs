@@ -13,6 +13,8 @@
 
 - In OnPrem 6.0 we are making changes to the Cassandra snitch we use for MultiAZ environments
 
+- Below is an example of how to work around this issue when running in AWS's `us-east-1` region
+
 - The Cassandra snitch is how Cassandra determines the "rack" or availability zone (AZ) for each node, a datum that needs to be extracted from the Kubernetes worker where the Cassandra Pod will be running and is used by Cassandra for the correct data distribution and redundancy
 
 - In the past, we used 3 types of snitches:
@@ -52,7 +54,7 @@ UN  100.103.18.141  20.97 GiB  256          100.0%            03e38629-5a31-470a
   - get the content of the label (either from the Kubernetes workers or from executing the following command after exec'ing inside the Cassandra Pod, container `cassandra`:
 
 ```
-kubectl exec -n sysdig -c cassandra sysdigcloud-cassandra-0 -- cat /node-labels/failure-domain.beta.kubernetes.io/zone
+kubectl exec -n sysdig -c cassandra sysdigcloud-cassandra-0 -- bash -c "cat /node-labels/failure-domain.beta.kubernetes.io/zone || cat /node-labels/topology.kubernetes.io/zone"
 us-east-1b
 ```
 
@@ -69,7 +71,7 @@ echo "us-east-1b" | sed 's/us-east-//'
 sysdig:
   cassandra:
     snitch:
-      extractCMD: "cat /node-labels/failure-domain.beta.kubernetes.io/zone | sed 's/us-east-//"
+      extractCMD: "cat /node-labels/failure-domain.beta.kubernetes.io/zone || cat /node-labels/topology.kubernetes.io/zone | sed 's/us-east-//'"
 ```
 
   - please keep in mind that at this stage we are not showing this change in the `installer diff` output because the value is being calculated at run time inside the Cassandra container.
