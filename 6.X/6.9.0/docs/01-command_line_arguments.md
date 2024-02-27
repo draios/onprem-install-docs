@@ -36,10 +36,10 @@ sysdig-serviceaccount.yaml:  name: sysdig-elasticsearch
 sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 ```
 
-- One implication of this is that unless the `node-to-labels` SA is added,
+- One implication of this is that unless the `node-to-labels` Service account is added,
   rack awareness will not work neither in Cassandra nor in Elasticsearch (to be verified)
-  Another implication is that if SA(s) are missing, the user will have to `describe`
-  the STS because Pods will not start at all:
+  Another implication is that if Service Accounts are missing, the user will have to `describe`
+  the statefulset because Pods will not start at all:
 
 ```text
 Events:
