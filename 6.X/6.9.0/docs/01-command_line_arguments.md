@@ -307,7 +307,7 @@ If you consider the example above, the correct value for this would be `argocd-p
 
 `--argo-git-charts-dir (string)`
 
-relative path from the repo root that will contain the folder with charts. (default "helm-install/charts"). This will be replaced within the ArgoCD apps definition files. If we look at the example above the correct value for this would be `argocd-projects/sysdig/helm-install/charts`.
+The relative path from the repo root that will contain the folder with charts. The default is `helm-install/charts`. This will be replaced within the ArgoCD apps definition files. If you consider the example above, the correct value for this would be `argocd-projects/sysdig/helm-install/charts`.
 
 `--argo-out-dir (string)`
 
