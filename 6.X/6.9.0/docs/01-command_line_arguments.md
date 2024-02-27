@@ -37,7 +37,7 @@ sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 ```
 
 - One implication of this is that unless the `node-to-labels` SA is added,
-  rack awareness will not work neither in Cassandra nor in ES (to be verified)
+  rack awareness will not work neither in Cassandra nor in Elasticsearch (to be verified)
   Another implication is that if SA(s) are missing, the user will have to `describe`
   the STS because Pods will not start at all:
 
