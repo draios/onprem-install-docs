@@ -280,7 +280,7 @@ The URL of repository that will contain ArgoCD files and helm charts, expected i
 
 `--argo-repo-rev (string)`
 
-Name of the branch of the repo to use. (default "main"). This will be replaced within the ArgoCD apps definition files.
+The name of the branch of the repo to use. The default is `main`. This will be replaced within the ArgoCD apps definition files.
 
 example of hierarchy:
 ```
