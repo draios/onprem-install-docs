@@ -272,7 +272,8 @@ At the moment we only take care of the generation of the files, the actual deplo
 
 `--argocd (boolean)`
 
-Generates files needed to deploy the sysdig stack on an ArgoCD installation. If the ArgoCD output directory exists, it will be deleted and recreated. NOTE: that using this flag will automatically also run the generation of charts that you would obtain with the `--helm-install` cli flag, this is because the argoCD generation is strictly tied with the helm-charts being produced in a certain way.
+Generates files needed to deploy the sysdig stack on an ArgoCD installation. If the ArgoCD output directory exists, it will be deleted and recreated.
+NOTE: Using this flag will automatically generate the charts that you would obtain with the --helm-install CLI flag. This happens because the argoCD generation is closely linked to the specific production method of the helm-charts.
 
 `--argo-repo-url (string)`
 
