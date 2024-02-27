@@ -26,7 +26,7 @@
 
 `--skip-serviceaccount`
 
-- The user must provide SAs with the exact same name expected:
+- The user must provide service accounts with the exact same name expected:
 
 ```text
 sysdig-serviceaccount.yaml:  name: sysdig
