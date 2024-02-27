@@ -9,7 +9,9 @@
 
 <br />
 
-## Increase persistent storage for NATS JetStream statefulset to 100Gi before upgrading on-prem to release 6.7.0
+## Increase NATS JetStream Storage when upgrading to 6.7.0
+
+Increase persistent storage for NATS JetStream statefulset to 100Gi before upgrading on-prem to release 6.7.0, this is a requirement.
 
 ### Background
 - NatsJs publishers allocate fixed number of bytes at the time of stream creation and cannot be modified later.
