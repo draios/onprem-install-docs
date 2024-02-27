@@ -276,7 +276,7 @@ Generates files needed to deploy the sysdig stack on an ArgoCD installation. If 
 
 `--argo-repo-url (string)`
 
-URL of repo that will contain ArgoCD files and helm charts, expected in the form `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. (default `git@github.com:ORGANIZATION/SAMPLE-REPO.git`). This will be replaced within the ArgoCD apps definition files.
+The URL of repository that will contain ArgoCD files and helm charts, expected in the form `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. The default is `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. This will be replaced within the ArgoCD apps definition files.
 
 `--argo-repo-rev (string)`
 
