@@ -56,6 +56,8 @@ This install assumes the Kubernetes cluster has network access to pull images fr
     Valid options: aws, gke, hostPath
   - [`sysdig.license`](docs/02-configuration_parameters.md#sysdiglicense): Sysdig license key
     provided with your Sysdig purchase confirmation mail
+  - [`sysdig.platformAuditTrail.enabled`](docs/02-configuration_parameters.md#sysdigplatformAuditTrailenabled):
+    Set this parameter to `true` if you would like to use Sysdig Platform Audit.
   - [`sysdig.dnsName`](docs/02-configuration_parameters.md#sysdigdnsName): The domain name
     the Sysdig APIs will be served on.
   - [`sysdig.collector.dnsName`](docs/02-configuration_parameters.md#sysdigcollectordnsName):
