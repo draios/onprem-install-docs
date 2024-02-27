@@ -107,7 +107,7 @@ It does not require a live cluster, and it does not fetches any value from a liv
 
 ### Flags
 
-`-f <filename>` - write the list to a file. **If the file exists, it is overwritten**
+`-f <filename>` - write the list to a file. If the file already exists, it will be overwritten.
 
 ### Example
 
