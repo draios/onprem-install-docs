@@ -76,8 +76,6 @@ actual name of the statefulset in the cluster differs
 
 ## Command: `update-license`
 
-Added November 2022, this is a new command.
-
 ** WARNING: THIS FEATURE requires `kubectl` to be at least version `1.20.0` **
 
 This command performs the minimal changes and restarts to apply a new license.
@@ -96,8 +94,6 @@ This command performs the following:
 - If `secure` and `anchore` are enabled, it also applies and restarts all Anchore services.
 
 ## Command: `image-list`
-
-Added November 2022
 
 This command prints to `stdout` (and optionally to a file) a list of all images in a generated stack.
 
