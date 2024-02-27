@@ -17,10 +17,10 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 |---|---|
 | Redis                      | 6.2.9 |
 | OpenSearch                 | 1.3.9 |
-| Cassandra                  | 3.11.16 |
+| Cassandra                  | 4.1.3 |
 | Postgres                   | 12.13 |
-| NATS Streaming             | 0.24.6 |
-| HA Proxy                   | 0.14.5 |
+| NATS JetStream             | 2.9.17 |
+| HA Proxy                   | 0.14.6 |
 
 
 ### Checksum for Installer Binaries
