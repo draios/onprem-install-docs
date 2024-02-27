@@ -303,7 +303,7 @@ git@github.com:ORGANIZATION/SAMPLE-REPO.git
 `--argo-git-apps-dir (string)`
 
 Relative path from the repo root that will contain the folder with ArgoCD apps definitions. (default "argocd"). This will be replaced within the ArgoCD apps definition files.
-If we look at the example above the correct value for this would be `argocd-projects/sysdig/argocd`.
+If you consider the example above, the correct value for this would be `argocd-projects/sysdig/argocd`.
 
 `--argo-git-charts-dir (string)`
 
