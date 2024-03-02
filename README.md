@@ -61,6 +61,7 @@ See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-
 
 ### Version 6.x
 
+- [6.4.5 Release, March 2024](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#645-hotfix-release-march-2024)
 - [6.9.0 Release, February 2024](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#690-release-february-2024)
 - [6.4.4 Release, February 2024](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#644-hotfix-release-february-2024)
 - [6.8.0 Release, January 2024](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#680-release-january-2024)
