@@ -113,7 +113,7 @@ The restore tool is based on Kubernetes Job, this job uses the latest backup on 
 
 The execution of the restore requires to scale down of all the deployments in the sysdig namespace and a StatefulSet, in order to have a smooth and error free database restoration, below you have a documentation how to do that, and also a scale up for setting back the environment.
 
-#### Scale Down the Workloads
+#### Scale Down the Workloads - This step is required
 
 Count the amount of replicas of the StatefulSet sysdigcloud-netsec-ingest using this command then note it down for future use.
 
@@ -141,29 +141,29 @@ kubectl get deploy -n sysdigcloud
 NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
 ingress-default-backend                            1/1     1            1           4h7m
 registry-scanner-api                               2/2     2            2           3h55m
-sysdig-alert-manager                               1/1     1            1           4h4m                      
+sysdig-alert-manager                               1/1     1            1           4h4m
 ...........
 ```
 
 Then scale down the workloads using these commands
 
+```bash
+kubectl scale deployment --replicas 0 --all -n sysdigcloud
 ```
-kubectl scale deployment --replicas 0 -—all -n sysdigcloud
-```
-```
+```bash
 kubectl scale sts sysdigcloud-netsec-ingest --replicas=0 -n sysdigcloud
 ```
 
 Then apply this example yaml to the cluster in the sysdigcloud namespace.
 
 
-```yaml 
+```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: pg-restore-ha-job
-  namespace: sysdigcloud  
-  generateName: pg-restore-ha  
+  namespace: sysdigcloud
+  generateName: pg-restore-ha
 spec:
   ttlSecondsAfterFinished: 200
   template:
@@ -207,7 +207,7 @@ spec:
             - name: AWS_SECRET_ACCESS_KEY
               value: YYYYYYYYYY
       imagePullSecrets:
-        - name: sysdigcloud-pull-secret              
+        - name: sysdigcloud-pull-secret
 ```
 
 ### Settings
@@ -237,17 +237,18 @@ In the case of scaling this StatefulSet please use the number noted before on th
 
 ```bash
 kubectl scale sts sysdigcloud-netsec-ingest --replicas=1 -n sysdigcloud
+```
 
 ### Verifications
 
 When the job is complete, you can run the following command in the `sysdigcloud` namespace to get the name of the pod which runs the restore job. The pod logs provides the indication whether the job is completed successfully or not.
 
-```
+```bash
 kubectl get pods -n sysdogcloud | grep "pg-restore-ha-job"
 kubectl logs <restore-pod-name> -n sysdigcloud
 ```
 
-```
+```bash
 2024-01-07T09:00:00+00:00 - INFO - Starting
 2024-01-07T09:00:00+00:00 - INFO - Checking envs
 2024-01-07T09:00:00+00:00 - INFO - Connecting to S3 and restoring

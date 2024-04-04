@@ -18,7 +18,6 @@
 `--skip-pull-secret`
 
 - The services require the pull secret to exist with the expected name (`sysdigcloud-pull-secret`) and to have allow access to the registry.
-  to have the expected name (`sysdigcloud-pull-secret`) and to allow access to the registry.
 - if the pull secret is missing, the behaviour could be unpredictable:
   some Pods could start if they can find the image locally and if their `imagePullPolicy`
   is not `Always`
