@@ -1,4 +1,4 @@
-Release 6.9.1 Mar, 2024
+Release 6.10.0 Apr, 2024
 ===
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
@@ -25,12 +25,12 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 ### Checksum for Installer Binaries
 
-Current version: 6.9.1-1
+Current version: 6.10.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 580dfa2ec3fd528b472c1d3a4d5f294966aefe4490dd8d0eb54bd3d62b74a50a | installer-darwin-amd64 |
-| a67fcd3980b9915ce51536c4a65ab9f99df26dac0c6c72550fd020cfdc8c97db | installer-darwin-arm64 |
-| 59934e2f19b51f5476e32b1c3a25e7afae9b4070982e1f7b7e4dff8ad5958c5c | installer-linux-amd64 |
-| 7ffa847b190216a8ee9dc73ddb3ca3f83fccd44e9c5ca21c09a9ccdbe40f51dc | installer-linux-arm |
-| f6d828c10b28072c780c681403c58ad09bb441ef58b47c7492e95373ca993831 | installer-linux-arm64 |
+| ec48faa2083ebe4003dde68c821c20b4da8450b3b84ad27d21d043567fa617a7 | installer-darwin-amd64 |
+| 2b894b5bae8470a27e3c0c4bc42d22c306d29fc423f76a071ab28d92854c0e5c | installer-darwin-arm64 |
+| 4b9d17fefd83eb841c35268eef0ef6dc311e3fedcfb4ea13d32e613e24d48416 | installer-linux-amd64 |
+| 187c2afa9df0a639424c00dcf43f85a942bd5660e0e539916d77739daf0bcf6f | installer-linux-arm |
+| f10ea3081010a42c7191a2dfcbdbcd2480f8bd9e07c18a84094db9d20db0ca3f | installer-linux-arm64 |
