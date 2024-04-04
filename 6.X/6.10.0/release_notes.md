@@ -29,8 +29,8 @@ Current version: 6.10.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 580dfa2ec3fd528b472c1d3a4d5f294966aefe4490dd8d0eb54bd3d62b74a50a | installer-darwin-amd64 |
-| a67fcd3980b9915ce51536c4a65ab9f99df26dac0c6c72550fd020cfdc8c97db | installer-darwin-arm64 |
-| 59934e2f19b51f5476e32b1c3a25e7afae9b4070982e1f7b7e4dff8ad5958c5c | installer-linux-amd64 |
-| 7ffa847b190216a8ee9dc73ddb3ca3f83fccd44e9c5ca21c09a9ccdbe40f51dc | installer-linux-arm |
-| f6d828c10b28072c780c681403c58ad09bb441ef58b47c7492e95373ca993831 | installer-linux-arm64 |
+| e345bcec58d501d845767e85a9ef8a68b4a2370a78fdd35cf901e4f9ff9cdbe7 | installer-darwin-amd64 |
+| 32b06a51ac4d5812c50393b635120726562741a10ca83d519050554532a37983 | installer-darwin-arm64 |
+| a7c0457cce06879759be0a92a665d914cc76bae86599e651989de6de8c366017 | installer-linux-amd64 |
+| 63a3676016e1b479c8a4445e36fe5cedc9c2a3e8b19277a24e6e291458a8b9a4 | installer-linux-arm |
+| 16f6889a0f6624bfa23e5229515e4c62c462a62becc75e2a454fc9c7200de0f1 | installer-linux-arm64 |
