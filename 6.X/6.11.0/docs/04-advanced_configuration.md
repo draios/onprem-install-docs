@@ -70,7 +70,7 @@ hostPathCustomPaths:
   cassandra: /sysdig/cassandra
   elasticsearch: /sysdig/elasticsearch
   mysql: /sysdig/mysql
-  postgresql: /sysdig/postgresql    
+  postgresql: /sysdig/postgresql
 ```
 
 ## Installer on EKS
