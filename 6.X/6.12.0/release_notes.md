@@ -3,6 +3,13 @@ Release 6.12.0 May, 2024
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
 
+Upgrade Matrix
+---
+
+Supported Upgrade From 6.X versions.
+
+**Upgrade From Version 5.X or previous are NOT SUPPORTED.**
+
 ## Using MinIO in the Sysdig On-premises Environments
 
 Starting from release v6.6.0 we have added MinIO to the Sysdig stack (specifically importing the MinIO binary from upstream) for use in conjunction with our services.
@@ -29,5 +36,3 @@ Current version: 6.12.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-~/sysdig/automation/onprem-automation/releases ~/sysdig/onprem-install-docs/6.X
-~/sysdig/onprem-install-docs/6.X
