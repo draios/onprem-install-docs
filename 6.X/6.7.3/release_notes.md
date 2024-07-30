@@ -1,4 +1,4 @@
-Release 6.7.3 May, 2024
+Release 6.7.3 Jul, 2024
 ===
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
@@ -29,7 +29,6 @@ Current version: 6.7.3-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-~/sysdig/automation/onprem-automation/releases ~/sysdig/onprem-install-docs/6.X
 | 3d4a97c973dbb6b9903311b9e2da395d964a312d8de11f5b7446a4183a46cf23 | installer-darwin-amd64 |
 | 8964a37cbe800329b311b57dafefcd6507b48fd3879222c10a664c835b2132d1 | installer-darwin-arm64 |
 | 867f690a15179607a8fc0eb4585a55ae2d0a51fa95646e4c438ddd01c5c3a6a8 | installer-linux-amd64 |
