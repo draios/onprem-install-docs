@@ -1,4 +1,4 @@
-Release 6.13.0 May, 2024
+Release 6.13.0 Jul, 2024
 ===
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
