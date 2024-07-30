@@ -36,8 +36,11 @@ Current version: 6.13.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 35212d71be4b87308b2993d1f0fcc485778c6ff681e651a8df370d30b8a1f3ba | installer-darwin-amd64 |
-| 3c8907483b5e6618d7141162d8edf6599a127c4571b2063bb4fae1add4b7355c | installer-darwin-arm64 |
-| d491f03f72becb507fd76884ac51ac42463562ec493bead4014538103ba90d25 | installer-linux-amd64 |
-| dd89a96ab50f55f4f01da3678fa32ec60d9689c482efcbb8ea30a052a417a742 | installer-linux-arm |
-| a0162aad9b3609e407287f5956d6ea52c2b4402a31cef398917daf49f2cc97eb | installer-linux-arm64 |
+~/sysdig/automation/onprem-automation/releases ~/sysdig/onprem-install-docs/6.X ~/sysdig/onprem-install-docs
+| d36e8238834ffc3c64233ce3aac6d7112dbb0b645413a9ca93fd6b9c3d6957c7 | installer-darwin-amd64 |
+| de753f4d2496af2665dd8b8acc0b8018e71c938c284e99901ae50a63225a531f | installer-darwin-arm64 |
+| 029459dd8e19224e5833f2b6ebce8b1ce09539f405acd6c15cdbce4a056ad3b9 | installer-linux-amd64 |
+| 7029db30b6dd145ae78f84c697c39aaca05f039390c67e67605d050997a6ac3c | installer-linux-arm |
+| eec99fa16fcd145ecab40428af80dafad58ff5c00563f31a4c4ddd538742ca27 | installer-linux-arm64 |
+
+~/sysdig/onprem-install-docs/6.X ~/sysdig/onprem-install-docs
