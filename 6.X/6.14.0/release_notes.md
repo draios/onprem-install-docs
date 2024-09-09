@@ -23,10 +23,10 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 | **Components** | **Kubernetes with Statefulsets** |
 |---|---|
 | Redis                      | 6.2.9 |
-| OpenSearch                 | 2.10.0 |
+| OpenSearch                 | 2.11.1 |
 | Cassandra                  | 4.1.5 |
 | Postgres                   | 12.13 |
-| NATS JetStream             | 2.10.10 |
+| NATS JetStream             | 2.10.14 |
 | HA Proxy                   | 0.14.7 |
 
 
