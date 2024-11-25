@@ -1333,7 +1333,7 @@ sysdig:
     enabled: true
 ```
 
-## **sysdig.secure.events.audit.config.store.ip.enabled**
+## **sysdig.secure.events.audit.config.store.ip**
 
 **Required**: `false`<br />
 **Description**: Global flag to enable storing of origin IP in Sysdig Platform Audit in all services.
@@ -1349,8 +1349,7 @@ sysdig:
       audit:
         config:
           store:
-            ip:
-              enabled: true
+            ip: true
 ```
 
 ## **sysdig.elasticsearch6Version**
