@@ -1,5 +1,6 @@
-<!-- Space: TOOLS -->
+<!-- Space: IONP -->
 <!-- Parent: Installer -->
+<!-- Parent: Git Synced Docs -->
 <!-- Title: Cassandra Snitch Issue When Upgrading to 6.0 -->
 <!-- Layout: plain -->
 
