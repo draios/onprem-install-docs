@@ -1,6 +1,5 @@
-<!-- Space: IONP -->
+<!-- Space: TOOLS -->
 <!-- Parent: Installer -->
-<!-- Parent: Git Synced Docs -->
 <!-- Title: Command Line Arguments -->
 <!-- Layout: plain -->
 
@@ -18,7 +17,7 @@
 
 `--skip-pull-secret`
 
-- The services require the pull secret to exist with the expected name (`sysdigcloud-pull-secret`) and to have access to the registry.
+- The services require the pull secret to exist with the expected name (`sysdigcloud-pull-secret`) and to have allow access to the registry.
 
 - if the pull secret is missing, the behaviour could be unpredictable:
   some Pods could start if they can find the image locally and if their `imagePullPolicy`
@@ -37,10 +36,10 @@ sysdig-serviceaccount.yaml:  name: sysdig-elasticsearch
 sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 ```
 
-- One implication of this is that unless the `node-to-labels` ServiceAccount is added,
-  rack awareness will not be available for any datastore.
-  Another implication is that if the  ServiceAccount(s) are missing, the user will have to `describe`
-  the StatefulSet because Pods will not start at all:
+- One implication of this is that unless the `node-to-labels` Service account is added,
+  rack awareness will not work neither in Cassandra nor in Elasticsearch (to be verified)
+  Another implication is that if Service Accounts are missing, the user will have to `describe`
+  the statefulset because Pods will not start at all:
 
 ```text
 Events:
@@ -55,19 +54,13 @@ Events:
 - installer does not apply the StorageClass manifest.
   It expects the storageClassName specified in values.yaml to exist.
 
-`--disable-proxy`
-
-- This flag allows disabling an existing configuration for proxy. Several services can be configured to use a proxy to go out to the Internet. For example `scanningv2-pkgmeta`, `certmanager`, `eventsForwarder` etc.
-- If it becomes necessary to remove such configuration, this flag can be used to remove the proxy configuration.
-- This flag also applies to `generate`, `diff` and `import`.
-
 ## Command: `import`
 
 `--zookeeper-workloadname <string value>`
 
 - This is the value that will be used for the `zookeeper` StatefulSet.
 The default value is `zookeeper`, this argument must be used when the
-actual name of the StatefulSet in the cluster differs
+actual name of the statefulset in the cluster differs
 
 `--kafka-workloadname <value>`
 
@@ -178,6 +171,7 @@ quay.io/sysdig/reporting-api:6.0.0.12431
 quay.io/sysdig/promchap:0.99.0-master.2022-11-18T13-46-40Z.d6b3d10f83
 quay.io/sysdig/redis-6:1.0.1
 quay.io/sysdig/ui-admin-nginx:6.0.0.12431
+quay.io/sysdig/admission-controller-api-pg-migrate:6.0.0.12431
 quay.io/sysdig/admission-controller-api:6.0.0.12431
 quay.io/sysdig/scanning:6.0.0.12431
 quay.io/sysdig/sysdig-alert-notifier:6.0.0.12431
@@ -283,7 +277,7 @@ NOTE: Using this flag will automatically generate the charts that you would obta
 
 `--argo-repo-url (string)`
 
-The URL of the repository that will contain the ArgoCD files and helm charts, expected in the form `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. The default is `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. This will be replaced within the ArgoCD apps definition files.
+The URL of repository that will contain ArgoCD files and helm charts, expected in the form `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. The default is `git@github.com:ORGANIZATION/SAMPLE-REPO.git`. This will be replaced within the ArgoCD apps definition files.
 
 `--argo-repo-rev (string)`
 

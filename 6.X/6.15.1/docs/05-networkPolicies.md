@@ -1,6 +1,5 @@
-<!-- Space: IONP -->
+<!-- Space: TOOLS -->
 <!-- Parent: Installer -->
-<!-- Parent: Git Synced Docs -->
 <!-- Title: Network policies v2 in the installer -->
 <!-- Layout: plain -->
 

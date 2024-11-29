@@ -1,6 +1,5 @@
-<!-- Space: IONP -->
+<!-- Space: TOOLS -->
 <!-- Parent: Installer -->
-<!-- Parent: Git Synced Docs -->
 <!-- Title: Postgres HA Backup Restore Runbook -->
 <!-- Layout: plain -->
 

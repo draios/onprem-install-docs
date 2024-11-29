@@ -1,6 +1,5 @@
-<!-- Space: IONP -->
+<!-- Space: TOOLS -->
 <!-- Parent: Installer -->
-<!-- Parent: Git Synced Docs -->
 <!-- Title: [BETA] Configuration Parameters -->
 <!-- Layout: plain -->
 
