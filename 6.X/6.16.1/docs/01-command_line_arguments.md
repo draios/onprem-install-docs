@@ -20,7 +20,7 @@
 
 - The services require the pull secret to exist with the expected name (`sysdigcloud-pull-secret`) and to have access to the registry.
 
-- if the pull secret is missing, the behaviour could be unpredictable:
+- If the pull secret is missing, the behaviour could be unpredictable:
   some Pods could start if they can find the image locally and if their `imagePullPolicy`
   is not `Always`
 - Other Pods will fail because they can't pull the image
