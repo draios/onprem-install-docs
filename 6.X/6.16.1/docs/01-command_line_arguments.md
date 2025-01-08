@@ -51,7 +51,7 @@ Events:
 
 `--skip-storageclass`
 
-- installer does not apply the StorageClass manifest.
+- Installer does not apply the StorageClass manifest.
   It expects the storageClassName specified in values.yaml to exist.
 
 `--disable-proxy`
