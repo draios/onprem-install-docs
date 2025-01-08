@@ -40,7 +40,6 @@ sysdig-serviceaccount.yaml:  name: sysdig-cassandra
 - One implication of this is that unless the `node-to-labels` ServiceAccount is added,
   rack awareness will not be available for any datastore.
   - Another implication is that if the ServiceAccount(s) are missing, you will have to `describe` the StatefulSet because Pods will not start at all:
-  the StatefulSet because Pods will not start at all:
 
 ```text
 Events:
