@@ -91,7 +91,7 @@ This command performs the following:
 
 - Gets a new license from either `--license` or from `--license-file name.ext`
 
-- applies the license to `common-config` and to the relevant Secret of the following backend services:
+- Applies the license to `common-config` and to the relevant Secret of the following backend services:
 
   - `api`
   - `collector`
