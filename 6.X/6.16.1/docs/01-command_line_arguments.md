@@ -82,7 +82,7 @@ actual name of the StatefulSet in the cluster differs
 
 ## Command: `update-license`
 
-** WARNING: THIS FEATURE requires `kubectl` to be at least version `1.20.0` **
+Prerequisite: This feature requires `kubectl` version `1.20.0` or greater.
 
 This command performs the minimal changes and restarts to apply a new license.
 Based on [this page](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/)
