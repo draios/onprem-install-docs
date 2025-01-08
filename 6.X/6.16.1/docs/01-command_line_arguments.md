@@ -57,7 +57,7 @@ Events:
 `--disable-proxy`
 
 - This flag lets you disable an existing configuration for proxy. Several services can be configured to use a proxy to go out to the Internet. For example, `scanningv2-pkgmeta`, `certmanager`, and `eventsForwarder`.
-- If it becomes necessary to remove such configuration, this flag can be used to remove the proxy configuration.
+- You can use this flag to remove such a proxy configuration, if necessary.
 - This flag also applies to `generate`, `diff` and `import`.
 
 ## Command: `import`
