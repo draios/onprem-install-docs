@@ -23,7 +23,7 @@
 - If the pull secret is missing, the behaviour could be unpredictable:
   some Pods could start if they can find the image locally and if their `imagePullPolicy`
   is not `Always`
-- Other Pods will fail because they can't pull the image
+- Other Pods will fail because they cannot pull the image.
 
 `--skip-serviceaccount`
 
