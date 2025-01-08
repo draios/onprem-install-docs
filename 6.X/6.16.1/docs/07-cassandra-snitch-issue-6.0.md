@@ -24,7 +24,7 @@
 
     - `GoogleCloudSnitch` for GKE
 
-    - `customGossipingPropertyFileSnitch` A custom snitch based on our own tool to extract AZ from the Kubernetes Nodes
+    - `customGossipingPropertyFileSnitch`: A custom snitch based on our own tool to extract AZ from the Kubernetes Nodes.
 
 - Starting from 6.x, we will use `customGossipingPropertyFileSnitch` on all environments.
 
