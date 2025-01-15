@@ -1,4 +1,4 @@
-Release 6.16.1 Jan, 2024
+Release 6.16.2 Jan, 2024
 ===
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
@@ -32,7 +32,7 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 ### Checksum for Installer Binaries
 
-Current version: 6.16.1-1
+Current version: 6.16.2-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
