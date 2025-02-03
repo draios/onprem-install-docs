@@ -97,7 +97,7 @@ This install assumes the Kubernetes cluster has network access to pull images fr
     The username for the configured airgapped_registry_name. Ignore this
     parameter if the registry does not require authentication.
 
-- Download the installer binary.
+- Please contact Sysdig Support to get the Installer that matches your OS.
 - Run the Installer.
   ```bash
   ./installer deploy
