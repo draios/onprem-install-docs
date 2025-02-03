@@ -83,7 +83,6 @@ This install assumes the Kubernetes cluster has network access to pull images fr
 
     See Airgapped Installation Options for more information.
 
-- Download the installer binary that matches your operating system from the [installerrelease page](https://github.com/draios/installer/releases).
 - Run the Installer.
   ```bash
   ./installer deploy
