@@ -46,9 +46,9 @@ A S3 or S3 compatible bucket is provisioned. The customer has an AWS Access Key 
 
 ### Installation
 
-The values necessary to install this component are detailed below:
+There needed values for this component to be installed they are detailed below in a yaml example
 
-```yaml
+```
 aws:
     logicalBackupS3Bucket: ""
     logicalBackupS3Region: ""
@@ -65,14 +65,11 @@ backups:
     version: 0.1.3
 ```
 
-After you set the values:
-1. Run `installer diff` 
-2. Review the changes
-3. If they are good, run `installer deploy` to deploy the changes
+After the values are setted please run a `installer diff` and check the changes, if the changes are good run `installer deploy` and the changes will be deployed.
 
 ### Manual Backups
 
-The backup tool is installed as a CronJob called `pg-backup-ha-cronjob` in the `sysdigcloud` namespace. By default, it runs backups every 6 hours. You can also trigger the backup on-demand with following command:
+The backup tool will be installed as a CronJob called `pg-backup-ha-cronjob` in the `sysdigcloud` namespace. By default it will run backups every 6 hours. Customers can also trigger the backup on-demand using the following command:
 
 ````
 kubectl create job pg-backup --from=cronjob/pg-backup-ha-cronjob -n sysdigcloud
@@ -80,7 +77,7 @@ kubectl create job pg-backup --from=cronjob/pg-backup-ha-cronjob -n sysdigcloud
 
 ### Verifications
 
-In the `sysdigcloud` namespace, you can run the following command to find the pod in which the latest backup job is executed. The log of the pod provides details about the backup operations.
+In the `sysdigcloud` namespace, you can run the following command to find the pod in which the latest backup job is executed. The log of the pod should provide the details about the backup operations.
 
 ```
 kubectl get pods -n sysdigcloud | grep "pg-backup-ha-cronjob"
@@ -113,7 +110,7 @@ We assume that the most recent backup can be found in S3 bucket in the path as i
 
 ### How to Use the Restore
 
-The restore tool is based on Kubernetes Job, this job uses the latest backup on the S3 bucket. Since datastore restore is only performed on-demand, it is **NOT** included in the Installer binary. You can restore the database by applying the following yaml. The restore time will vary depending on the size of databases.
+The restore tool is based on Kubernetes Job, this job uses the latest backup on the S3 bucket. Since datastore restore is only performed on-demand, it is **NOT** included in the Installer binary. Customers can trigger the database restore by applying the following yaml. The restore time will vary depending on the size of databases.
 
 The execution of the restore requires to scale down of all the deployments in the sysdig namespace and a StatefulSet, in order to have a smooth and error free database restoration, below you have a documentation how to do that, and also a scale up for setting back the environment.
 
