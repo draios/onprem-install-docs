@@ -6,7 +6,8 @@
 
 # Openshift SCC
 
-In an openshift scenario, we need to leverage openshift SCC (Security Context Constraint) to make the sysdig workload run with the proper configuration. We will use 2 scc for the service accounts:
+In an openshift scenario, we need to leverage openshift SCC(Security Context Constraint) to make the sysdig workload run with the proper configuration.
+At the moment we will use 2 scc for the service accounts:
 
 * **privileged**: It allows to run privileged container, but it's used when the container must run as the root user.
 * **nonroot-v2**: Available from Openshift 4.11. It allows to run the container as any user with uid > 0 and to set the seccomp profile.
@@ -17,7 +18,7 @@ One important concept is that even if we give to a service account multiple SCCs
 
 More details on the SCC [documentation](https://docs.openshift.com/container-platform/4.14/authentication/managing-security-context-constraints.html).
 
-Here you can find a table with all the Service Accounts and the reason behind the given SCC in Openshift >= 4.11:
+Here you can find a table with all the serviceaccount and the reason behind the given SCC in Openshift >= 4.11:
 
 |        Service Account        |    SCC     | Reason                                                                                                                                                    |
 | :---------------------------: | :--------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -30,6 +31,7 @@ Here you can find a table with all the Service Accounts and the reason behind th
 |   sysdig-meerkat-collector    | privileged | The dockerfile has `sysdig` as USER, and the kubelet cannot verify that user `sysdig` does not have uid 0. After the hardening this could be set to nonroot-v2 |
 |   sysdig-meerkat-aggregator   | privileged | The dockerfile has `sysdig` as USER, and the kubelet cannot verify that user `sysdig` does not have uid 0. After the hardening this could be set to nonroot-v2 |
 |   sysdig-meerkat-datastream   | privileged | The dockerfile has `sysdig` as USER, and the kubelet cannot verify that user `sysdig` does not have uid 0. After the hardening this could be set to nonroot-v2 |
+|     sysdigcloud-minio-sa      | privileged | init container uses root                                                                                                                                  |
 |     node-labels-to-files      | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
 |     elasticsearch-pre-job     | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
 |    elasticsearch-post-job     | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
@@ -38,4 +40,5 @@ Here you can find a table with all the Service Accounts and the reason behind th
 |       metadata-service        | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
 |             redis             | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
 |    sysdigcloud-promqlator     | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
+|  sysdigcloud-minio-operator   | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
 |  sysdig-certificate-exporter  | nonroot-v2 | Needs to run with uid 1000 and seccompProfile set                                                                                                         |
