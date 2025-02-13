@@ -43,8 +43,7 @@ global:
 **Required**: `false`<br />
 **Description**: The URL of the airgapped (internal) docker registry. This URL
 is used for installations where the Kubernetes cluster can not pull images
-directly from Quay. See [airgap instructions
-multi-homed](../README.md#airgapped-with-multi-homed-installation-machine)
+directly from Quay. See [airgap instructions multi-homed](../README.md#airgapped-with-multi-homed-installation-machine)
 and [full airgap instructions](../README.md#full-airgap-install) for more
 details.<br />
 **Default**:<br />
