@@ -14006,6 +14006,40 @@ sysdig:
           timeout: "30s"
 ```
 
+## **sysdig.secure.scanningv2.scanResultAPI.partman.retention.pipeline**
+**Required**: `false`<br />
+**Description**: The retention period in days for pipeline results in the scan results database. Acceptable values range from 1 to 90.<br />
+**Default**: `90`<br />
+
+**Example**:
+
+```yaml
+sysdig:
+  secure:
+    scanningv2:
+      scanResultAPI:
+        partman:
+          retention:
+            pipeline: "90"
+```
+
+## **sysdig.secure.scanningv2.scanResultAPI.partman.retention.registry**
+**Required**: `false`<br />
+**Description**: The retention period in days for registry results in the scan results database. Acceptable values range from 1 to 90. <br/>
+**Default**: `90`<br />
+
+**Example**:
+
+```yaml
+sysdig:
+  secure:
+    scanningv2:
+      scanResultAPI:
+        partman:
+          retention:
+            registry: "90"
+```
+
 ## **sysdig.platformService.enabled**
 
 **Required**: `false`<br />
