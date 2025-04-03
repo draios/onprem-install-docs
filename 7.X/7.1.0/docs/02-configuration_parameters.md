@@ -2498,30 +2498,6 @@ sysdig:
       adminpassword: my_root_user_password
 ```
 
-## **sysdig.postgresDatabases.serviceOwnerManagement**
-
-**Required**: `false`<br />
-**Description**: A map containing database connection details for external postgresql instance used as `serviceOwnerManagement` database. To use in conjunction with `sysdig.postgresql.external`. Only relevant if `sysdig.postgresql.primary` is configured.<br />
-**Example**:
-
-```yaml
-sysdig:
-  postgresql:
-    primary: true
-    external: true
-  postgresDatabases:
-    serviceOwnerManagement:
-      host: my-som-db-external.com
-      port: 5432
-      db: som_db
-      username: som_user
-      password: my_som_user_password
-      sslmode: disable
-      admindb: root_db
-      adminusername: root_user
-      adminpassword: my_root_user_password
-```
-
 ## **sysdig.postgresDatabases.beacon**
 
 **Required**: `false`<br />
@@ -11136,95 +11112,6 @@ sysdig:
 sysdig:
   promRemoteWritePlatformMetrics:
     jvmOptions: -Xms4G -Xmx4G -Dspring.profiles.active=beacon-ibm
-```
-
-## **sysdig.serviceOwnerManagement.enabled**
-
-**Required**: `false`<br />
-**Description**: Enables ServiceOwnerManagement, the microservice that IBM Service Owners will use to manage their assets.<br />
-**Options**: `true|false`<br />
-**Default**: `false`<br />
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagement:
-    enabled: true
-```
-
-## **sysdig.serviceOwnerManagement.legacyToken**
-
-**Required**: `false`<br />
-**Description**: Set the ServiceOwnerManagement-to-Legacy access token, used by this service to authenticate against the API server.<br />
-**Options**:<br />
-**Default**:<br />
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagement:
-    legacyToken: change_me
-```
-
-## **sysdig.serviceOwnerManagement.beaconToken**
-
-**Required**: `false`<br />
-**Description**: Set the ServiceOwnerManagement-to-Beacon access token, used by this service to authenticate against the Beacon server.<br />
-**Options**:<br />
-**Default**:<br />
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagement:
-    beaconToken: change_me
-```
-
-## **sysdig.serviceOwnerManagementVersion**
-
-**Required**: `false`<br />
-**Description**: Docker image tag of ServiceOwnerManagement, relevant when `sysdig.serviceOwnerManagement.enabled` is `true`.<br />
-**Options**:<br />
-**Default**: [`sysdig.monitorVersion`](configuration_parameters.md#sysdigmonitorversion)<br />
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagementVersion: 2.4.1.5032
-```
-
-## **sysdig.serviceOwnerManagementReplicaCount**
-
-**Required**: `false`<br />
-**Description**: Number of ServiceOwnerManagement replicas.<br />
-**Options**:<br />
-**Default**:<br />
-
-| cluster-size | count |
-| ------------ | ----- |
-| small        | 1     |
-| medium       | 3     |
-| large        | 5     |
-
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagementReplicaCount: 2
-```
-
-## **sysdig.serviceOwnerManagement.jvmOptions**
-
-**Required**: `false`<br />
-**Description**: The custom configuration for the ServiceOwnerManagement JVM.<br />
-**Options**:<br />
-**Default**:<br />
-**Example**:
-
-```yaml
-sysdig:
-  serviceOwnerManagement:
-    jvmOptions: -Xms4G -Xmx4G
 ```
 
 ## **sysdig.resources.promRemoteWriteBeacon.requests.cpu**
