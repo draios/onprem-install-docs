@@ -1,4 +1,4 @@
-Release 7.1.0 Feb, 2025
+Release 7.0.0 Feb, 2024
 ===
 
 Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
@@ -22,23 +22,23 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 | **Components** | **Kubernetes with Statefulsets** |
 |---|---|
-| Redis                      | 6.2.14 |
-| OpenSearch                 | 2.18.0 |
-| Cassandra                  | 4.1.7 |
-| Postgres                   | 15.10 |
+| Redis                      | 6.2.9 |
+| OpenSearch                 | 2.11.1 |
+| Cassandra                  | 4.1.5 |
+| Postgres                   | 12.13 |
 | NATS JetStream             | 2.10.14 |
 | HA Proxy                   | 0.14.7 |
 
 
 ### Checksum for Installer Binaries
 
-Current version: 7.1.0-1
+Current version: 7.0.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| 682f6583afac26347af6c17a86c5c9dabf51e023e7e7cfc9f22d0feae1fcf1f3 | installer-darwin-amd64 |
-| 4aea1f7ab4def424b7fb5480d93c634db9b8c3f0140ce5f28b04ebcc731e7baf | installer-darwin-arm64 |
-| d7a5caa566622e5bf94f26bdd53a17f295a281f17db6497fcc3f772da20c7e59 | installer-linux-amd64 |
-| 541ca61c1fc515de78760395f17eb186c98839d59db4016f2ded9a2066c71154 | installer-linux-arm |
-| 9e3618973606a577969667e3fa55f579645d8c6708e52e1560c08ee7681869a7 | installer-linux-arm64 |
+| 28114bf6f9d3de80673fb8d8b250ffddf8a164c81a176bbe2c6d3e41e98d41e9 | installer-darwin-amd64 |
+| 683c33d3a38d69730fba449e7e97e624cd29fd574eb1187d93613807a60b5e6b | installer-darwin-arm64 |
+| 6f9e115bb1a50f7dcd211b7802c7c53300246daca3ba8a6118f4a2d2655cc916 | installer-linux-amd64 |
+| bb16f96f7639b11265fff294558099418974b11318b933cc8ce36c5de1782744 | installer-linux-arm |
+| c6eb20190d72421f8b6058c6711cc7768689035e028ca49cf00d5912aca742b5 | installer-linux-arm64 |
 
