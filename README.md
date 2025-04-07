@@ -62,10 +62,10 @@ Beyond info at this repo, take a look at our [Sysdig On-Premises Release Notes](
 **⚠️ Upgrade Path Warning**
 
 Before upgrading to the latest version, please note these critical requirements:
-1. **For versions before 6.7 (6.5.X or above):**
+1. **Upgrading before 6.7 (6.5.X or above):**
     - In v6.7.0, the nats.js PVC requirements have been increased if your **NATS storage size is below 100GB**, as a result, it is necessary to [resize the PVCs](6.X/6.7.0/docs/09-natsJs-pvc-size-increase.md) before initiating the installer upgrade. Open a support case for guidance and assistance with the upgrade process.
 
-2. **For versions before 6.9 (for any 5.x upgrade from):**
+2. **Upgrading before 6.9 (for any 5.x upgrade from):**
     - If you are currently using on-prem version **5.x** and plan to upgrade to **v6.9.0**, ensure you have upgraded your data store to Cassandra v3 before proceeding with the upgrade to v6.9.0.
 
 Failure to follow these steps may result in upgrade failures or data inconsistencies. Verify your current configuration before upgrading.
