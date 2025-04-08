@@ -39,6 +39,8 @@ Sysdig platform is continuously being validated at multiple K8s flavors includin
 | >= 5.1.10 | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
 | 6.0.X, 6.1.X | 1.23, 1.24, 1.25, 1.26 |
 | >= 6.2.X | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29 |
+| 7.X | 1.30, 1.31 |
+
 
 ## Supported Migration Paths
 
@@ -49,13 +51,29 @@ Beyond info at this repo, take a look at our [Sysdig On-Premises Release Notes](
 
 |Install version | Supported Upgrade From | Latest Release |
 |---|---|---|
+| 7.x (by request) | 6.X | [7.X](7.X) (*)|
 | 6.x (by request) | 5.0.X, 5.1.X 6.X.X | [6.X](6.X) (*)|
 | 5.1 (by request) | 4.0.X, 5.0.X, 5.1.X | [5.1](5.1) |
 | 5.0 (by request) | 4.0.X, 5.0.X | [5.0](5.0) |
 | 4.0 (by request) | 3.6.X, 4.0.X | [4.0](4.0) |
 | 3.6 (by request) | 3.2.X, 3.5.X, 3.6.X | [3.6](3.6) |
 > Reference:
-> - (*) Upgrade from 5.X to 6.X is supported only until 6.11, since 6.12 the direct upgrade from 5.X is not supported, please check in each version.
+> - (*) Upgrade from 5.X to 6.X is supported only until 6.11, since 6.12 the direct upgrade from 5.X is not supported, please check the upgrade path warnings for each version below.
+
+
+**⚠️ Upgrade Path Warning**
+
+Before upgrading to the latest version, please note these critical requirements:
+1. **Before Upgrading 6.7.x (for upgrades from 6.5.X or above):**
+    - In v6.7.0, the nats.js PVC requirements have been increased if your **NATS storage size is below 100GB**, as a result, it is necessary to [resize the PVCs](6.X/6.7.0/docs/09-natsJs-pvc-size-increase.md) before initiating the installer upgrade. Open a support case for guidance and assistance with the upgrade process.
+
+2. **Before Upgrading to 6.9.x (for upgrades from 5.x or above):**
+    - If you are currently using on-prem version **5.x** and plan to upgrade to **v6.9.0**, ensure you have upgraded your data store to Cassandra v3 before proceeding with the upgrade to v6.9.0.
+
+3. **Before Upgrading to 6.12.x (for upgrades from 5.x):**
+    - For fresh installations and upgrades to version v6.12.0, OpenSearch v2 is included. If you are currently using **on-prem version 5.x** and plan to upgrade to v6.12.0, ensure that you have first migrated your environment to OpenSearch v1 by upgrading to **any on-prem 6.x** before proceeding with the upgrade to version v6.12.0.
+
+Failure to follow these steps may result in upgrade failures or data inconsistencies. Verify your current configuration before upgrading.
 
 See [docs.sysdig.com](https://docs.sysdig.com/en/on-premises-upgrades.html#UUID-99ec8b45-9aed-4aff-d86b-ad17bc8ef333_UUID-92d3fce4-1e95-4f25-056c-3cc177380de6) for the rest of the migration table.
 
