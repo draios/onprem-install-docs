@@ -79,8 +79,7 @@ actual name of the statefulset in the cluster differs
 ** WARNING: THIS FEATURE requires `kubectl` to be at least version `1.20.0` **
 
 This command performs the minimal changes and restarts to apply a new license.
-Based on [this page](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/)
-
+For more details, see [Upgrade On-Premises License](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/).
 This command performs the following:
 
 - Gets a new license from either `--license` or from `--license-file name.ext`

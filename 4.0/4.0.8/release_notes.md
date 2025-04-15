@@ -1,7 +1,7 @@
 Release 4.0.8 ~~July, 2022~~ Updated Dec, 2022
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+Review the full feature release notes here: https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/
 
 Patch Release updates in 4.0.8-2 (from 4.0.8-1)
 ---

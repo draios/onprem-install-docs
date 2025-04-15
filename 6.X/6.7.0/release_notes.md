@@ -1,7 +1,7 @@
 Release 6.7.0 Dec, 2023
 ===
 
-Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
+Review the [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
 
 ## Using MinIO in the Sysdig On-premises Environments
 

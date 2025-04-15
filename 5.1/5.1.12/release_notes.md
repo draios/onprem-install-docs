@@ -1,7 +1,7 @@
 Release 5.1.12 January, 2024
 ===
 
-For additional information, review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
+For additional information, Review the [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
 
 Upgrade Matrix
 ---

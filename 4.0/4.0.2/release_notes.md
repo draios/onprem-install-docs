@@ -1,7 +1,7 @@
 Release 4.0.2 June 29, 2021
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+Review the full feature release notes here: https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/
 
 Upgrade Matrix
 ---
