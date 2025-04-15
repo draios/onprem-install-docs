@@ -1,7 +1,7 @@
 Release 6.2.1 May, 2023
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+Review the full feature release notes here: https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/
 
 Note: 6.2.1 release introduces the new ScanningV2 engine, which still does not qualifies for air-gap environments.
 

@@ -1,7 +1,7 @@
 Release 6.14.1 Sep, 2024
 ===
 
-Review the full feature [release notes](https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html).
+Review the [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
 
 Upgrade Matrix
 ---

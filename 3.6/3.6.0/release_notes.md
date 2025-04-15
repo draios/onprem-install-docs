@@ -1,7 +1,7 @@
 Release 3.6.0 November 9, 2020
 ===
 
-Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html.
+Review the full feature release notes here: https://docs.sysdig.com/en/sysdig-on-premises-release-notes.html
 
 Upgrade Matrix
 ---

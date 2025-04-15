@@ -72,10 +72,10 @@ actual name of the STS in the cluster differs
 
 ## Command: `update-license`
 
-Added November 2022, this is a new command.
+Added November 2022. This is a new command.
 
 This command performs the minimal changes and restarts to apply a new license.
-Based on [this page](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/)
+For more details, see [Upgrade On-Premises License](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/upgrade-an-on-premises-license/).
 
 This command performs the following:
 

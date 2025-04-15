@@ -7,7 +7,7 @@ The Sysdig agent can be installed along with Sysdig Monitor and/or Sysdig Secure
 
 If you use the installer to add agent(s), note that not all of the agent configurations are enabled. You may need to do further edits in the agent config files. 
 
-This section assumes you will run the agent container as a Kubernetes pod, which then enables the Sysdig agent automatically to detect and monitor your Kubernetes environment. To set up the agent, you need the api key for agent from the settings menu in Sysdig Monitor/Sysdig Secure. Instructions for retrieving the api key can be found [here](https://docs.sysdig.com/en/agent-installation--overview-and-key.html).
+This section assumes you will run the agent container as a Kubernetes pod, which then enables the Sysdig agent automatically to detect and monitor your Kubernetes environment. To set up the agent, you need the api key for agent from the settings menu in Sysdig Monitor/Sysdig Secure. For instructions on how to retrieve the key, see [Retrieve the Sysdig API Token](https://docs.sysdig.com/en/retrieve-the-sysdig-api-token).
 
 If you are setting up both Monitor and Agent together, you can provide a blank value for the `agent.apiKey`. The agent will be launched with the appropriate api key and the value updated in the `values.yaml` file.
 

@@ -5969,7 +5969,7 @@ sysdig:
 
 ## **agent.apiKey**
 **Required**: `false`<br>
-**Description**: Sysdig Agent api key for running agents. Instructions for retrieving the api key can be found [here](https://docs.sysdig.com/en/agent-installation--overview-and-key.html).<br>
+**Description**: Sysdig Agent API key for running agents. For instructions on retrieving the API key, see [Retrieve the Sysdig API Token](https://docs.sysdig.com/en/retrieve-the-sysdig-api-token).<br>
 _**Note**: Required for agent setup. If setting up Monitor and Agent at the same time, you can leave this as blank._<br>
 **Options**:<br>
 **Default**:<br>
