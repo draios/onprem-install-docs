@@ -1,6 +1,6 @@
 # Migrating MySQL to PostgreSQL Database
 
-This topic is meant for the Support organization and Professional Services that will assist with deploying Sysdig On-Prem installations. For more information on our oversight services, see [Oversight Services for Installations and Upgrades](/en/docs/administration/on-premises-deployments/on-premises-installation/#oversight-services-for-installations-and-upgrades).
+This topic is meant for the Support organization and Professional Services that will assist with deploying Sysdig On-Prem installations. For more information on our oversight services, see [Oversight Services for Installations and Upgrades](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/on-premises-installation/#oversight-services-for-installations-and-upgrades).
 
 
 ## Migration
