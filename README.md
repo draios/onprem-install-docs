@@ -75,7 +75,7 @@ Before upgrading to the latest version, please note these critical requirements:
 
 Failure to follow these steps may result in upgrade failures or data inconsistencies. Verify your current configuration before upgrading.
 
-See [docs.sysdig.com](en/docs/administration/on-premises-deployments/sysdig-on-premises-release-support/legacy-support-statement/#supported-releases) for the rest of the migration table.
+See [docs.sysdig.com](https://docs.sysdig.com/en/docs/administration/on-premises-deployments/sysdig-on-premises-release-support/legacy-support-statement/#supported-releases) for the rest of the migration table.
 
 ## Release history
 
