@@ -1,6 +1,6 @@
 # Installer
 
-The Sysdig Installer tool is a Golang binary that helps automate the on-premises deployment of the Sysdig platform (Sysdig Monitor and Sysdig Secure), for environments using Kubernetes or OpenShift. Use the Installer to install or upgrade your Sysdig platform. It is recommended as a replacement for the earlier manual installation and upgrade procedures.
+The Sysdig Installer tool is a golang binary that helps automate the on-premises deployment of the Sysdig platform (Sysdig Monitor and Sysdig Secure), for environments using Kubernetes or OpenShift. Use the Installer to install or upgrade your Sysdig platform. It is recommended as a replacement for the earlier manual installation and upgrade procedures.
 
 # Installation Overview
 
