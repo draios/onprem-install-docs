@@ -1,4 +1,4 @@
-Release 7.1.0 Apr, 2025
+Release 7.2.0 Apr, 2025
 Mar===
 
 To review all the features, see [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
@@ -32,7 +32,7 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 ### Checksum for Installer Binaries
 
-Current version: 7.1.0-1
+Current version: 7.2.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
