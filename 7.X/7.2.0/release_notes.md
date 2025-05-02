@@ -1,4 +1,4 @@
-Release 7.1.0 Apr, 2025
+Release 7.2.0 Apr, 2025
 ===
 
 To review all the features, see [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
@@ -28,17 +28,17 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 | Postgres                   | 15.8 |
 | NATS JetStream             | 2.10.14 |
 | HA Proxy                   | 0.14.7 |
+| Neo4J                      | 5.19.0 |
 
 
 ### Checksum for Installer Binaries
 
-Current version: 7.1.0-1
+Current version: 7.2.0-1
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| feefbc110b624e537e82138d203f0bbc6bef76fcb340d671cb8740c35c69831c | installer-darwin-amd64 |
-| 1cb1979f36c34dbccfedcc5244445829869ebc23e0c785d18393c80c2fd5e259 | installer-darwin-arm64 |
-| cf2183e4b3533c11a2cf21d1ec6d51578e3615b7ed47f5f79df2169bfbc46d5d | installer-linux-amd64 |
-| cc9e4183fbd7c67066638e79e8f7e85b8bac5ada8cff40fdc6de807973b1a766 | installer-linux-arm |
-| 0c3006b74877ca29206bf56428b129b272d4aa949110d70d40c6bda6e8f79c15 | installer-linux-arm64 |
-
+| 96792f6fd32277ed79e2d8e392c04d37242e2a75c570b7b355704ae4c9803826 | installer-darwin-amd64 |
+| 29c1ca926d19b8721a696c322b855706d8c5bc47767c6c252cbd1444db0deae4 | installer-darwin-arm64 |
+| 0bca7642b29a5556dc8027e664bdc3b6da7ae65b44ece638e0d9027ee93ed32c | installer-linux-amd64 |
+| 1125bce13395eccc6c153fc5e8c57afc8ad68533c1b8b4b5ee0687027cc19a4c | installer-linux-arm |
+| 9e040c10180912071403b9f4f410df7c50e750a4ed9f191b92b5b898cc731dd0 | installer-linux-arm64 |
