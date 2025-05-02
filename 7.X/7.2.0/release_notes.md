@@ -1,5 +1,5 @@
 Release 7.2.0 Apr, 2025
-Mar===
+===
 
 To review all the features, see [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
 
