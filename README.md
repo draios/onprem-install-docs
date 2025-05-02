@@ -30,7 +30,7 @@ The Sysdig Platform is a highly available application for securing and monitorin
 
 ## K8s support matrix
 
-Sysdig platform is continuously being validated at multiple K8s flavors including k0ps, Openshift4, EKS, GKE, AKS, IKS, ROKS or RKE2. You can find below the K8s version support matrix. If you have a question about a custom flavor or K8s version, please just share it with your TAM.
+Sysdig platform continuously being validated at multiple K8s flavors including kOps, Openshift4, EKS, GKE, AKS, IKS, ROKS or RKE2. You can find below the K8s version support matrix. If you have a question about a custom flavor or K8s version, share it with your technical account manager (TAM).
 
 | Install version | Validated K8s versions |
 |---|---|
