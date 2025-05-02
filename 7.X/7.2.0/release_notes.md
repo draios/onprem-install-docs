@@ -28,6 +28,7 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 | Postgres                   | 15.8 |
 | NATS JetStream             | 2.10.14 |
 | HA Proxy                   | 0.14.7 |
+| Neo4J                      | 5.19.0 |
 
 
 ### Checksum for Installer Binaries
