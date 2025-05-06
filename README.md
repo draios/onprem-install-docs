@@ -81,6 +81,7 @@ For the full migration table, see [On-Premises Version Support](https://docs.sys
 
 ### Version 7.x
 
+- [7.2.0 Release, April 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#720-release-april-2025)
 - [7.1.0 Release, April 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#710-release-april-2025)
 - [7.0.0 Release, February 2025](https://docs.sysdig.com/en/docs/release-notes/sysdig-on-premises-release-notes/#700-release-february-2025)
 
