@@ -25,7 +25,7 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 | Redis                      | 6.2.9 |
 | OpenSearch                 | 2.11.1 |
 | Cassandra                  | 4.1.5 |
-| Postgres                   | 12.13 |
+| Postgres                   | 15.8 |
 | NATS JetStream             | 2.10.14 |
 | HA Proxy                   | 0.14.7 |
 
