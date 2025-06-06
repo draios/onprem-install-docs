@@ -1,4 +1,4 @@
-Release 7.3.0 May, 2025
+Release 7.3.0 June, 2025
 ===
 
 To review all the features, see [Sysdig On-Premises Release Notes](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/).
