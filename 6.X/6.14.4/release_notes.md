@@ -1,6 +1,6 @@
-| 9bbab346b3e932f3138c8386053f0a493f56c00366fff202bd148278d5bd3353 | installer-darwin-amd64 |
-| d4e917611762b61b143956da2ae7eb746b7bc802dbd0802672416b43d5c3d51f | installer-darwin-arm64 |
-| f431fb1295437e928bcf467c089eed6f9b9a8cc3a1fd7d568b7228c2f712dce0 | installer-linux-amd64 |
-| fe959cfb4b69449a584722e9687fda7d3b9bfd3a5aa8ae4814d3fcc7db3554ea | installer-linux-arm |
-| 35e09c2218dbfae9301bdb1950a22e28e4c9e844b75e6da3118fb75fe052e127 | installer-linux-arm64 |
+| 722a826cf639d997f4d9482a5b0b231b7eca855a4bcfa335ccff4b34484fecf1 | installer-darwin-amd64 |
+| 4969c5ff63f00b364bd1bed5c4ddc5af69440842bed5aba46aee62db7ecc39f8 | installer-darwin-arm64 |
+| 49cdbd3445151d41dd00379829f957226ee78d2296fbec1be1ff0eb6934cc550 | installer-linux-amd64 |
+| c5c8caad4967b46832e47b992abea337fde8a5b50c056135f2f0a9b517bf6ee9 | installer-linux-arm |
+| 40ff07045fd1532d740ec2b113d901e70e5f4cb44b2fb6003601506785aeb3f9 | installer-linux-arm64 |
 
