@@ -33,13 +33,12 @@ Copyright: MinIO Project, (C) 2015-2023 MinIO, Inc. This product includes softwa
 
 ### Checksum for Installer Binaries
 
-Current version: 7.4.0-1
+Current version: 7.4.0-2
 
 | **sha256sum** | **Installer binary** |
 |---|---|
-| a495e60c3407a648f404997ed9d4208825fcebbc762efb7853fecaad08f6a7b2 | installer-darwin-amd64 |
-| 0205b6ef14c6a3f4a27a50c0b8a6c351a1af0a180870b7631b3ec8b86cc3f5a9 | installer-darwin-arm64 |
-| 21f258603f6838bc3ce7d1e84275f7475e61374b76dfa8c1f99fb78dabc4aa42 | installer-linux-amd64 |
-| b634e702902728baac88dfb75784888645c9bed42e6e1e72c3208d514d59f648 | installer-linux-arm |
-| 254db4a567346e177535a6975d3c720bf39f6e07b16c595805b5cc75b7e20801 | installer-linux-arm64 |
-
+| acdbaf3ff2b06cd80e9daa3d671cc70624416879e1ece950bfd73385d1af2065 | installer-darwin-amd64 |
+| a60eabca81abf9b4fd4562d41573dd6e22f546ad1e9b707784be2a769761a999 | installer-darwin-arm64 |
+| 1226cfce5330d18620d83b93daf850a8b14f7916710b0012a150fe8be5519394 | installer-linux-amd64 |
+| 3805095d81e44208162c8ec9c94565d40707b43a314bc77cc0c79c4ba07d9394 | installer-linux-arm |
+| e5ea0a62578e685629e5e955fca3fa5582e8e9d1f3d444365470dd497b8d5b21 | installer-linux-arm64 |
