@@ -93,7 +93,7 @@ On successful run of Installer towards the end of your terminal you should see t
   Collector port is: 6443
   ```
 
-5. Save the values.yaml file in a secure location; it will be used for future upgrades. 
+5. Save the values.yaml file in a secure location; it will be used for future upgrades.
 
 The Installer also generates a directory containing all of the Kubernetes YAML manifests the Installer applied against your cluster. It is not necessary to keep this directory. The Installer can regenerate it by using the exact same binary, the exact same` values.yaml` and the `--skip-import` option.
 
@@ -145,11 +145,11 @@ Use this method where the installation machine does not have network access to p
 1. Follow the Docker Log In to quay.io steps under the Access Requirements section.
 2. Pull the image containing the self-extracting tar:
   ```bash
-  docker pull quay.io/sysdig/installer:3.5.1-1-uber
+  docker pull quay.io/sysdig/installer:7.3.1-1-uber
   ```
 3. Extract the tarball:
   ```bash
-  docker create --name uber_image quay.io/sysdig/installer:3.5.1-1-uber
+  docker create --name uber_image quay.io/sysdig/installer:7.3.1-1-uber
   docker cp uber_image:/sysdig_installer.tar.gz .
   docker rm uber_image
   ```
@@ -218,7 +218,7 @@ This extracts the images into the `images_archive` directory relative to where t
   ```bash
   ./installer deploy
   ```
-  
+
 On successful run of Installer towards the end of your terminal you should see this message:
 
   ```
@@ -230,7 +230,7 @@ On successful run of Installer towards the end of your terminal you should see t
   password: "awesome-password"
   ```
 
-6. Save the values.yaml file in a secure location; it will be used for future upgrades. 
+6. Save the values.yaml file in a secure location; it will be used for future upgrades.
 
 There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
 
