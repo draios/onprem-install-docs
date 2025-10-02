@@ -121,19 +121,19 @@ cp-kafka                    3/3     19h
 
   * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `200Gi`
 
-  ```yaml
-  ...
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 200Gi
-  ...
-  ```
+    ```yaml
+    ...
+    volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 200Gi
+    ...
+    ```
 
 * This next step needs to be done extremely carefully. Please open a second terminal to keep a watch on Kafka pods. We're deleting the
   Kafka statefulset without deleting the pods so that the edited yaml can be applied. `--cascade=orphan` is mandatory and very important here.
@@ -190,16 +190,18 @@ cp-kafka                    3/3     19h
 
   * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `200Gi`
 
-  ```yaml
-  spec:
-    volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        resources:
-          requests:
-            storage: 200Gi
-  ```
+    ```yaml
+    ...
+    spec:
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 200Gi
+    ...
+    ```
 
 * This next step needs to be done extremely carefully. Please open a second terminal to keep a watch on Kafka pods. We're deleting the
 Kafka statefulset without deleting the pods so that the edited yaml can be applied. `--cascade=orphan` is mandatory and very important here.
