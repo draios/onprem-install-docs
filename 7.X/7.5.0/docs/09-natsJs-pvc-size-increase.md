@@ -1,7 +1,7 @@
 <!-- Space: IONP -->
 <!-- Parent: Installer -->
 <!-- Parent: Git Synced Docs -->
-<!-- Title: NatsJs PVC size increase for 6.7.0 release -->
+<!-- Title: NatsJs PVC size increase for 6.7.x and 7.5.x+ releases -->
 <!-- Layout: plain -->
 
 <br />
@@ -10,27 +10,32 @@
 
 <br />
 
-## Increase NATS JetStream Storage when upgrading to 6.7.0
+## Increase NATS JetStream Storage when upgrading to 6.7.0+ and 7.5.0+
 
-Increase persistent storage for NATS JetStream statefulset to 100Gi before upgrading on-prem to release 6.7.0, this is a requirement.
+Increase persistent storage for NATS JetStream statefulset according to the target release. This is a requirement before upgrading on‑prem:
+
+- For upgrades to 6.7.0: increase to 100Gi
+- For upgrades to 7.5.0 or newer: increase to 200Gi
 
 ### Background
 - NatsJs publishers allocate fixed number of bytes at the time of stream creation and cannot be modified later.
 - As the number of publishers (services using NATS) grows, the storage requirement for NATS also increases.
 - Due to fixed size of streams, the storage requirement is the same across Small, Medium or Large clusters.
 - There are future improvements scoped towards configuring stream sizes based on cluster size, but that is not possible at the moment.
-- We're bumping the storage to 100Gi to leave headroom for any new services in future upgrades while we work on improving stream allocation.
+- For release 6.7.0 we're bumping the storage to 100Gi to leave headroom for new services. For releases 7.5.0 and newer, increase to 200Gi to accommodate additional publishers and streams.
 
-If an upgrade to `6.7` is performed without following the steps to increase the disk for NATS statefulset, it may lead to following error on secure services:
+If an upgrade to `6.7` or above is performed without following the steps to increase the disk for NATS statefulset correctly, it may lead to following error on secure services:
 
 ```
 Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.nats.client.Connection]: Factory method 'natsConnection' threw exception; nested exception is io.nats.client.JetStreamApiException: no suitable peers for placement, insufficient storage [10005]
 ```
 
-> [!IMPORTANT]  
-> This runbook has to be applied before upgrading to release 6.7.0. Also, please add `.Values.nats.jetstream.fileStorage.size` as `100Gi` in values.yaml to avoid potential errors.
+> [!IMPORTANT]
+> Apply this runbook before upgrading. Also set `.Values.nats.jetstream.fileStorage.size` in `values.yaml` to match your target release: `100Gi` for 6.7.0, `200Gi` for 7.5.0+.
 
-Unfortunately, statefulset PVC templates cannot be patched directly and require additional steps. 
+> Note: In command examples below that show `100Gi`, use `200Gi` when upgrading to 7.5.0+.
+
+Unfortunately, statefulset PVC templates cannot be patched directly and require additional steps.
 Also, there are many factors at play when  increasing the size of persistent volume dynamically.
 
 To check if storageclass supports volume expansion, run the following command and look for `ALLOWVOLUMEEXPANSION`:
@@ -60,7 +65,7 @@ nats-js-pvc-nats-1                 Bound    nats-js-pvc-nats-1                 5
 nats-js-pvc-nats-2                 Bound    nats-js-pvc-nats-2                 50Gi       RWO            local-disk     74m
 ```
 
-* Start with any one of the PVCs and patch it to increase the storage to 100Gi
+* Start with any one of the PVCs and patch it to increase the storage to 100Gi (use 200Gi for 7.5.0+)
 
 ```shell
 ~> kubectl patch pvc nats-js-pvc-nats-0 -n sysdigcloud -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
@@ -70,7 +75,7 @@ persistentvolumeclaim "nats-js-pvc-nats-0" patched
 * Wait for a minute for PV to auto-resize. If it doesn't, restart the associated nats pod.
 
 ```shell
-~> kubectl delete pod nats-0 -n sysdigcloud 
+~> kubectl delete pod nats-0 -n sysdigcloud
 pod "nats-0" deleted
 
 ~> kubectl get pvc -n sysdigcloud | grep nats-js
@@ -81,6 +86,8 @@ nats-js-pvc-nats-2                 Bound    nats-js-pvc-nats-2                 5
 ```
 
 * Once the restarted pod is Running and `Ready 3/3`, repeat the above steps to patch remaining PVCs and restart 1 pod at a time. Final state should be:
+
+  Note: For 7.5.0+, `CAPACITY` will show `200Gi` for all NATS PVCs.
 
 ```shell
 ~> kubectl get pvc -n sysdigcloud | grep nats-js
@@ -118,8 +125,8 @@ nats                        3/3     19h
 
 * Make the following changes to the yaml file:
 
-  * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `100Gi`
-  
+  * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `100Gi` (use `200Gi` for 7.5.0+)
+
   ```yaml
   ...
   volumeClaimTemplates:
@@ -131,7 +138,7 @@ nats                        3/3     19h
           storage: 100Gi
   ...
   ```
-  
+
 * This next step needs to be done extremely carefully. Please open a second terminal to keep a watch on nats pods. We're deleting the
   nats statefulset without deleting the pod so that the edited yaml can be applied. `--cascade=orphan` is mandatory and very important here.
   There should be no restarts on nats pods.
@@ -185,8 +192,8 @@ nats                        3/3     19h
 
 * Make the following changes to the yaml file:
 
-  * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `100Gi`
-  
+  * Update the `spec.volumeClaimTemplates.spec.resources.requests.storage` to `100Gi` (use `200Gi` for 7.5.0+)
+
   ```yaml
   spec:
     volumeClaimTemplates:
@@ -195,7 +202,7 @@ nats                        3/3     19h
           requests:
             storage: 100Gi
   ```
-  
+
 * This next step needs to be done extremely carefully. Please open a second terminal to keep a watch on nats pods. We're deleting the
 nats statefulset without deleting the pod so that the edited yaml can be applied. `--cascade=orphan` is mandatory and very important here.
 There should be no restarts on nats pods.
@@ -245,13 +252,13 @@ nats-js-pvc-nats-2                 Bound    nats-js-pvc-nats-2                 5
 ```shell
 ~> kubectl delete pvc nats-js-pvc-nats-0 -n sysdigcloud &
 persistentvolumeclaim "nats-js-pvc-nats-0" deleted
-``` 
+```
 
 * Delete the pod (nats-0 in this case). Wait for the PVC to get deleted. If a new PVC is not created automatically, delete the pod a second time.
 The PVC will be in `Pending` state because there's no HostPath volume with 100Gi size. We need to make adjustments now.
 
 ```shell
-~> kubectl delete pod nats-0 -n sysdigcloud 
+~> kubectl delete pod nats-0 -n sysdigcloud
 pod "nats-0" deleted
 
 ~> kubectl get pvc -n sysdigcloud | grep nats-js
@@ -269,11 +276,11 @@ persistentvolume/nats-js-pvc-nats-0 edited
 ```
 
 * Make the following changes to the PV yaml file:
-  * Update the `spec.capacity.storage` to `100Gi`
+  * Update the `spec.capacity.storage` to `100Gi` (use `200Gi` for 7.5.0+)
   * Delete the entire section for `spec.claimRef`
 
     **Before edit**
-  
+
     ```yaml
     ...
     spec:
@@ -293,9 +300,9 @@ persistentvolume/nats-js-pvc-nats-0 edited
       type: DirectoryOrCreate
     ...
     ```
-    
+
     **After edit**
-  
+
     ```yaml
     ...
     spec:
@@ -319,9 +326,9 @@ persistentvolumeclaim/nats-js-pvc-nats-0 edited
 * Make the following changes to the PVC yaml file:
   * Add `spec.volumeName` with value as the name of PersistentVolume (here: nats-js-pvc-nats-0) that we patched in previous step after `spec.VolumeMode`
   * Delete the section for `status`
-       
+
     **Before edit**
-  
+
     ```yaml
     ...
     spec:
@@ -335,9 +342,9 @@ persistentvolumeclaim/nats-js-pvc-nats-0 edited
     status:
       phase: Pending
     ```
-    
+
     **After edit**
-  
+
     ```yaml
     ...
     spec:
@@ -350,7 +357,7 @@ persistentvolumeclaim/nats-js-pvc-nats-0 edited
       volumeMode: Filesystem
       volumeName: nats-js-pvc-nats-0
     ```
-    
+
 * The PVC should now be in `Bound` state and Pod should be running. Once the pod is `Ready 3/3`, repeat the steps from deleting PVC and pod for remaining 2 statefulset pods.
 
 ```shell
@@ -391,14 +398,14 @@ nats-js-pvc-nats-2                 Bound    pvc-266e6b46-dc07-45aa-b52f-cb235a99
 ~> kubectl delete pvc nats-js-pvc-nats-0 -n sysdigcloud &
 persistentvolumeclaim "nats-js-pvc-nats-0" deleted
 ~> kubectl delete pv pvc-95413869-b940-4435-affc-81de2bc30b5f -n sysdigcloud &
-persistentvolume "pvc-95413869-b940-4435-affc-81de2bc30b5f" deleted  
+persistentvolume "pvc-95413869-b940-4435-affc-81de2bc30b5f" deleted
 ```
 
 * Delete the pod (nats-0 in this case). Wait for the PVC and PV to get deleted. If a new PVC is not created automatically, delete the pod a second time.
-  Cluster will dynamically provision a 100Gi volume, and the PVC will be Bound.
+  Cluster will dynamically provision a 100Gi (or 200Gi for 7.5.0+) volume, and the PVC will be Bound.
 
 ```shell
-~> kubectl delete pod nats-0 -n sysdigcloud 
+~> kubectl delete pod nats-0 -n sysdigcloud
 pod "nats-0" deleted
 
 ~> kubectl get pvc -n sysdigcloud | grep nats-js
@@ -421,6 +428,6 @@ nats-js-pvc-nats-2                 Bound    pvc-266e6b46-dc07-45aa-b52f-cb235a99
 * Verify the following:
   * All pods are `Ready 3/3`: `kubectl get pods -n sysdigcloud | grep nats`
   * Statefulset is created and shows `3` Ready replicas: `kubectl get statefulset -n sysdigcloud | grep nats`
-  * Statefulset spec shows volumeClaimTemplate storage size as 100Gi: `kubectl get statefulset nats -n sysdigcloud -o yaml`
-  * All PVCs are `Bound` and showing up as `100Gi` size: `kubectl get pvc -n sysdigcloud`
+  * Statefulset spec shows volumeClaimTemplate storage size as 100Gi or 200Gi (according to your upgrade target): `kubectl get statefulset nats -n sysdigcloud -o yaml`
+  * All PVCs are `Bound` and showing up as `100Gi` or `200Gi` size (according to your upgrade target): `kubectl get pvc -n sysdigcloud`
   * NATS Pod logs do not show any errors (Errors like `no route to host` or `connection refused` are expected during pod restarts).
