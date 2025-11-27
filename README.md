@@ -39,7 +39,7 @@ Sysdig platform continuously being validated at multiple K8s flavors including k
 | >= 5.1.10 | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
 | 6.0.X, 6.1.X | 1.23, 1.24, 1.25, 1.26 |
 | >= 6.2.X | 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29 |
-| 7.X | 1.28, 1.29, 1.30, 1.31, 1.32, 1.33 |
+| 7.X | 1.28, 1.29, 1.30, 1.31, 1.32, 1.33, 1.34 |
 
 
 ## Supported Migration Paths
@@ -81,6 +81,7 @@ For the full migration table, see [On-Premises Version Support](https://docs.sys
 
 ### Version 7.x
 
+- [7.5.0 Release, November 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#750-release-november-2025)
 - [7.4.0 Release, August 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#740-release-august-2025)
 - [7.3.1 Release, August 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#731-hotfix-release-august-2025)
 - [7.3.0 Release, June 2025](https://docs.sysdig.com/en/release-notes/sysdig-on-premises-release-notes/#730-release-june-2025)
