@@ -145,11 +145,11 @@ Use this method where the installation machine does not have network access to p
 1. Follow the Docker Log In to quay.io steps under the Access Requirements section.
 2. Pull the image containing the self-extracting tar:
   ```bash
-  docker pull quay.io/sysdig/installer:3.5.1-1-uber
+  docker pull quay.io/sysdig/installer:7.4.1-1-uber
   ```
 3. Extract the tarball:
   ```bash
-  docker create --name uber_image quay.io/sysdig/installer:3.5.1-1-uber
+  docker create --name uber_image quay.io/sysdig/installer:7.4.1-1-uber
   docker cp uber_image:/sysdig_installer.tar.gz .
   docker rm uber_image
   ```
