@@ -93,7 +93,7 @@ On successful run of Installer towards the end of your terminal you should see t
   Collector port is: 6443
   ```
 
-5. Save the values.yaml file in a secure location; it will be used for future upgrades.
+5. Save the values.yaml file in a secure location; it will be used for future upgrades. 
 
 The Installer also generates a directory containing all of the Kubernetes YAML manifests the Installer applied against your cluster. It is not necessary to keep this directory. The Installer can regenerate it by using the exact same binary, the exact same` values.yaml` and the `--skip-import` option.
 
@@ -218,7 +218,7 @@ This extracts the images into the `images_archive` directory relative to where t
   ```bash
   ./installer deploy
   ```
-
+  
 On successful run of Installer towards the end of your terminal you should see this message:
 
   ```
@@ -230,7 +230,7 @@ On successful run of Installer towards the end of your terminal you should see t
   password: "awesome-password"
   ```
 
-6. Save the values.yaml file in a secure location; it will be used for future upgrades.
+6. Save the values.yaml file in a secure location; it will be used for future upgrades. 
 
 There will also be a generated directory containing various Kubernetes configuration yaml files which were applied by Installer against your cluster. It is not necessary to keep the generated directory, as the Installer can regenerate is consistently with the same values.yaml file.
 
