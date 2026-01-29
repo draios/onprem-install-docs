@@ -280,6 +280,8 @@ For advanced configuration option see [advanced.md](docs/04-advanced_configurati
 
 This table represents the amount of resources for various cluster sizes and deployment modes in their default configuration:
 
+**Note:** For Secure Only and Platform modes, the values shown are with scanningv2, KSPM, and graph enabled.
+
 |Size                                    |Mode        |CPU Cores Requests|CPU Cores Limits|Memory GB Limits|Total Disk GB|
 |----------------------------------------|------------|------------------|----------------|----------------|-------------|
 |Small                                   |Secure Only |66                |162             |289             |947.15       |
