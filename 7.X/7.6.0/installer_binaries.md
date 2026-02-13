@@ -12,11 +12,11 @@ The following table lists all available installer binaries with their SHA256 che
 
 | **SHA256 Checksum** | **Installer Binary** |
 |---|---|
-| 4d53ed03fa5183a251f7deebb881978bb859a25e4c7931472c3425a82be55e53 | [installer-darwin-amd64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-darwin-amd64) |
-| ae8f1925728246c8d335a5849796bab6e0a27ebf7692ab3ce948c7f76fb3aec3 | [installer-darwin-arm64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-darwin-arm64) |
-| 07e2ae5d2575860cd123e167abf9cfb6778ea84dafd7dc2b1c6e901378ebc0b1 | [installer-linux-amd64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-amd64) |
-| 25607063e8c7b4920e22d5f282f220559910f7efa02a8f02b9f6130dbdcab8a5 | [installer-linux-arm](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-arm) |
-| c584904caf4455eb9c2f6e422eda0fdbc4eaec67b5dc51a50daae3d6adedca39 | [installer-linux-arm64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-arm64) |
+| 245f452572352adb06789f43f970ddcaf630a4604c3ca52a834f7c8577638afc | [installer-darwin-amd64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-darwin-amd64) |
+| 2196c4b92d4dea53f5813afb8f1622d71f775d486e6c9fd1d30288ac41952b12 | [installer-darwin-arm64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-darwin-arm64) |
+| 47e6139d3063c955f96fa03d7a09195c232c7c1d000e38a7399505f702abd329 | [installer-linux-amd64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-amd64) |
+| 2e74ba33ec416171d75a67ff76522d5c42abea11c7884fa9608172234845503a | [installer-linux-arm](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-arm) |
+| 56b24e7274c24180a8e06c65fd5b1e02977cf5afea7a4e050a664ad12b8b0f2f | [installer-linux-arm64](https://github.com/draios/installer/releases/download/7.6.0-1/installer-linux-arm64) |
 
 ## Verification
 
