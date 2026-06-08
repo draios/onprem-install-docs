@@ -9,12 +9,12 @@ The following table shows the version of each datastore component used in this r
 | **Component** | **Version (Kubernetes with StatefulSets)** |
 |---|---|
 | Redis                      | 7.2.13 |
-| OpenSearch                 | 2.19.2 |
+| OpenSearch                 | 2.19.5 |
 | Cassandra                  | 4.1.8 |
 | PostgreSQL                 | 15.8 |
 | NATS JetStream             | 2.11.4 |
 | HA Proxy                   | 3.2.1 |
-| Neo4j                      | 2026.02.2 |
+| Neo4j                      | 2026.03.1 |
 
 ## Notes
 
