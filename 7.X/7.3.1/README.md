@@ -37,11 +37,7 @@ If your environment has access to the internet, you can perform a quickstart ins
 
 Follow these steps if your cluster (Kubernetes or Openshift) has Internet access to pull images directly from `quay.io`:
 
-1. Copy the current version of sysdig-chart/values.yaml to your working directory:
-
-  ```bash
-  wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-  ```
+1. Copy [examples/single-node/values.yaml](examples/single-node/values.yaml) to your working directory as `values.yaml`.
 2. Edit the following values:
 
   - [`size`](docs/02-configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: `small`, `medium` and `large`.
@@ -157,10 +153,7 @@ Use this method where the installation machine does not have network access to p
 
 #### On the Installation Machine:
 
-1. Copy the current version sysdig-chart/values.yaml to your working directory:
-  ```bash
-  wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-  ```
+1. Copy [examples/single-node/values.yaml](examples/single-node/values.yaml) to your working directory as `values.yaml`.
 2. Edit the following values:
 
   - [`size`](docs/02-configuration_parameters.md#size): Specifies the size of the cluster. Size

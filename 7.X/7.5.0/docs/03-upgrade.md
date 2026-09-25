@@ -36,11 +36,7 @@ For more context, review the [Prerequisites](../README.md#prerequisites) and [In
 
 ### Step 1 - Download the latest `values.yaml` template
 
-Copy the current version `sysdig-chart/values.yaml` to your working directory.
-
-```bash
-wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-```
+Copy [examples/single-node/values.yaml](../examples/single-node/values.yaml) to your working directory as `values.yaml`.
 
 <br />
 
