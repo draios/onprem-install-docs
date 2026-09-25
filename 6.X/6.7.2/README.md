@@ -31,10 +31,7 @@ Note that you can perform a quick install if your environment has access to the 
 
 This install assumes the Kubernetes cluster has network access to pull images from quay.io.
 
-- Copy the current version `sysdig-chart/values.yaml` to your working directory.
-  ```bash
-  wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-  ```
+- Copy [examples/single-node/values.yaml](examples/single-node/values.yaml) to your working directory as `values.yaml`.
 - Edit the following values:
 
   - [`size`](docs/02-configuration_parameters.md#size): Specifies the size of the cluster. Size defines CPU, Memory, Disk, and Replicas. Valid options are: small, medium, and
@@ -168,10 +165,7 @@ the installation machine.
 
 #### On the Installation Machine:
 
-- Copy the current version sysdig-chart/values.yaml to your working directory.
-  ```bash
-  wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-  ```
+- Copy [examples/single-node/values.yaml](examples/single-node/values.yaml) to your working directory as `values.yaml`.
 - Edit the following values:
 
   - [`size`](docs/02-configuration_parameters.md#size): Specifies the size of the cluster. Size

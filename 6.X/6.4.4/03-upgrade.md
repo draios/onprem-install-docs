@@ -30,11 +30,7 @@ Options](../README.md#quickstart-install) for more context.
 
 ### Download base template 
 
-Copy the current version of `sysdig-chart/values.yaml` to your working directory.
-
-```bash
-wget https://raw.githubusercontent.com/draios/sysdig-cloud-scripts/installer/installer/values.yaml
-```
+Copy [examples/single-node/values.yaml](examples/single-node/values.yaml) to your working directory as `values.yaml`.
 
 <br />
 
