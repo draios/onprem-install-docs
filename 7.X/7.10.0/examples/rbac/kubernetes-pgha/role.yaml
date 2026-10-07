@@ -1,0 +1,241 @@
+---
+# Namespaced Role for the installer ServiceAccount on vanilla Kubernetes
+# (global.deployment: kubernetes) with Postgres in HA
+# (global.postgresql.ha.enabled: true, postgresql.ha.checkCRD: true).
+#
+# Compared with examples/rbac/fullaccess/role.yaml this file is written with
+# explicit apiGroups instead of `apiGroups: ['*']`, so it can be handed to a
+# customer security review as-is. The resource coverage is otherwise the same,
+# minus four entries that never granted anything and are deliberately not
+# carried over:
+#   - namespaces / namespace / storageclasses -> cluster-scoped, a Role cannot
+#     grant them; they live in clusterrole.yaml
+#   - podsecuritypolicies -> the PSP API was removed in Kubernetes 1.25
+#   - podpreset -> the PodPreset API was removed in Kubernetes 1.20
+#   - pod/delete, pod/status -> typos for the `pods` resource, already covered
+#
+# As with the ClusterRole, rules are here either because the installer applies
+# the object (APPLY) or because RBAC privilege-escalation prevention requires the
+# installer to hold a permission before it may create a Role that grants it
+# (GRANT). The installer creates three Roles in this namespace: `postgres-pod`,
+# `sysdigcloud-postgres-operator` and `sysdigcloud-postgres-cluster-post-job`.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: sysdigcloud
+  name: installer
+rules:
+# (APPLY) core namespaced objects rendered by the charts.
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - events
+  - persistentvolumeclaims
+  - pods
+  - pods/exec
+  - pods/log
+  - pods/status
+  - podtemplates
+  - replicationcontrollers
+  - secrets
+  - serviceaccounts
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+# (GRANT) endpoints additionally needs deletecollection. On vanilla Kubernetes
+#         Patroni uses Endpoints as its DCS (the OperatorConfiguration sets
+#         kubernetes_use_configmaps: false), and both the `postgres-pod` and
+#         `sysdigcloud-postgres-operator` Roles list
+#         endpoints:create/delete/deletecollection/get/list/patch/update/watch.
+#         On OpenShift the DCS is ConfigMaps instead, so the openshift* examples
+#         carry the equivalent verbs on configmaps rather than on endpoints.
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+# (APPLY) workloads.
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  - deployments
+  - deployments/scale
+  - replicasets
+  - statefulsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+# (APPLY) the post-install Job, the postgres migration Job, and the backup,
+#         vacuum and slot-monitor CronJobs.
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+# (GRANT) `delete` is required here because the sysdigcloud-postgres-operator
+#         Role lists poddisruptionbudgets:delete - the operator updates a PDB by
+#         delete + create rather than patch.
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+# (APPLY) Ingress objects, plus `delete` for the orphaned-ingress cleanup the
+#         installer performs before applying a chart. `extensions` is retained
+#         only for clusters older than 1.22.
+- apiGroups:
+  - networking.k8s.io
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - networkpolicies
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+# (APPLY) the installer creates the operator's namespaced Role/RoleBinding, the
+#         postgres-pod Role, the chart-managed sysdigcloud-postgres-pod
+#         RoleBinding and the post-job Role/RoleBinding. `patch` is needed on
+#         upgrade because `kubectl apply` PATCHes existing objects.
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  - rolebindings
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+  - delete
+# ---------------------------------------------------------------------------
+# Postgres HA - required only when global.postgresql.ha.enabled is true.
+# ---------------------------------------------------------------------------
+# (APPLY) the installer creates the `postgresql` CR (cluster.yaml) and the
+#         `OperatorConfiguration` CR (operator.yaml), and polls the postgresql
+#         CR's status with `kubectl wait` until it reports Running.
+# (GRANT) the sysdigcloud-postgres-operator Role lists the same resources with
+#         create/delete/deletecollection/get/list/patch/update/watch, and the
+#         post-job Role lists get/list/patch/update/watch.
+- apiGroups:
+  - acid.zalan.do
+  resources:
+  - postgresqls
+  - postgresqls/status
+  - operatorconfigurations
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+# (GRANT) the operator only reads PostgresTeams, but the installer still has to
+#         hold these verbs in order to create the Role that grants them.
+- apiGroups:
+  - acid.zalan.do
+  resources:
+  - postgresteams
+  verbs:
+  - get
+  - list
+  - watch
+# (GRANT) leader election when the operator runs more than one replica. The rule
+#         is unconditional in the operator's Role, so it is always required here
+#         regardless of the configured replica count.
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - create
+  - update
+# ---------------------------------------------------------------------------
+# Optional - uncomment only if the corresponding feature is enabled.
+# ---------------------------------------------------------------------------
+# global.postgresql.ha.tls.enabled: true renders cert-manager Issuer and
+# Certificate objects (requires cert-manager and its CRDs in the cluster).
+#- apiGroups:
+#  - cert-manager.io
+#  resources:
+#  - issuers
+#  - certificates
+#  verbs:
+#  - get
+#  - list
+#  - create
+#  - update
+#  - patch
+#  - delete
+#
+# prometheus.enabled: true renders a PrometheusRule (requires the Prometheus
+# Operator CRDs). NOTE: it is created in prometheus.namespace, which defaults to
+# the release namespace - if you override it, this rule must be granted in that
+# namespace instead of this one.
+#- apiGroups:
+#  - monitoring.coreos.com
+#  resources:
+#  - prometheusrules
+#  verbs:
+#  - get
+#  - list
+#  - create
+#  - update
+#  - patch
+#  - delete
+...

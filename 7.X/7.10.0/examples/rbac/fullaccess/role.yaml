@@ -1,0 +1,133 @@
+---
+# Namespaced Role for the installer ServiceAccount on vanilla Kubernetes
+# (global.deployment: kubernetes) with a single-instance or external Postgres.
+# If Postgres is deployed in HA, use examples/rbac/kubernetes-pgha instead.
+#
+# This file previously used `apiGroups: ['*']`. It is now written with explicit
+# apiGroups so it can be handed to a customer security review as-is. Four groups
+# of entries were dropped in the process; none of them granted anything:
+#
+#   - namespaces, namespace, storageclasses -> cluster-scoped. A Role cannot
+#     grant a cluster-scoped resource, so these were inert here. They are
+#     granted by clusterrole.yaml in the same directory.
+#   - podsecuritypolicies -> the PodSecurityPolicy API was removed in Kubernetes
+#     1.25.
+#   - podpreset -> the PodPreset API was removed in Kubernetes 1.20.
+#   - pod/delete, pod/status -> misspellings of the `pods` resource. `pods` and
+#     `pods/status` are granted below.
+#
+# Narrowing `'*'` to real apiGroups also drops the wildcard's reach into groups
+# that never served these resources (for example `extensions/deployments`,
+# removed in 1.16). Every resource the charts actually render is still covered -
+# see examples/rbac/verify.py.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: sysdigcloud
+  name: installer
+rules:
+  # Ingress moved to networking.k8s.io in Kubernetes 1.19 and extensions/v1beta1
+  # Ingress was removed entirely in 1.22, so on a modern cluster a grant on
+  # 'extensions' alone authorizes nothing. 'extensions' is kept alongside it so
+  # this example continues to work on clusters older than 1.22.
+  - apiGroups:
+      - 'extensions'
+      - 'networking.k8s.io'
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - create
+      - list
+      - patch
+      - update
+      - delete
+  - apiGroups:
+      - 'networking.k8s.io'
+    resources:
+      - networkpolicies
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - 'policy'
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - create
+      - update
+      - get
+      - list
+      - patch
+  # Core namespaced objects rendered by the charts.
+  - apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - endpoints
+      - events
+      - persistentvolumeclaims
+      - pods
+      - pods/exec
+      - pods/log
+      - pods/status
+      - podtemplates
+      - replicationcontrollers
+      - secrets
+      - serviceaccounts
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - 'apps'
+    resources:
+      - daemonsets
+      - deployments
+      - deployments/scale
+      - replicasets
+      - statefulsets
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - 'batch'
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - rolebindings
+    verbs:
+      - create
+      - update
+      - delete
+      - get
+      - list
+      # `kubectl apply` PATCHes an already-existing object, so upgrades need patch.
+      - patch

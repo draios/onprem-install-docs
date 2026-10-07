@@ -1,0 +1,162 @@
+---
+# ClusterRole for the installer ServiceAccount on vanilla Kubernetes
+# (global.deployment: kubernetes) with Postgres in HA
+# (global.postgresql.ha.enabled: true, postgresql.ha.checkCRD: true).
+#
+# Every rule below exists for one of two reasons:
+#
+#   (APPLY) the installer runs `kubectl apply` on a cluster-scoped object, so it
+#           needs get + create + patch on that resource. `patch` matters on
+#           upgrade, where apply PATCHes the already-existing object.
+#
+#   (GRANT) Kubernetes RBAC privilege-escalation prevention: a ServiceAccount
+#           that creates a ClusterRole must already hold every permission listed
+#           inside it. On a default vanilla install the installer creates the
+#           ClusterRoles `ingress-controller`, `sysdigcloud-postgres-operator`,
+#           `sysdigcloud-mds-manager-role` and `sysdigcloud-metadata-enricher`,
+#           so their rules have to be mirrored here.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: installer
+rules:
+# (APPLY) cluster-scoped reads performed during `generate` and `validate`.
+# (GRANT) nodes is listed by ingress-controller, sysdigcloud-mds-manager-role,
+#         sysdigcloud-metadata-enricher and sysdigcloud-postgres-operator;
+#         persistentvolumes is listed by sysdigcloud-postgres-operator.
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - nodes
+  - persistentvolumes
+  - pods
+  - secrets
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+# (APPLY) sysdig-common-config renders a Namespace unless
+#         sysdigCommonConfig.skipNamespace is true. Applying it over a
+#         pre-created namespace still needs get + patch.
+# (GRANT) namespaces:get is listed by ingress-controller (restricted with
+#         resourceNames) and by sysdigcloud-postgres-operator.
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - create
+  - patch
+  - update
+# (APPLY) sysdig-common-config renders a StorageClass unless
+#         sysdigCommonConfig.skipStorageClass is true or the installer is run
+#         with --skip-storageclass.
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+# (APPLY) the installer creates the ClusterRole/ClusterRoleBinding pairs for the
+#         Zalando Postgres operator, ingress-controller, metadata-service and
+#         metadata-enricher.
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
+  - clusterrolebindings
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+# (APPLY) Ingress objects render as networking.k8s.io/v1 on Kubernetes >= 1.19
+#         (see sysdig-template.ingressApiVersionAndKind). The `extensions` group
+#         is kept only so this example still works on clusters older than 1.22,
+#         where extensions/v1beta1 Ingress still existed; it is inert on 1.22+.
+- apiGroups:
+  - networking.k8s.io
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  - extensions
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+# (APPLY) charts/haproxy-ingress/templates/ingressclass.yaml creates the
+#         cluster-scoped IngressClass `haproxy`. It is gated on
+#         global.deployment == "kubernetes", which is exactly why none of the
+#         openshift* examples needed this rule.
+# (GRANT) the ingress-controller ClusterRole lists ingressclasses get/list/watch
+#         under BOTH the extensions and networking.k8s.io groups, so both groups
+#         are required verbatim for the escalation check to pass.
+- apiGroups:
+  - networking.k8s.io
+  - extensions
+  resources:
+  - ingressclasses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+# (APPLY) the installer applies CRDs itself, ahead of the rest of each chart
+#         (installer/pkg/installer/charts.go). With Postgres HA these are the
+#         three acid.zalan.do CRDs (postgresqls, operatorconfigurations,
+#         postgresteams); the operator runs with enable_crd_registration: false
+#         and never writes them. metadata-service also ships a CRD and is
+#         enabled by default, so this rule is required even without HA.
+# (GRANT) sysdigcloud-postgres-operator lists customresourcedefinitions:get.
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+# (APPLY) OPTIONAL - uncomment only if haproxyIngress.priorityClass.create is
+#         set to true (it defaults to false). PriorityClass is cluster-scoped.
+#- apiGroups:
+#  - scheduling.k8s.io
+#  resources:
+#  - priorityclasses
+#  verbs:
+#  - get
+#  - create
+#  - update
+#  - patch
+# (APPLY) OPTIONAL - uncomment only if global.storageClassProvisioner is
+#         hostPath, which makes sysdig-common-config render a PersistentVolume.
+#         PersistentVolume is cluster-scoped. The read-only persistentvolumes
+#         grant above is not enough to create one.
+#- apiGroups:
+#  - ""
+#  resources:
+#  - persistentvolumes
+#  verbs:
+#  - create
+#  - update
+#  - patch
+...
