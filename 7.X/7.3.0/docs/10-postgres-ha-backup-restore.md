@@ -41,7 +41,7 @@ A S3 or S3 compatible bucket is provisioned. The customer has an AWS Access Key 
 | `sysdig.postgresql.aws.awsSecretAccessKey` | Secret Access Key | YYYYYYYYYY |
 | `sysdig.postgresql.aws.DeploymentEnvironment` | This variable is used to determine whether the backups includes all databases, or Sysdig only databases.<br />* If the value is left blank, then all databases will be backed up<br />* If the value is set to `sysdig_databases`, then the, `template0`, `template1` ,`postgres` databases will be skipped, all other are backed up | sysdig_databases|
 | `sysdig.postgresql.backups.enabled` | This variable name is used to enable or disable backup. The value can be `enabled` or ` disabled`. Default to `enabled`. | enabled|
-| `sysdig.postgresql.backups.schedule`              | Frequency to perform database backup                         | `"* */6 * * *"`  |
+| `sysdig.postgresql.backups.schedule`              | Frequency to perform database backup. Set this explicitly to `"0 */6 * * *"`: the shipped default `"* */6 * * *"` runs a backup every minute during hours 00, 06, 12 and 18 instead of once every 6 hours.                         | `"0 */6 * * *"`  |
 | `sysdig.postgresql.backups.version`              | Backup - Restore Image Version                         | 0.1.3  |
 
 ### Installation
@@ -60,7 +60,7 @@ aws:
     deploymentEnvironment: ""
 backups:
     enabled: false
-    schedule: '* */6 * * *'
+    schedule: '0 */6 * * *'
     imagePullSecret: sysdigcloud-pull-secret
     version: 0.1.3
 ```
@@ -72,7 +72,7 @@ After you set the values:
 
 ### Manual Backups
 
-The backup tool is installed as a CronJob called `pg-backup-ha-cronjob` in the `sysdigcloud` namespace. By default, it runs backups every 6 hours. You can also trigger the backup on-demand with following command:
+The backup tool is installed as a CronJob called `pg-backup-ha-cronjob` in the `sysdigcloud` namespace. With `schedule: '0 */6 * * *'` it runs backups every 6 hours. You can also trigger the backup on-demand with following command:
 
 ````
 kubectl create job pg-backup --from=cronjob/pg-backup-ha-cronjob -n sysdigcloud
