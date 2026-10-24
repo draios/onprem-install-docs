@@ -1,6 +1,6 @@
-# Release 7.10.0 Oct, 2026
+# Release 7.10.1 Oct, 2026
 
-Welcome to Sysdig On-Prem Release 7.10.0! This document provides links to important resources and documentation for this release.
+Welcome to Sysdig On-Prem Release 7.10.1! This document provides links to important resources and documentation for this release.
 
 ---
 
